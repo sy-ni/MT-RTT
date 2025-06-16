@@ -209,9 +209,8 @@
 
     var fulfill = 0
 
-    timeline.forEach((trial, i) => {
-  if (!trial.type) console.warn("Missing type in trial", i, trial);
-});
+
+
 
 
     var consent = {
@@ -327,18 +326,26 @@ var contbutton;
 
 
 
-// timeline.push({
-//         type: jsPsychFullscreen,
-//         fullscreen_mode: true,
-//         message: `<div><p>When you press 'Continue', the window will become full-screen. <br><br>Please keep the window full-screen until you are advised to close it at the end of the experiment.`,
-//         button_label: `<strong>Continue</strong>`,
-//         on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-//         let bar = document.createElement('div');
-//              bar.id = 'bottom-bar';
-//              document.body.appendChild(bar);
-//     }
-//         });
 
+
+var fullscreentrial = {
+    type: jsPsychFullscreen,
+        fullscreen_mode: true,
+        message: `<div><p>When you press 'Continue', the window will become full-screen. <br><br>Please keep the window full-screen until you are advised to close it at the end of the experiment.`,
+        button_label: `<strong>Continue</strong>`,
+        on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+        let bar = document.createElement('div');
+             bar.id = 'bottom-bar';
+             document.body.appendChild(bar)},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+             document.body.removeChild(bar);
+             timeline.forEach((trial, i) => {
+  if (!trial.type) console.log("Missing type in trial", i, trial);
+});
+    }
+}
 
         beforeqfun = function(){
     const participated = document.querySelector('input[name="participated"]:checked')?.value;
@@ -354,15 +361,13 @@ var beforequestion = {
         },
     choices: ['<strong>Continue</strong>'],
     button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold"<strong>Continue</strong></button>',
-    on_start: function(){
+    on_load: function(){
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+        contbutton = document.getElementById('continue-btn');
+        contbutton.disabled=true;
         let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
-      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
-    },
-    on_load: function(){
-        contbutton = document.getElementById('continue-btn')
-        contbutton.disabled=true
         document.addEventListener('click',beforeqfun)
     },
     on_finish: function(data){
@@ -374,6 +379,7 @@ var beforequestion = {
         if (block2only === 1) {
             jsPsych.timeline.insert(beenherebefore);
             jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome);}
         else if (block2only===0) {
@@ -388,6 +394,7 @@ var beforequestion = {
                 block2code=code.toUpperCase();
                 console.log('theme:',theme,'condition:',condition1,'rule1:',rule1,'condition2:',condition2,'rule2:',rule2,'code:',code,'block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome)};
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar')
@@ -403,7 +410,7 @@ var beenherebefore = {
             <p>Thank you for returning!</p>
             <p>Please enter your participant ID and condition code (e.g. BNF) from before below.</p>`,
         button_label: "Continue",
-        html: `<div style="width: 400px; margin: auto; text-align: center; align-items: center; position:fixed; top:50%; left:50%;transform: translateX(-50%)">
+        html: `<div style="width: 400px; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
   <p>Participant ID:</p>
   <div style="width:400px; align-items: center"><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
@@ -526,7 +533,10 @@ var calstim  = function(){
     else if (clickcount===8) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom right</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
     else if (clickcount===9) {clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>, in the centre'}
     else if (clickcount===10) {clickwhere.innerHTML = 'Great! Please click once more to continue<br>'}
-    else if (clickcount === 11) {jsPsych.finishTrial()}
+    else if (clickcount === 11){
+        document.removeEventListener('click', recordmouse);
+        document.removeEventListener('click', calstim);
+        jsPsych.finishTrial({calibration: calibrationarray})}
 }
     
 
@@ -541,6 +551,7 @@ var buttoncalibration = {
     choices: [],
     button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
     on_start: function(){
+        console.log('button calibration started')
         // let bar = document.createElement('div');
     //   bar.id = 'bottom-bar';
     //   document.body.appendChild(bar);
@@ -550,13 +561,14 @@ var buttoncalibration = {
         // contbutton = document.getElementById('continue-btn')
         // contbutton.disabled=true
         const clickwhere = document.getElementById('clickwhere')
+        clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>';
         document.addEventListener('click', recordmouse)
         document.addEventListener('click', calstim)
     },
     on_finish: function(data){
-        document.removeEventListener('click', recordmouse);
-        document.removeEventListener('click', calstim);
-        data.calibration = calibrationarray;
+        // document.removeEventListener('click', recordmouse);
+        // document.removeEventListener('click', calstim);
+        // data.calibration = calibrationarray;
         // document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
         // let bar = document.getElementById('bottom-bar');
         // document.body.removeChild(bar);
@@ -1516,8 +1528,6 @@ var start_button = {
   choices: [''],
   on_start: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-        let bar = document.getElementById('bottom-bar');
-        document.body.removeChild(bar);
   },
   button_html: '<button class="jspsych-btn-2" style="width: 15px; height: 15px; background-color: white; border: 2px solid black; border-radius: 0px; padding: 0"></button>',
   data: {
@@ -1533,7 +1543,7 @@ mousetrackingerror = 0
 
     var fixation = {
       type: jsPsychHtmlButtonResponse,
-      stimulus: '<div style="font-size:60px; top:50%">+</div> <div id="mouseleftfix" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div> <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>',
+      stimulus: '<div style="font-size:46px; position:fixed; top:52%">+</div> <div id="mouseleftfix" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div> <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>',
       choices: [],
       trial_duration: function(){
         return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 450, 550, 650, 750, 850], 1)[0];
@@ -1587,10 +1597,10 @@ var test1 = {
       stimulus: function(){
 let word = jsPsych.timelineVariable('stimulus', true);
 let realbutton = jsPsych.timelineVariable('correct_response', true);
-if (realbutton === 0) {return `<p style="font-size: 46px; top: 50%">${word}</p> <button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
+if (realbutton === 0) {return `<p style="font-size: 46px; position:fixed; top: 46%;left: 50%; transform: translateX(-50%)">${word}</p> <button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
 <div id="mouseleft" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div>
 <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>`}
-else {return `<p style="font-size: 46px; top: 50%">${word}</p><button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>`}},
+else {return `<p style="font-size: 46px; top: 46%;left: 50%; transform: translateX(-50%)%">${word}</p><button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>`}},
       choices: jsPsych.timelineVariable('button'),
   button_html: jsPsych.timelineVariable('html'),
 css_classes: ['top-buttons'],
@@ -1607,7 +1617,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
         const correctresponse = jsPsych.timelineVariable('correct_response')
         const t0 = performance.now();
         const wrongdiv = document.createElement('div');
-        wrongdiv.style = 'color: red; font-size: 60px; position: fixed; left: 50%;transform: translateX(-50%)';
+        wrongdiv.style = 'color: red; font-size: 60px; position: fixed; top: 60%;left: 50%;transform: translateX(-50%)';
         screen.appendChild(wrongdiv);
         const dummy = document.getElementById("dummy");
         let dummyclicks = 0;
@@ -1888,12 +1898,12 @@ var immigration_desc_false_block40procedure  = {
 var brexit_nondesc_true_instructions = {
     type: jsPsychHtmlKeyboardResponse,
     stimulus: `<p>This time, the sentences are going to change.</p>
-    <p>Instead of being about what happened, the statements are going to be</p>
-    <p>about what <em>should</em> have happened.</p>
-    <p>That is, they will express an opinion about the fact Brexit happened.</p>
-    <p>In this next block, please respond as if Brexit <strong>should have</strong> happened.</p>
-    <p> That is to say, that it was a good idea, and it was good that it happened </p>
-    <p>For example, if the sentence says 'Leave' should have won, you should say FALSE.</p>
+    <p>Instead of being about whether the UK left the EU, the statements are going to be</p>
+    <p>about if the UK <em>should have</em> left the EU.</p>
+    <p>That is, they will express an opinion about the UK leaving the EU</p>
+    <p>In this next block, please respond as the UK <strong>should have</strong> left the EU;</p>
+    <p> That it was the right thing to do, and a good thing to have happened. </p>
+    <p>For example, if the sentence says "'Leave' should have won", you should say TRUE.</p>
     <p>Press any button to continue.</p>`
 };
 var immigration_nondesc_true_instructions = {
@@ -2118,7 +2128,7 @@ var brexit_nondesc_false_stimuli = [
 
 
     var brexit_nondesc_false_procedure  = {
-      timeline: [start_button, fixation, 1],
+      timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_false_stimuli,
       repetitions: 2,
       randomize_order: true
