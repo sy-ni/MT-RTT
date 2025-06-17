@@ -487,17 +487,17 @@ var welcomeA = {
         },
     choices: ['Continue'],
     button_html: '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>',
-        data: { screen: "beenherebefore" },
-        on_start: function(){
+    data: { screen: "beenherebefore" },
+    on_start: function(){
             let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      document.body.appendChild(bar);
-      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
+            bar.id = 'bottom-bar';
+           document.body.appendChild(bar);
+            document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
         },
-        on_finish: function(){
-                document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-                let bar = document.getElementById('bottom-bar');
-                document.body.removeChild(bar);
+    on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
         }
 };
 
@@ -1536,10 +1536,15 @@ var start_button = {
 };
 
 
-var stopconstants = 0
-var start
-var mousebad = 0
-mousetrackingerror = 0
+var stopconstants = 0;
+var start;
+var mousebad = 0;
+mousetrackingerror = 0;
+
+function handleLeftMouse() {console.log("left mouse move"), mousebad = 1};
+function handleRightMouse() {console.log("right mouse move"), mousebad = 1};
+function handleTopMouse() {console.log("top mouse move"), mousebad = 1};
+function handleBottomMouse() {console.log("bottom mouse move"), mousebad = 1};
 
     var fixation = {
       type: jsPsychHtmlButtonResponse,
@@ -1567,17 +1572,20 @@ mousetrackingerror = 0
         mousetrackingerror = 1;
         return;
     }
-    console.log("Assigned all elements");
-    leftfix.addEventListener('mouseover', () => 
-    {console.log("left mouse move"), mousebad=1});
-    rightfix.addEventListener('mouseover', () => 
-    {console.log("right mouse move"), mousebad=1});
-    topfix.addEventListener('mouseover', () => 
-    {console.log("top mouse move"), mousebad=1});
-    bottomfix.addEventListener('mouseover', () => 
-    {console.log("bottom mouse move"), mousebad=1});
+    leftfix.addEventListener('mouseover', handleLeftMouse);
+    rightfix.addEventListener('mouseover', handleRightMouse);
+    topfix.addEventListener('mouseover', handleTopMouse);
+    bottomfix.addEventListener('mouseover', handleBottomMouse);
     },
     on_finish: function(data){
+        const leftfix = document.getElementById('mouseleftfix');
+        const rightfix = document.getElementById('mouseright');
+        const topfix = document.getElementById('mousetop');
+        const bottomfix = document.getElementById('mousebottom');
+        leftfix.removeEventListener('mouseover', handleLeftMouse);
+        rightfix.removeEventListener('mouseover', handleRightMouse);
+        topfix.removeEventListener('mouseover', handleTopMouse);
+        bottomfix.removeEventListener('mouseover', handleBottomMouse);
         data.mousetrackingerror = mousetrackingerror
         data.earlymove = mousebad
     }
@@ -1683,21 +1691,12 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 
 
 
-
-
-
-
-
-// HERES BUTTON CODE
-    // button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'}
-
-
 //block one (descriptive, true)
     
     var brexit_desc_true_instructions = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>In this next block, please respond as if Brexit <strong>did</strong> happen.</p>
-    <p>For example, if the sentence says The UK has pulled out of the EU, respond as if the sentence is true.</p>
+    stimulus: `<p>In this next block, please respond as if the UK <strong>left</strong> the EU.</p>
+    <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
     <p>Press any button to continue.</p>`
 };
 var immigration_desc_true_instructions = {
@@ -1793,9 +1792,9 @@ var immigration_desc_true_block40procedure  = {
 
 var brexit_desc_false_instructions = {
     type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>In this next block, please respond as if Brexit <strong>did not</strong> happen.</p>
-    <p>That is, as if the UK voted to remain in the EU</p>
-    <p>For example, if the sentence says The UK has pulled out of the EU, you should say FALSE.</p>
+    stimulus: `<p>In this next block, please respond as if the UK <strong>is still</strong> in the EU.</p>
+    <p>That is, as if the UK did not leave the EU.</p>
+    <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
     <p>Press any button to continue.</p>`
 };
 var immigration_desc_false_instructions = {
@@ -1803,7 +1802,7 @@ var immigration_desc_false_instructions = {
     stimulus: `<p>In this next block, please respond as if the number of immigrants is getting <strong>smaller</strong>.</p>
     <p>That is, as if each year, the number of immigrants in the UK is declining.</p>
     <p>For example, if the sentence says 'Immigration numbers are decreasing', respond as if the sentence is true.</p>
-    <p> If the sentence says 'The immigrant population is increasing', you should say FALSE.</p>
+    <p> If the sentence says 'The immigrant population is increasing',respond as if the sentence is false.</p>
     <p> If the sentence says 'The immigrant population isn't increasing', respond as if the sentence is true</p>
     <p> Please note that this does not imply a value judgement about whether the assertion is good or bad.</p>
     <p>Press any button to continue.</p>`
@@ -2102,7 +2101,7 @@ var brexit_desc_true_block40instructions = {
 
 
 var brexit_nondesc_false_stimuli = [
-{ stimulus: "The UK should have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
+{stimulus: "The UK should have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
   { stimulus: "The UK should have exited the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
   { stimulus: "The UK should have withdrawn from the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
   { stimulus: "The UK should have pulled out of the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
@@ -2187,19 +2186,36 @@ var rulechange = {
     stimuli: `<p>Great. In the next block, the rule is going to change.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-}
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+    }
+};
 
 var conditionchange = {
     type: jsPsychHtmlButtonResponse,
     stimuli: function(){return `<p>Great. In the next block, the statements and rule are going to change.</p>
-    <p> If you would like to take a break, feel free to do so. Please take a picture of or note down your ID and condition code: ${jspsych_id} and ${block2code}
+    <p> If you would like to take a break, feel free to do so. Please ensure you have recorded your ID and condition code: <strong>${jspsych_id}</strong> and <strong>${block2code}</strong>
         as you may need these to resume the experiment`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
-    },
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar),
+        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);},
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-}
+};
 
 
 //end of experiment
@@ -2215,7 +2231,9 @@ var experimentover ={
       document.body.appendChild(bar);
   },
   on_finish: function() {
-    document.getElementById('bottom-bar')?.remove()},
+    document.getElementById('bottom-bar')?.remove();
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 //   timeline.push(experimentover);
 
@@ -2265,6 +2283,10 @@ var experimentover ={
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
         // timeline.push(brexit_nondesc_true_procedure)
@@ -2323,16 +2345,16 @@ var experimentover ={
         data: {
             screen: "immigrationendingsurvey1"
         },
-        on_load: function(){
-
-        },
-
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 
@@ -2382,6 +2404,10 @@ var expbrexit2 = [
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 // second immigration should (n't) (2/4)
@@ -2423,16 +2449,16 @@ var expimmg2 = [
         data: {
             screen: "immigrationendingsurvey2"
         },
-        on_load: function(){
-
-        },
-
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 // first brexit 'are' (3/4)
@@ -2529,10 +2555,6 @@ var expimmg3 = [
         data: {
             screen: "immigrationendingsurvey3"
         },
-        on_load: function(){
-
-        },
-
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
