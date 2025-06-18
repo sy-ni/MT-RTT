@@ -31,7 +31,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 0
+    z-index: 0;
   }
 
   #jspsych-survey-html-form-next {
@@ -149,8 +149,8 @@
     font-size: 20px;
     padding: 0px 0px;
     z-index: 1;
-    width: 220px;
-    height: 80px;
+    width: 300px;
+    height: 110px;
   }
 
 
@@ -169,15 +169,11 @@
   <script>
 
     //to-do:
-    // include self-exlusion item at end where they can report any reason their data shouldn't be included
     // do surveys nicely
-    // capture screen info! so you know what the shortest distance is
-    // ask dom maybe: selecting right answer after will be highly varirable?
-    // collect all the data!
-    // check accuracy
-    // remove t/f button labels 
-    // display participant ID; then after doing first block, give them option to return. 
-
+    // ask dom maybe: selecting right answer after will be highly variable?
+    // make sure all trials are collecting data
+    // check accuracy in each trial
+    // add a button to return to full screen
 
     // done/not doing:
     // add 'too slow!' thing // (done in help)
@@ -193,7 +189,7 @@
 // so 1/2 (40) test block of inducer 2x10 (55 seconds) and 20x1 (75 seconds) is 130 seconds; 260 seconds for 80.
 // second practice block is 2.5 mins
 // second test block is also 260 seconds
-// total for one (desc/nondesc) = 15... yuh yoh
+// total for one (desc/nondesc) is ~15
 
 
     var jsPsych = initJsPsych({
@@ -309,6 +305,7 @@
 
 
 
+
 // timeline.push(consent);
 
 var jspsych_id = ""
@@ -358,7 +355,11 @@ var fullscreentrial = {
 var beforequestion = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){
-        return'<p>Select which applies to you:</p> <label><input type="radio" name="participated" value="Yes"> I have already completed some of the experiment</label><br><br><label><input type="radio" name="participated" value="No"> I have not completed any of the experiment before</label><br>'
+        return `<div style="position:fixed; top:20%; left:50%; transform:translateX(-50%);"><p><strong>Select which applies to you:</strong></p></div>
+            <div style="display: flex; flex-direction:column;height: 10.5%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 16px; position:absolute; z-index:-1;top:26.5%;left:50%;transform: translateX(-50%);">
+                <label style="margin-bottom:4%"><input type="radio" name="participated" value="Yes"> I have already completed some of the experiment</label><label><input type="radio" name="participated" value="No"> I have not completed any of the experiment before</label><br>
+                </div>
+        `
         },
     choices: ['<strong>Continue</strong>'],
     button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold"<strong>Continue</strong></button>',
@@ -390,15 +391,18 @@ var beforequestion = {
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             jsPsych.data.addProperties({jspsych_id: jspsych_id});
             if (condition1 === "desc") {condition2 = "nondesc"}
-            else if (condition2 ==="nondesc") {condition2 = "desc"}
-            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];jsPsych.data.addProperties({condition: rule1});
-            rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];jsPsych.data.addProperties({condition: rule2});
+            else if (condition1 ==="nondesc") {condition2 = "desc"};
+            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            jsPsych.data.addProperties({condition: rule1});
+            rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            jsPsych.data.addProperties({condition: rule2});
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
-            console.log('theme:',theme,'condition:',condition1,'rule1:',rule1,'condition2:',condition2,'rule2:',rule2,'code:',code,'block2code:',block2code);
+            jsPsych.data.addProperties({block2code: block2code})
+            console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
+            // jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome)};
 }};
 timeline.push(beforequestion);
@@ -464,15 +468,21 @@ var welcomeA = {
                 <br>Next, we will check the experiment display.`}
         else if (block2only===1 && !validcodes.includes(block2code)) {return `<p style="color:red">This code is invalid. Please refresh and try again</p>`}
         },
-    choices: ['Continue'],
-    button_html: '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>',
+    choices: function(){
+        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
+        if (block2only===1 && !validcodes.includes(block2code)) {return []}
+        else {return '[Continue]'}},
+    button_html: function(){
+        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
+        if (block2only===1 && !validcodes.includes(block2code)) {return []}
+        else {return '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>'}},
     data: { screen: "beenherebefore" },
     on_start: function(){
             let bar = document.createElement('div');
             bar.id = 'bottom-bar';
            document.body.appendChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-            console.log(theme,condition2,rule2,block2code)
+            console.log(theme,condition2,rule2,block2code);
         },
     on_finish: function(){
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
@@ -491,14 +501,8 @@ var clickwhere;
 function recordmouse(event){
     xcord = event.clientX;
     ycord = event.clientY;
-    calibrationarray.push({x:xcord, y:ycord})
-    console.log(xcord,ycord)
-    console.log(calibrationarray)
-    clickcount++
-    console.log(clickcount)
-    // if (clickcount < 10) {contbutton.disabled=true}
-    //     else {contbutton.disabled = false}
-
+    calibrationarray.push({x:xcord, y:ycord});
+    clickcount++;
     }
 
 var calstim  = function(){
@@ -516,6 +520,7 @@ var calstim  = function(){
     else if (clickcount === 11){
         document.removeEventListener('click', recordmouse);
         document.removeEventListener('click', calstim);
+        jsPsych.data.addProperties({calibrationa: calibrationarray});
         jsPsych.finishTrial({calibration: calibrationarray})}
 }
     
@@ -531,44 +536,45 @@ var buttoncalibration = {
     choices: [],
     button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
     on_start: function(){
-        console.log('button calibration started')
-        // let bar = document.createElement('div');
-    //   bar.id = 'bottom-bar';
-    //   document.body.appendChild(bar);
-    //   document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+      document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
     },
     on_load: function(){
-        // contbutton = document.getElementById('continue-btn')
-        // contbutton.disabled=true
         const clickwhere = document.getElementById('clickwhere')
         clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>';
         document.addEventListener('click', recordmouse)
         document.addEventListener('click', calstim)
-    },
-    on_finish: function(data){
-        // document.removeEventListener('click', recordmouse);
-        // document.removeEventListener('click', calstim);
-        // data.calibration = calibrationarray;
-        // document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-        // let bar = document.getElementById('bottom-bar');
-        // document.body.removeChild(bar);
-        console.log('finished')
     }
+    };
 
-}
 // timeline.push(buttoncalibration);
 
 
+var ontorealblocks = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>Great.</p>
+    <p>Next, instead of words, you will respond to sentences according to a particular rule.</p>
+    <p>The positions and meanings of the buttons will stay the same.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar)}
+};
+
     var welcome = {
       type: jsPsychHtmlButtonResponse,
-      stimulus: function(){return `You are now ready to begin.<br>You should be in a place where you can focus without being interrupted.<br>
-         Please ensure you have recorded your participant ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>).`},
+      stimulus: function(){return `<p style="line-height:2.2em">Thank you; the display is now calibrated.<br>Please ensure you are in a place where you can focus without being interrupted,<br>
+         and that you have recorded your participant ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)</p>`},
          choices: ['<strong>Continue</strong>'],
          button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
-         on_load: function(){
-        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-        console.log(theme,condition1,rule1,condition2,rule2,code,block2code)},
-        on_start: function(){
+         on_start: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
         let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar)},
@@ -583,6 +589,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions)
@@ -620,6 +627,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions)
@@ -657,6 +665,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -694,6 +703,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -731,6 +741,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -768,6 +779,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -805,6 +817,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -842,6 +855,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -879,6 +893,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -916,6 +931,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -953,6 +969,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -990,6 +1007,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1027,6 +1045,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1064,6 +1083,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -1101,6 +1121,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1138,6 +1159,7 @@ var buttoncalibration = {
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1171,7 +1193,8 @@ var buttoncalibration = {
   }
   else if (block2code ==="BNT" && block2only===1) {
     jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
+    // jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -1194,6 +1217,7 @@ var buttoncalibration = {
   else if (block2code==="BNF" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -1216,6 +1240,7 @@ var buttoncalibration = {
   else if (block2code==="BDT" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -1238,6 +1263,7 @@ var buttoncalibration = {
   else if (block2code==="BDF" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -1261,6 +1287,7 @@ var buttoncalibration = {
   else if (block2code ==="INT" && block2only===1) {
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1283,6 +1310,7 @@ var buttoncalibration = {
   else if (block2code==="INF" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -1305,6 +1333,7 @@ var buttoncalibration = {
   else if (block2code==="IDT" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -1327,6 +1356,7 @@ var buttoncalibration = {
   else if (block2code==="IDF" && block2only===1){
     jsPsych.timeline.insert(instructions);
     jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1357,7 +1387,7 @@ var buttoncalibration = {
     var instructions1 = {
         type: jsPsychHtmlButtonResponse,
         stimulus:`
-            <div style="position:fixed; top:50%;left: 50%; transform: translateX(-50%); margin: auto">Before starting the main task, 
+            <div style="position:fixed; top:35%;left: 50%; transform: translateX(-50%); width:600px; margin: auto">Before starting the main task, 
                 it is important for us to understand our participants' characteristics, so that our conclusions are scientifically valid.</p>
             <p>Let's start with some questions about yourself.</p>`,
         choices: ["Continue"],
@@ -1379,29 +1409,27 @@ var buttoncalibration = {
 
     // timeline.push(instructions1)
 
-
+// <div style="font-size: 12px; text-align:center; position:absolute; top:12%" <p><strong>Please enter the following information:</strong></p></div>
 
     var participant_info2 = {
         type: jsPsychSurveyHtmlForm,
-    //     preamble: `<div style="font-size: 12px;">
-    //   <h1 style="text-align: center;">Part 1/4</h1>
-    // </div>`,
-        html: `<div style="height: 650; width:450; margin-top: 20%; overflow-y: auto; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px;">
+        html: `
+    <div style="width:400px;font-size: 16px; text-align:center; position:absolute; top:17%;left: 52%;transform: translateX(-50%);" <p><strong>Please enter the following information:</strong></p></div>
 
-    <div style="width: 400px; margin: auto; text-align: center; align-items: center">
+    <div style="height: 55%; width: 30%; margin: auto; text-align: center; align-items: center; position:fixed;top:21%;left: 52%;transform: translateX(-50%);font-size:16px; overflow-y: auto;">
       
-      <p>Please enter your age (in years, e.g., "31"):</p>
-      <div style="width:400px; align-items: center"><input type="text" name="age" style="width: 50%" required></div>
+      <div><p>Age (in years, e.g., "31"):</p></div>
+      <div style="width:400px; align-items: center;font-size:15px"><input type="text" name="age" style="width: 15%" required></div>
 
-      <p>Please enter your gender:</p>
-      <div style="width:140px;text-align: left; align-items: left; position: relative; left:52%;transform: translateX(-50%);"
+      <div style="justify-"><p><br>Gender:</p></div>
+      <div style="width:140px;text-align: left; font-size:15px;align-items: left; position: relative; left:52%;transform: translateX(-50%);">
         <label><input type="radio" name="gender" value="Female" required> Female</label><br>
         <label><input type="radio" name="gender" value="Male"> Male</label><br>
         <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label><br>
       </div>
 
-      <p>Please enter your highest completed education level:</p>
-      <div style="width:180px;text-align: left; align-items: left; position: relative; left:52%;transform: translateX(-50%);"
+      <div><p>Highest completed education level:</p></div>
+      <div style="width:200px;text-align: left;font-size:15px; align-items: left; position: relative; left:52%;transform: translateX(-50%);">
         <label><input type="radio" name="education" value="GCSE/Equivalent" required> GCSE/Equivalent</label><br>
         <label><input type="radio" name="education" value="A-Level/Equivalent"> A-Level/Equivalent</label><br>
         <label><input type="radio" name="education" value="Some university"> Some university</label><br>
@@ -1411,13 +1439,19 @@ var buttoncalibration = {
       </div>
 
     </div>
+    <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:52%;transform: translateX(-50%);"></div>
+
   `,
 button_label: "Continue",
-  on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
-  const content = document.querySelector('.jspsych-content')
-            if (content) {
-                content.style.marginTop = '5%';
-            }
+  on_load: function(){
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+  let bar = document.createElement('div');
+             bar.id = 'bottom-bar';
+             document.body.appendChild(bar);
+//   const content = document.querySelector('.jspsych-content')
+//             if (content) {
+//                 content.style.marginTop = '5%';
+//             }
   },
   on_finish: function() {
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
@@ -1435,13 +1469,21 @@ button_label: "Continue",
 
 var part1cont= {
       type: jsPsychHtmlButtonResponse,
-      stimulus: `<h1> Part 2/4 </h1>
-        <p>Thank you. Next, you will practise the experiment,
-            to get used to how it works. </p>
-        <div style='width: 700px;'>
+      stimulus: `<p style="height:46%">Thank you.<br>Now, the main experiment will begin.</p>
       `,
+      on_load: function(){
+        let bar = document.createElement('div');
+             bar.id = 'bottom-bar';
+             document.body.appendChild(bar);
+             document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+      },
       post_trial_gap: 500,
       choices: ["Continue"],
+      on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+    let bar = document.getElementById('bottom-bar');
+    document.body.removeChild(bar);
+      },
         data: { screen: "part1cont" },
         button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     };
@@ -1452,12 +1494,12 @@ var part1cont= {
     var instructions = {
       type: jsPsychHtmlButtonResponse,
       stimulus: `
-        <p>In the next section, a stimulus will appear in the center 
+        <p>In the experiment, a stimulus will appear in the center 
         of the screen.</p>
         <br>
         <p>If the word means <strong>"true"</strong>, 
-        press the left button as fast as you can.</p>
-        <p>If the word means <strong>"false"</strong>, press the right button 
+        press the <strong>left</strong> button as fast as you can.</p>
+        <p>If the word means <strong>"false"</strong>, press the <strong>right</strong> button 
         as fast as you can.</p>
         <br>
         <p>Before each trial, you will press a button on the bottom of the screen.</p>
@@ -1528,7 +1570,7 @@ function handleBottomMouse() {console.log("bottom mouse move"), mousebad = 1};
 
     var fixation = {
       type: jsPsychHtmlButtonResponse,
-      stimulus: '<div style="font-size:46px; position:fixed; top:52%">+</div> <div id="mouseleftfix" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div> <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>',
+      stimulus: '<div style="font-size:46px; position:fixed; top:52%;left:50%;transform:translateX(-50%)">+</div> <div id="mouseleftfix" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div> <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>',
       choices: [],
       trial_duration: function(){
         return jsPsych.randomization.sampleWithoutReplacement([250, 500, 750, 450, 550, 650, 750, 850], 1)[0];
@@ -1562,10 +1604,10 @@ function handleBottomMouse() {console.log("bottom mouse move"), mousebad = 1};
         const rightfix = document.getElementById('mouseright');
         const topfix = document.getElementById('mousetop');
         const bottomfix = document.getElementById('mousebottom');
-        leftfix.removeEventListener('mouseover', handleLeftMouse);
-        rightfix.removeEventListener('mouseover', handleRightMouse);
-        topfix.removeEventListener('mouseover', handleTopMouse);
-        bottomfix.removeEventListener('mouseover', handleBottomMouse);
+    if (leftfix) leftfix.removeEventListener('mouseover', handleLeftMouse);
+    if (rightfix) rightfix.removeEventListener('mouseover', handleRightMouse);
+    if (topfix) topfix.removeEventListener('mouseover', handleTopMouse);
+    if (bottomfix) bottomfix.removeEventListener('mouseover', handleBottomMouse);
         data.mousetrackingerror = mousetrackingerror
         data.earlymove = mousebad
     }
@@ -1585,12 +1627,13 @@ var test1 = {
       stimulus: function(){
 let word = jsPsych.timelineVariable('stimulus', true);
 let realbutton = jsPsych.timelineVariable('correct_response', true);
-if (realbutton === 0) {return `<p style="font-size: 46px; position:fixed; top: 46%;left: 50%; transform: translateX(-50%)">${word}</p> <button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
+if (realbutton === 0) {return `<p style="position:fixed; font-size: 28px; position:fixed; top: 46%; left:50%; transform: translateX(-50%)">${word}</p> <button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
 <div id="mouseleft" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 48%; transform: translateX(-50%)"></div> <div id="mouseright" style="position: fixed; width: 20px; height: 70px; bottom:13%;left: 52%; transform: translateX(-50%)"></div>
 <div id="mousetop" style="position: fixed; width: 70px; height: 20px; bottom:18%;left: 50%; transform: translateX(-50%)"></div> <div id="mousebottom" style="position: fixed; width: 70px; height: 20px; bottom:11%;left: 50%; transform: translateX(-50%)"></div>`}
-else {return `<p style="font-size: 46px; top: 46%;left: 50%; transform: translateX(-50%)%">${word}</p><button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>`}},
+else {return `<p style="position:fixed; font-size: 28px; top: 46%; left:50%; transform: translateX(-50%)">${word}</p><button id="dummy" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>`}},
       choices: jsPsych.timelineVariable('button'),
   button_html: jsPsych.timelineVariable('html'),
+  randomize_order: true,
 css_classes: ['top-buttons'],
 extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       data: {
@@ -1639,6 +1682,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
     var inducer_procedure = {
       timeline: [start_button, fixation, test1],
       timeline_variables: inducer_stimuli,
+      // 2 4
       repetitions: 4,
       randomize_order: true,
       };
@@ -1674,81 +1718,112 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 //block one (descriptive, true)
     
     var brexit_desc_true_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this next block, please respond as if the UK <strong>left</strong> the EU.</p>
     <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
-    <p>Press any button to continue.</p>`
+    <p>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 var immigration_desc_true_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>In this next block, please respond as if immigration to the UK <strong>is</strong> relatively high.</p>
-    <p>For example, if the sentence says 'Immigration levels are low', you should say FALSE.</p>
-    <p> Please note that this does not imply a value judgement about whether the assertion is good or bad.</p>
-    <p>Press any button to continue.</p>`
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this next block, please respond as if immigration to the UK is<strong>increasing</strong>.</p>
+    <p>For example, if the sentence says 'Immigration levels are low', you should response as if the sentence is <strong>false</strong>.</p>
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 
 
     var brexit_desc_true_stimuli = [
-      { stimulus: "The UK has left the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has exited the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has withdrawn from the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has pulled out of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t remained in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is out of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t stayed in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn’t in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn't part of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has remained in the EU",  correct_response: 0,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has stayed in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is part of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t left the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t exited the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t withdrawn from the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t pulled out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn’t out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
+      { stimulus: "The UK has left the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has exited the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has withdrawn from the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has pulled out of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t remained in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK is out of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t stayed in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK isn’t in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK isn't part of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has remained in the EU",  correct_response: 0,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has stayed in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK is in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK is part of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t left the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t exited the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t withdrawn from the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t pulled out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK isn’t out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
     ];
 
     var brexit_desc_true_rightwrong_stimuli = brexit_desc_true_stimuli.concat(rightwrong2stimuli)
 
+
     var brexit_desc_true_procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_desc_true_stimuli,
-      repetitions: 2,
+      // 2
+      repetitions: 1,
       randomize_order: true
     };
 
-    var brexit_desc_true_block40procedure  = {
+    // var brexit_desc_true_block40procedure  = {
+    //   timeline: [start_button, fixation, test1],
+    //   timeline_variables: brexit_desc_true_rightwrong_stimuli,
+    //   repetitions: 1,
+    //   randomize_order: true
+    // };
+
+    // 2
+        var brexit_desc_true_block40procedure  = {
       timeline: [start_button, fixation, test1],
-      timeline_variables: brexit_desc_true_rightwrong_stimuli,
+      timeline_variables: inducer_stimuli,
       repetitions: 1,
       randomize_order: true
     };
 
     var immigration_desc_true_stimuli = [
-    { stimulus: "Immigrant numbers are rising", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers are increasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers are getting higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population is expanding", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population is climbing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren't decreasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren't going down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren't declining", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population isn't shrinking", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population isn't getting smaller.", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers are decreasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers are going down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers are declining", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population is shrinking", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population is getting smaller", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren’t rising", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren’t increasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren’t getting higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population isn't expanding", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population isn't climbing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' }
+    { stimulus: "Immigrant numbers are rising", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers are increasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers are getting higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population is expanding", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population is climbing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren't decreasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren't going down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren't declining", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population isn't shrinking", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population isn't getting smaller.", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers are decreasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers are going down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers are declining", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population is shrinking", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population is getting smaller", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren’t rising", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren’t increasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren’t getting higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population isn't expanding", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population isn't climbing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' }
     ];
 
 var immigration_desc_true_rightwrong_stimuli = immigration_desc_true_stimuli.concat(rightwrong2stimuli)
@@ -1771,46 +1846,68 @@ var immigration_desc_true_block40procedure  = {
 //block two (descriptive, false)
 
 var brexit_desc_false_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this next block, please respond as if the UK <strong>is still</strong> in the EU.</p>
     <p>That is, as if the UK did not leave the EU.</p>
     <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 var immigration_desc_false_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this next block, please respond as if the number of immigrants is getting <strong>smaller</strong>.</p>
     <p>That is, as if each year, the number of immigrants in the UK is declining.</p>
     <p>For example, if the sentence says 'Immigration numbers are decreasing', respond as if the sentence is true.</p>
     <p> If the sentence says 'The immigrant population is increasing',respond as if the sentence is false.</p>
     <p> If the sentence says 'The immigrant population isn't increasing', respond as if the sentence is true</p>
     <p> Please note that this does not imply a value judgement about whether the assertion is good or bad.</p>
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 
 
 var brexit_desc_false_stimuli = [
-{ stimulus: "The UK has left the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'  },
-      { stimulus: "The UK has exited the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has withdrawn from the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has pulled out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t remained in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-      { stimulus: "The UK hasn’t stayed in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn’t in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn't part of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has remined in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has stayed in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK has kept being in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK is part of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>' },
-      { stimulus: "The UK hasn’t left the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t exited the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t withdrawn from the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK hasn’t pulled out of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-      { stimulus: "The UK isn’t out of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
+{ stimulus: "The UK has left the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'  },
+      { stimulus: "The UK has exited the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has withdrawn from the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has pulled out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t remained in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK is out of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+      { stimulus: "The UK hasn’t stayed in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK isn’t in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK isn't part of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has remined in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has stayed in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has kept being in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK is in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK is part of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
+      { stimulus: "The UK hasn’t left the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t exited the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t withdrawn from the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK hasn’t pulled out of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK isn’t out of the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
     ];
 
     var brexit_desc_false_rightwrong_stimuli = brexit_desc_false_stimuli.concat(rightwrong2stimuli)
@@ -1819,38 +1916,47 @@ var brexit_desc_false_stimuli = [
     var brexit_desc_false_procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_desc_false_stimuli,
-      repetitions: 2,
+      // 2
+      repetitions: 1,
       randomize_order: true
     };
 
+    // var brexit_desc_false_block40procedure  = {
+    //   timeline: [start_button, fixation, test1],
+    //   timeline_variables: brexit_desc_false_rightwrong_stimuli,
+    //   repetitions: 1,
+    //   randomize_order: true
+    // };
+
+    // 2
     var brexit_desc_false_block40procedure  = {
       timeline: [start_button, fixation, test1],
-      timeline_variables: brexit_desc_false_rightwrong_stimuli,
+      timeline_variables: rightwrong2stimuli,
       repetitions: 1,
       randomize_order: true
     };
 
     var immigration_desc_false_stimuli = [
-    { stimulus: "Immigrant numbers are rising",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers are increasing",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers are getting higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population is expanding", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population is climbing",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren't decreasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren't going down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers aren't declining", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population isn't shrinking", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "The immigrant population isn't getting smaller.",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>' },
-  { stimulus: "Immigrant numbers are decreasing",     correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers are going down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers are declining", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population is shrinking",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population is getting smaller", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren’t rising",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren’t increasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers aren't getting higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population isn't expanding", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population isn't climbing",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style="font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
+    { stimulus: "Immigrant numbers are rising",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers are increasing",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers are getting higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population is expanding", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population is climbing",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren't decreasing", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren't going down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers aren't declining", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population isn't shrinking", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "The immigrant population isn't getting smaller.",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
+  { stimulus: "Immigrant numbers are decreasing",     correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers are going down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers are declining", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population is shrinking",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population is getting smaller", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren’t rising",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren’t increasing", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers aren't getting higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population isn't expanding", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population isn't climbing",correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
     ];
 
 var immigration_desc_false_rightwrong_stimuli = immigration_desc_false_stimuli.concat(rightwrong2stimuli)
@@ -1874,51 +1980,70 @@ var immigration_desc_false_block40procedure  = {
 // // now onto non-descriptive "positive" statements (e.g. brexit should have happened)
 
 
+
 var brexit_nondesc_true_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>This time, the sentences are going to change.</p>
-    <p>Instead of being about whether the UK left the EU, the statements are going to be</p>
-    <p>about if the UK <em>should have</em> left the EU.</p>
-    <p>That is, they will express an opinion about the UK leaving the EU</p>
-    <p>In this next block, please respond as the UK <strong>should have</strong> left the EU;</p>
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `
+    <p>In this round, please respond as the UK <strong>should have</strong> left the EU;</p>
     <p> That it was the right thing to do, and a good thing to have happened. </p>
-    <p>For example, if the sentence says "'Leave' should have won", you should say TRUE.</p>
-    <p>Press any button to continue.</p>`
+    <p>For example, if the sentence says "<em>'Leave' should have won</em>", you should say press the <strong>left</strong> button.</p>
+    <p><br>Press to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 var immigration_nondesc_true_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>This time, the sentences are going to change.</p>
-    <p>Instead of being about what <em>is</em> the case, the statements are going to be</p>
-    <p>about what <em>should</em> be the case</p>
-    <p>That is, they will express an opinion about whether immigrant numbers should increase or decrease.</p>
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this block, the rules and sentences are not going to be about what <strong>is</strong> the case.</p>
+    <p>Instead, they are going to be about what <strong>should</strong> be the case</p>.
+    <p>They will express an opinion about whether immigrant numbers <strong>should</strong> increase or decrease.</p>
     
-    <p>In this next block, please respond as if immigration to the UK <strong>should be</strong> relatively high.</p>
-    <p>For example, if the sentence says 'Immigration levels should be low', you should say FALSE.</p>
-    <p>Press any button to continue.</p>`
+    <p>In this next block, please respond as if immigration to the UK <strong>should increase</strong>.</p>
+    <p>For example, if the sentence says 'Immigration levels should decrease', you should respond as if that statement is <strong>false</strong>.</p>
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 
     var brexit_nondesc_true_stimuli = [
-    { stimulus: "The UK should have left the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have exited the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have withdrawn from the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have pulled out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have remained in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have stayed in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have kept being in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be part of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have stayed in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have remained in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have kept being in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be part of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have withdrawn from the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have pulled out of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have exited the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be out of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'}
+    { stimulus: "The UK should have left the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have exited the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have withdrawn from the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have pulled out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should be out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have remained in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have stayed in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have kept being in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be part of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have stayed in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have remained in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have kept being in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should be in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should be part of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have withdrawn from the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have pulled out of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have exited the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be out of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'}
     ];
 
     var brexit_nondesc_true_rightwrong_stimuli = brexit_nondesc_true_stimuli.concat(rightwrong2stimuli)
@@ -1941,26 +2066,26 @@ var immigration_nondesc_true_instructions = {
 
 
     var immigration_nondesc_true_stimuli = [
-    { stimulus: "Immigrant numbers should rise", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers should increase", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers should get higher", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population should climb", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population should expand", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t decrease", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t go down", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t decline", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population shouldn’t shrink", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population shouldn't get smaller", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers should decrease", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers should go down", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers should decline", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population should shrink", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population should get smaller", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t rise", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t increase", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "Immigrant numbers shouldn’t get higher", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population shouldn't expand", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The immigrant population shouldn't climb", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'}
+    { stimulus: "Immigrant numbers should rise", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should increase", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should get higher", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population should climb", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population should expand", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t decrease", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t go down", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t decline", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population shouldn’t shrink", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The immigrant population shouldn't get smaller", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should decrease", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should go down", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should decline", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The immigrant population should shrink", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The immigrant population should get smaller", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t rise", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t increase", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers shouldn’t get higher", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The immigrant population shouldn't expand", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The immigrant population shouldn't climb", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'}
     ];
 
     var immigration_nondesc_true_rightwrong_stimuli = immigration_nondesc_true_stimuli.concat(rightwrong2stimuli)
@@ -1985,122 +2110,232 @@ var immigration_nondesc_true_block40procedure  = {
 // // non descriptive false (immigration should not be high, brexit should not have happened)
 
 var brexit_nondesc_false_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: ` <p>In this next block, please respond as if the UK <strong>should have stayed</strong> in the EU.</p>
     <p>For example, if the sentence says 'The UK should have remained in the EU', respond as if the sentence is TRUE.</p>
     <p>If the sentence says 'The UK shouldn't have stayed in the EU', respond as if the sentence is FALSE.</p>
-    <p>Press any button to continue.</p>`
+    <p>Press to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 var immigration_nondesc_false_instructions = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `<p>In this next block, please respond as if immigrant numbers should<strong>decrease</strong>.</p>
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this next block, please respond as if immigrant numbers should <strong>decrease</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is false.</p>
     <p>If the sentence says 'Immigrant numbers should go down', respond as if the sentence is true.</p>
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var immigration_nondesc_false_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false' from before.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
-    <p>That is, continue responding as if immigrant numbers <strong>should not</strong> increase.</p>
-    <p>For example, if the sentence says 'Immigrant numbers should rise',respond as if the sentence is false.</p>
+    <p>That is, continue responding as if immigrant numbers <strong>should decrease</strong>.</p>
+    <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is false.</p>
     <p>For words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var immigration_nondesc_true_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
-    <p>That is, continue responding as if immigrant numbers <strong>should</strong>increase.</p>
+    <p>That is, continue responding as if immigrant numbers <strong>should</strong> increase.</p>
     <p>For example, if the sentence says 'Immigration numbers should rise', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var immigration_desc_false_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are decreasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are decreasing', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var immigration_desc_true_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are rising', respond as if the sentence is true.</p>
     <p>As before, for words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var brexit_nondesc_false_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> remained in the EU.</p>
     <p>For example, if the sentence says 'The UK should be in the EU', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var brexit_nondesc_true_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> left the EU.</p>
     <p>For example, if the sentence says 'The UK should not be in the EU', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var brexit_desc_false_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>remained</strong> in the EU.</p>
     <p>For example, if the sentence says 'The UK is in the EU', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 var brexit_desc_true_block40instructions = {
-    type: jsPsychHtmlKeyboardResponse,
+    type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>left</strong> the EU.</p>
     <p>For example, if the sentence says 'The UK is not in the EU', respond as if the sentence is true.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p>Press any button to continue.</p>`
+    <p><br>Press any button to continue.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)}
 };
 
 
 var brexit_nondesc_false_stimuli = [
-{stimulus: "The UK should have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have exited the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have withdrawn from the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have pulled out of the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be out of the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have remained in the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have stayed in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have kept being in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be part of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have stayed in the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have remained in the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should have kept being in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK should be part of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have withdrawn from the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have pulled out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have exited the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't have left the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-  { stimulus: "The UK shouldn't be out of the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
+{stimulus: "The UK should have left the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have exited the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have withdrawn from the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have pulled out of the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should be out of the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have remained in the EU",correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have stayed in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have kept being in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be in the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be part of the EU", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+  { stimulus: "The UK should have stayed in the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have remained in the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should have kept being in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should be in the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK should be part of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have withdrawn from the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have pulled out of the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have exited the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't have left the EU", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "The UK shouldn't be out of the EU",correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
     ];
 
     var brexit_nondesc_false_rightwrong_stimuli = brexit_nondesc_false_stimuli.concat(rightwrong2stimuli)
@@ -2109,7 +2344,8 @@ var brexit_nondesc_false_stimuli = [
     var brexit_nondesc_false_procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_false_stimuli,
-      repetitions: 2,
+      // 2
+      repetitions: 1,
       randomize_order: true
     };
 
@@ -2121,26 +2357,26 @@ var brexit_nondesc_false_stimuli = [
     };
 
     var immigration_nondesc_false_stimuli = [
-    {stimulus: "Immigrant numbers should rise", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers should increase", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers should get higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population should expand", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population should climb", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t decrease", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t go down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t decline", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population shouldn’t shrink", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population shouldn't get smaller", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers should decrease", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers should go down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers should decline", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population should shrink", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population should get smaller", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t rise", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t increase", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "Immigrant numbers shouldn’t get higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population shouldn't expand", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'},
-    {stimulus: "The immigrant population shouldn't climb", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">[-]</button>'}
+    {stimulus: "Immigrant numbers should rise", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers should increase", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers should get higher", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "The immigrant population should expand", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "The immigrant population should climb", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t decrease", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t go down", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t decline", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "The immigrant population shouldn’t shrink", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "The immigrant population shouldn't get smaller", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers should decrease", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers should go down", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers should decline", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "The immigrant population should shrink", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "The immigrant population should get smaller", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t rise", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t increase", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "Immigrant numbers shouldn’t get higher", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "The immigrant population shouldn't expand", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    {stimulus: "The immigrant population shouldn't climb", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'}
     ];
 
 
@@ -2149,7 +2385,8 @@ var brexit_nondesc_false_stimuli = [
 var immigration_nondesc_false_procedure = {
     timeline: [start_button, fixation, test1],
     timeline_variables: immigration_nondesc_false_stimuli,
-    repetitions: 2,
+    // 2
+    repetitions: 1,
     randomize_order: true
 };
 
@@ -2161,9 +2398,31 @@ var immigration_nondesc_false_block40procedure  = {
     };
 
 
+
+
 var rulechange = {
     type: jsPsychHtmlButtonResponse,
-    stimuli: `<p>Great. In the next block, the rule is going to change.</p>`,
+    stimulus: `<p>Great.<br> In the next block, the rule is going to change.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+                    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+    }
+};
+
+var brexitrulechange = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>Great.<br> In the next block, the rule is going to change.</p>
+    <p>Instead of being about whether the UK left the EU,</p>
+
+    `,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2180,9 +2439,69 @@ var rulechange = {
 
 var conditionchange = {
     type: jsPsychHtmlButtonResponse,
-    stimuli: function(){return `<p>Great. In the next block, the statements and rule are going to change.</p>
-    <p> If you would like to take a break, feel free to do so. Please ensure you have recorded your ID and condition code: <strong>${jspsych_id}</strong> and <strong>${block2code}</strong>
+    stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p>
+    <p> If you would like to take a break, feel free to do so.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
         as you may need these to resume the experiment`},
+    on_start: function(){
+        block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar),
+        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);},
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+};
+
+var B_NtDconditionchange = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `<p>In the next block, the statements and rule are going to change.</p>
+    <p>Instead of being about whether the UK <strong>should have left</strong> the EU,</p>
+    <p>the statements are going to be about whether the UK <em>has left</em> the EU.</p>
+    <p>That is, they will state either that the UK has left the EU, or that it is still in the EU</p>`},
+    on_start: function(){
+        block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar),
+        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);},
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+};
+
+var B_DtNconditionchange = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
+    <p<br>>Instead of being about whether the UK left the EU,</p>
+    <p>the statements are going to be about if the UK <em>should have</em> left the EU.</p>
+    <p>That is, they will express an opinion about the UK leaving the EU</p>`},
+    on_start: function(){
+        block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar),
+        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);},
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+};
+
+var I_DtNconditionchange = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
+    <p<br>>Instead of being about whether immigrant numbers <strong>are</strong> changing,</p>
+    <p>the statements are going to be about if immigrant numbers <em>should be</em> changing.</p>
+    <p>That is, they will express an opinion about immigrant numbers increasing </p>`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2204,17 +2523,17 @@ var experimentover ={
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p> Thank you. Now you will do some survey questions </p>`,
     choices: [''],
-    button_html: '<button id="btn-expover" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    button_html: '<button id="btn-expover" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
   },
   on_finish: function() {
     document.getElementById('bottom-bar')?.remove();
-    let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
-};
+    document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+}};
 //   timeline.push(experimentover);
 
 
