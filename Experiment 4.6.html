@@ -172,8 +172,8 @@
     // do surveys nicely
     // ask dom maybe: selecting right answer after will be highly variable?
     // make sure all trials are collecting data
-    // check accuracy in each trial
     // add a button to return to full screen
+    // check all the document.body removes
 
     // done/not doing:
     // add 'too slow!' thing // (done in help)
@@ -476,7 +476,7 @@ var welcomeA = {
         let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
         if (block2only===1 && !validcodes.includes(block2code)) {return []}
         else {return '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>'}},
-    data: { screen: "beenherebefore" },
+    data: { screen: "welcomeA" },
     on_start: function(){
             let bar = document.createElement('div');
             bar.id = 'bottom-bar';
@@ -1516,7 +1516,7 @@ var part1cont= {
         let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar)},
-        data: { screen: "instructions1" },
+        data: { screen: "inducer instructions" },
         button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_finish: function(){
             let bar = document.getElementById('bottom-bar');
@@ -1637,7 +1637,7 @@ else {return `<p style="position:fixed; font-size: 28px; top: 46%; left:50%; tra
 css_classes: ['top-buttons'],
 extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       data: {
-        task: 'inducer',
+        task: 'response',
         correct_response: jsPsych.timelineVariable('correct_response'),
         stimulus: jsPsych.timelineVariable('stimulus')
       },
@@ -1672,6 +1672,8 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 
 
 
+
+
 // in on_finish:
         // if (data.rt > 2500) {slow = "1"}
         // else {slow = "0"}
@@ -1685,6 +1687,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       // 2 4
       repetitions: 4,
       randomize_order: true,
+      data: {block:'inducer'} 
       };
     // timeline.push(inducer_procedure);
 
@@ -1732,7 +1735,8 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_desc_true_instructions'} 
 };
 var immigration_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
@@ -1749,7 +1753,8 @@ var immigration_desc_true_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_desc_true_instructions'} 
 };
 
 
@@ -1785,7 +1790,9 @@ var immigration_desc_true_instructions = {
       timeline_variables: brexit_desc_true_stimuli,
       // 2
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BDTintro'} 
+
     };
 
     // var brexit_desc_true_block40procedure  = {
@@ -1793,6 +1800,8 @@ var immigration_desc_true_instructions = {
     //   timeline_variables: brexit_desc_true_rightwrong_stimuli,
     //   repetitions: 1,
     //   randomize_order: true
+    //   data: {block:'BDT'} 
+
     // };
 
     // 2
@@ -1833,14 +1842,18 @@ var immigration_desc_true_procedure = {
     timeline: [start_button, fixation, test1],
     timeline_variables: immigration_desc_true_stimuli,
     repetitions: 2,
-    randomize_order: true
+    randomize_order: true,
+    data: {block:'IDTintro'} 
+
 };
 
 var immigration_desc_true_block40procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: immigration_desc_true_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'IDT'} 
+
     };
 
 //block two (descriptive, false)
@@ -1862,6 +1875,8 @@ var brexit_desc_false_instructions = {
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar)}
+            ,
+            data: {screen:'Brx_desc_false_instructions'} 
 };
 var immigration_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
@@ -1882,7 +1897,8 @@ var immigration_desc_false_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'Imm_desc_false_instructions'} 
 };
 
 
@@ -1918,14 +1934,16 @@ var brexit_desc_false_stimuli = [
       timeline_variables: brexit_desc_false_stimuli,
       // 2
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BDFintro'} 
     };
 
     // var brexit_desc_false_block40procedure  = {
     //   timeline: [start_button, fixation, test1],
     //   timeline_variables: brexit_desc_false_rightwrong_stimuli,
     //   repetitions: 1,
-    //   randomize_order: true
+    //   randomize_order: true,
+    //   data: {block:'BDF'} 
     // };
 
     // 2
@@ -1966,14 +1984,16 @@ var immigration_desc_false_procedure = {
     timeline: [start_button, fixation, test1],
     timeline_variables: immigration_desc_false_stimuli,
     repetitions: 2,
-    randomize_order: true
+    randomize_order: true,
+    data: {block:'IDTintro'} 
 };
 
 var immigration_desc_false_block40procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: immigration_desc_false_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'IDT'} 
     };
 
 
@@ -1998,7 +2018,8 @@ var brexit_nondesc_true_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_nondesc_true_instructions'} 
 };
 var immigration_nondesc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
@@ -2019,7 +2040,8 @@ var immigration_nondesc_true_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_nondesc_true_instructions'} 
 };
 
 
@@ -2053,7 +2075,8 @@ var immigration_nondesc_true_instructions = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_true_stimuli,
       repetitions: 2,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BNTintro'} 
     };
 
 
@@ -2061,7 +2084,8 @@ var immigration_nondesc_true_instructions = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_true_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BNT'} 
     };
 
 
@@ -2095,14 +2119,16 @@ var immigration_nondesc_true_procedure = {
     timeline: [start_button, fixation, test1],
     timeline_variables: immigration_nondesc_true_stimuli,
     repetitions: 2,
-    randomize_order: true
+    randomize_order: true,
+    data: {block:'INTintro'} 
 };
 
 var immigration_nondesc_true_block40procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: immigration_nondesc_true_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'INT'} 
     };
 
 
@@ -2125,7 +2151,8 @@ var brexit_nondesc_false_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_nondesc_false_instructions'} 
 };
 var immigration_nondesc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
@@ -2143,7 +2170,8 @@ var immigration_nondesc_false_instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_nondesc_false_instructions'} 
 };
 
 var immigration_nondesc_false_block40instructions = {
@@ -2164,7 +2192,8 @@ var immigration_nondesc_false_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_nondesc_false_40_instructions'} 
 };
 
 var immigration_nondesc_true_block40instructions = {
@@ -2186,6 +2215,8 @@ var immigration_nondesc_true_block40instructions = {
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar)}
+            ,
+      data: {screen:'imm_nondesc_true_40_instructions'} 
 };
 
 var immigration_desc_false_block40instructions = {
@@ -2206,7 +2237,8 @@ var immigration_desc_false_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_desc_false_40_instructions'} 
 };
 
 var immigration_desc_true_block40instructions = {
@@ -2227,7 +2259,8 @@ var immigration_desc_true_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_desc_true_40_instructions'} 
 };
 
 var brexit_nondesc_false_block40instructions = {
@@ -2248,7 +2281,8 @@ var brexit_nondesc_false_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_nondesc_false_40_instructions'} 
 };
 
 var brexit_nondesc_true_block40instructions = {
@@ -2269,7 +2303,8 @@ var brexit_nondesc_true_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'imm_nondesc_true_40_instructions'} 
 };
 
 var brexit_desc_false_block40instructions = {
@@ -2290,7 +2325,8 @@ var brexit_desc_false_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_desc_false_40_instructions'} 
 };
 
 var brexit_desc_true_block40instructions = {
@@ -2311,7 +2347,8 @@ var brexit_desc_true_block40instructions = {
     on_finish: function(){
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)}
+            document.body.removeChild(bar)},
+            data: {screen:'brx_desc_true_40_instructions'} 
 };
 
 
@@ -2346,14 +2383,16 @@ var brexit_nondesc_false_stimuli = [
       timeline_variables: brexit_nondesc_false_stimuli,
       // 2
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BDFintro'} 
     };
 
     var brexit_nondesc_false_block40procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_false_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BDF'} 
     };
 
     var immigration_nondesc_false_stimuli = [
@@ -2387,14 +2426,16 @@ var immigration_nondesc_false_procedure = {
     timeline_variables: immigration_nondesc_false_stimuli,
     // 2
     repetitions: 1,
-    randomize_order: true
+    randomize_order: true,
+    data: {block:'INFintro'} 
 };
 
 var immigration_nondesc_false_block40procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: immigration_nondesc_false_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'INF'} 
     };
 
 
@@ -2414,7 +2455,8 @@ var rulechange = {
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-    }
+    },
+    data: {screen:'rulechange'} 
 };
 
 var brexitrulechange = {
@@ -2434,7 +2476,8 @@ var brexitrulechange = {
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
                     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-    }
+    },
+    data: {screen:'brexitrulechange'} 
 };
 
 var conditionchange = {
@@ -2448,6 +2491,7 @@ var conditionchange = {
       bar.id = 'bottom-bar';
       document.body.appendChild(bar),
         document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        data: {screen:'conditionchange'},
         on_finish: function(){
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
@@ -2473,6 +2517,7 @@ var B_NtDconditionchange = {
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);},
     choices: ['Continue'],
+    data: {screen:'B_NtD_conditionchange'},
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
 };
 
@@ -2493,6 +2538,7 @@ var B_DtNconditionchange = {
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);},
     choices: ['Continue'],
+    data: {screen:'B_DtN_conditionchange'},
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
 };
 
@@ -2513,6 +2559,7 @@ var I_DtNconditionchange = {
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);},
     choices: ['Continue'],
+    data: {screen:'I_DtN_conditionchange'},
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
 };
 
@@ -2529,7 +2576,8 @@ var experimentover ={
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
-  },
+  },    
+  data: {screen:'experimentover'},
   on_finish: function() {
     document.getElementById('bottom-bar')?.remove();
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
