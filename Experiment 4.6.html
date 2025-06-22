@@ -16,7 +16,7 @@
     <script src="https://unpkg.com/@jspsych-contrib/plugin-survey-slider@2.0.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-survey-html-form@1.0.3"></script>
    <script  src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-
+   <script src="https://unpkg.com/@jspsych/plugin-survey-likert@1.1.3"></script>
     <link href="https://unpkg.com/jspsych@7.3.4/css/jspsych.css" rel="stylesheet" type="text/css" />
 <style>
     #bottom-bar {
@@ -37,6 +37,23 @@
   #jspsych-survey-html-form-next {
     font-weight: bold
   }
+
+  .jspsych-html-slider-response-container {
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction: column;
+    line-height: 1.3em !important;
+}
+
+
+.jspsych-multiple-slider-form {
+    position:fixed
+}
+
+#jspsych-html-slider-response-wrapper {
+    margin-top:5% !important
+}
 
   .jspsych-content-wrapper.with-bottom-bar {
   padding-bottom: 5%;
@@ -86,11 +103,13 @@
     justify-content: center;
     width: 120px; 
     height: 30px;
+    font-weight: bold
 }    
 
 
 #jspsych-multiple-slider-form {
     z-index: 9999;
+    width:80%;
 }
 
 
@@ -171,9 +190,10 @@
     //to-do:
     // do surveys nicely
     // ask dom maybe: selecting right answer after will be highly variable?
-    // make sure all trials are collecting data
+    // make sure all trials are collecting data > add 'condition' , remove spare 'calibration' or 'calibration a'
     // add a button to return to full screen
     // check all the document.body removes
+
 
     // done/not doing:
     // add 'too slow!' thing // (done in help)
@@ -181,6 +201,7 @@
     // make you have to click button once sentence has appeared - not sure i should do this
     // get 'test' to match correct response? wdym.
     // WAIT maybe I want it within one trial in case people move before the sentence is over.
+
 
 
 // notes
@@ -342,8 +363,9 @@ var fullscreentrial = {
              timeline.forEach((trial, i) => {
   if (!trial.type) console.log("Missing type in trial", i, trial);
 });
-    }
 }
+};
+timeline.push(fullscreentrial)
 
         beforeqfun = function(){
     const participated = document.querySelector('input[name="participated"]:checked')?.value;
@@ -405,7 +427,7 @@ var beforequestion = {
             // jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome)};
 }};
-timeline.push(beforequestion);
+// timeline.push(beforequestion);
 
 
 
@@ -520,8 +542,8 @@ var calstim  = function(){
     else if (clickcount === 11){
         document.removeEventListener('click', recordmouse);
         document.removeEventListener('click', calstim);
-        jsPsych.data.addProperties({calibrationa: calibrationarray});
-        jsPsych.finishTrial({calibration: calibrationarray})}
+        jsPsych.data.addProperties({calibration: calibrationarray});
+        jsPsych.finishTrial()}
 }
     
 
@@ -614,10 +636,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -652,10 +676,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -690,10 +716,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -728,10 +756,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -766,10 +796,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -804,10 +836,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -842,10 +876,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -880,10 +916,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -918,10 +956,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -956,10 +996,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -994,10 +1036,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1032,10 +1076,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1070,10 +1116,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1108,10 +1156,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1146,10 +1196,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1184,33 +1236,37 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code ==="BNT" && block2only===1) {
-    jsPsych.timeline.insert(instructions);
+    // jsPsych.timeline.insert(instructions);
     // jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+    // jsPsych.timeline.insert(ontorealblocks);
+    // jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    // jsPsych.timeline.insert(rulechange);
+    // jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    // jsPsych.timeline.insert(experimentover);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1230,10 +1286,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1253,10 +1311,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1);
-    jsPsych.timeline.insert(brexitendingsurvey2);
-    jsPsych.timeline.insert(brexitendingsurvey3);
-    jsPsych.timeline.insert(brexitendingsurvey4);
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1276,10 +1336,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(brexitendingsurvey1)
-    jsPsych.timeline.insert(brexitendingsurvey2)
-    jsPsych.timeline.insert(brexitendingsurvey3)
-    jsPsych.timeline.insert(brexitendingsurvey4)
+        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform)
     jsPsych.timeline.insert(exitfullscreen)
 
@@ -1300,10 +1362,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1323,10 +1387,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1346,10 +1412,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1369,10 +1437,12 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
         jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(immigrationendingsurvey1);
-    jsPsych.timeline.insert(immigrationendingsurvey2);
-    jsPsych.timeline.insert(immigrationendingsurvey3);
-    jsPsych.timeline.insert(immigrationendingsurvey4);
+        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures2);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(exclusionform);
     jsPsych.timeline.insert(exitfullscreen);
   }
@@ -1380,6 +1450,9 @@ var ontorealblocks = {
         };
 
         // timeline.push(welcome);
+
+
+
 
 
 
@@ -1639,7 +1712,8 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       data: {
         task: 'response',
         correct_response: jsPsych.timelineVariable('correct_response'),
-        stimulus: jsPsych.timelineVariable('stimulus')
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        teststim: jsPsych.timelineVariable('stimulus')
       },
       on_load: function(){
         wrongtimes = [];
@@ -1723,7 +1797,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
     var brexit_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this next block, please respond as if the UK <strong>left</strong> the EU.</p>
-    <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
+    <p>For example, if the sentence says '<em>The UK has pulled out of the EU</em>' respond as if the sentence is true.</p>
     <p>Press any button to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -2585,21 +2659,24 @@ var experimentover ={
 //   timeline.push(experimentover);
 
 
-  //first brexit 'should' (1/4)
-  var expbrexit1 = [
-        {stimulus: "The UK should have left the EU"},
-        {stimulus: "The UK should have voted to leave EU"},
-        {stimulus: "The 'Remain' campaign should have lost"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        { stimulus: "The UK shouldn't have remined in the EU"},
-        { stimulus: "The 'Leave' campaign should have won"}
-    ]
+var scale1 = ['<span style="font-size: 12px"><em>Strongly Disagree</em></span>', '<span style="font-size: 12px"><em>Strongly Agree</em></span>']
 
-    var expbrexit_items1 = []
-    for (const item of expbrexit1) {
-        expbrexit_items1.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+
+//1 
+  var BrexitExplicitMeasures1_Stimuli = [
+{stimulus: 'The UK has left the EU'},
+{stimulus: 'The UK is part of the EU'},
+{stimulus: 'The UK isn’t in the EU'},
+{stimulus: 'The UK hasn’t exited the EU'},
+{stimulus: 'The UK has withdrawn from the EU'},
+{stimulus: 'Please select <em>Strongly Agree</em> for this question'}
+];
+
+    var BrexitExplicitMeasures1_Items = []
+    for (const item of BrexitExplicitMeasures1_Stimuli) {
+        BrexitExplicitMeasures1_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2609,20 +2686,20 @@ var experimentover ={
     }
 
 
-    var brexitendingsurvey1 = {
+    var BrexitExplicitMeasures1 = {
         type: jsPsychMultipleSlider,
-        questions: expbrexit_items1,
+        questions: BrexitExplicitMeasures1_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
         <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
-        <p> Please answer the following questions according to your own opinion</p></div>,
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "brexitendingsurvey1"
+            screen: "BrexitExplicitMeasures1"
         },
         on_start: function(){
     let bar = document.createElement('div');
@@ -2630,73 +2707,9 @@ var experimentover ={
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
-  on_finish: function(){
-    let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)
-  }
-        };
-
-        // timeline.push(brexit_nondesc_true_procedure)
-
-
-    // first immigration should (1/4)
-
-
-    //FIX
-    var expimmg1 = [
-        {stimulus: "Immigrant numbers shouldn't rise"},
-        {stimulus: "Immigrant numbers shouldn't get higher"},
-        {stimulus: "The immigrant population should expand"},
-        {stimulus: "Immigrant numbers should go down"},
-        {stimulus: "Please answer 'Strongly Agree' to this question"},
-        { stimulus: "The immigrant population shouldn't shrink"},
-    ]
-
-    var expimmg2 = [
-        {stimulus: "Immigrant numbers shouldn't go down"},
-        {stimulus: "The immigrant population should shrink"},
-        {stimulus: "The immigrant population should expand"},
-        {stimulus: "Immigrant numbers shouldn't get higher"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        { stimulus: "The immigrant population shouldn't climb"},
-    ]
-
-
-
-    var expimmg_items1 = []
-    for (const item of expimmg1) {
-        expimmg_items1.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-
-
-    var immigrationendingsurvey1 = {
-        type: jsPsychMultipleSlider,
-        questions: expimmg_items1,
-        randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px"
-        <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px"
-        <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 15%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
-            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`,
-        require_movement: true,
-        slider_width: 400,
-        data: {
-            screen: "immigrationendingsurvey1"
-        },
-        on_start: function(){
-    let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      bar.style.zIndex = '0';
-      document.body.appendChild(bar);
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
   },
   on_finish: function(){
     let bar = document.getElementById('bottom-bar');
@@ -2705,22 +2718,25 @@ var experimentover ={
         };
 
 
-// second brexit 'should' (n't) 2/4
 
-var expbrexit2 = [
-        {stimulus: "The UK should still be part of the EU"},
-        {stimulus: "The UK shouldn't have exited the EU"},
-        {stimulus: "The UK should be in the EU"},
-        {stimulus: "The 'Remain' campaign should have won"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        { stimulus: "The UK should have remined in the EU"},
-    ]
+// timeline.push(BrexitExplicitMeasures1)
 
-    var expbrexit_items2 = []
-    for (const item of expbrexit2) {
-        expbrexit_items1.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+//2
+var BrexitExplicitMeasures2_Stimuli = [
+{stimulus: 'The UK has kept being in the EU'},
+{stimulus: 'The UK is out of the EU'},
+{stimulus: 'The UK hasn’t pulled out of the EU'},
+{stimulus: 'The UK hasn’t stayed in the EU'},
+{stimulus: 'The UK has remained in the EU'},
+{stimulus: 'Please select <em>Strongly Disgree</em> for this question'}
+
+];
+
+    var BrexitExplicitMeasures2_Items = []
+    for (const item of BrexitExplicitMeasures2_Stimuli) {
+        BrexitExplicitMeasures2_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2730,26 +2746,30 @@ var expbrexit2 = [
     }
 
 
-    var brexitendingsurvey2 = {
+    var BrexitExplicitMeasures2 = {
         type: jsPsychMultipleSlider,
-        questions: expbrexit_items2,
+        questions: BrexitExplicitMeasures2_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
         <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
         <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "brexitendingsurvey2"
+            screen: "BrexitExplicitMeasures2"
         },
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
   },
   on_finish: function(){
     let bar = document.getElementById('bottom-bar');
@@ -2757,22 +2777,26 @@ var expbrexit2 = [
   }
         };
 
-// second immigration should (n't) (2/4)
 
-var expimmg2 = [
-        {stimulus: "Immigrant numbers shouldn't go down"},
-        {stimulus: "The immigrant population should shrink"},
-        {stimulus: "The immigrant population should expand"},
-        {stimulus: "Immigrant numbers shouldn't get higher"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        { stimulus: "The immigrant population should climb"},
-    ]
 
-    var expimmg_items2 = []
-    for (const item of expimmg2) {
-        expimmg_items2.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 22px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+// timeline.push(BrexitExplicitMeasures2)
+
+
+//3
+var BrexitExplicitMeasures3_Stimuli = [
+{stimulus: 'The UK should be in the EU'},
+{stimulus: 'The UK shouldn’t have left the EU'},
+{stimulus: 'The UK should have exited the EU'},
+{stimulus: 'The UK shouldn’t be part of the EU'},
+{stimulus: 'The UK shouldn’t be out of the EU'},
+{stimulus: 'Please select <em>Strongly disagree</em> for this question'}
+];
+
+    var BrexitExplicitMeasures3_Items = []
+    for (const item of BrexitExplicitMeasures3_Stimuli) {
+        BrexitExplicitMeasures3_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2781,26 +2805,31 @@ var expimmg2 = [
         })
     }
 
-    var immigrationendingsurvey2 = {
+
+    var BrexitExplicitMeasures3 = {
         type: jsPsychMultipleSlider,
-        questions: expimmg_items2,
+        questions: BrexitExplicitMeasures3_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 15%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
         <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 600px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
-            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`,
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "immigrationendingsurvey2"
+            screen: "BrexitExplicitMeasures3"
         },
         on_start: function(){
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
   },
   on_finish: function(){
     let bar = document.getElementById('bottom-bar');
@@ -2808,24 +2837,26 @@ var expimmg2 = [
   }
         };
 
-// first brexit 'are' (3/4)
-var expbrexit3 = [
-        {stimulus: "The UK has left the EU"},
-        {stimulus: "The UK has withdrawn from the EU"},
-        {stimulus: "The 'Leave' campaign won"},
-        {stimulus: "Please answer 'Strongly Agree' to this question"},
-        {stimulus: "The 'Remain' campaign didn't win"},
-        {stimulus: "The UK isn’t in the EU"}
-    ]
 
 
-    var scale2 = ['<span style="margin-left: 110px; font-size: 12px"><em>Strongly Disagree</em></span>', '<span style="margin-right: 110px; font-size: 12px"><em>Strongly Agree</em></span>']
+// timeline.push(BrexitExplicitMeasures3);
 
-    var expbrexit_items3 = []
-    for (const item of expbrexit3) {
-        expbrexit_items3.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+
+//4
+var BrexitExplicitMeasures4_Stimuli = [
+{stimulus: 'The UK should have pulled out of the EU'},
+{stimulus: 'The UK shouldn’t have remained in the EU'},
+{stimulus: 'The UK shouldn’t have kept being in the EU'},
+{stimulus: 'The UK shouldn’t have withdrawn form the EU'},
+{stimulus: 'The UK should have stayed in the EU'},
+{stimulus: 'Please select <em>Stronly disagree</em> for this question'}
+];
+
+    var BrexitExplicitMeasures4_Items = []
+    for (const item of BrexitExplicitMeasures4_Stimuli) {
+        BrexitExplicitMeasures4_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2835,20 +2866,20 @@ var expbrexit3 = [
     }
 
 
-    var brexitendingsurvey3 = {
+    var BrexitExplicitMeasures4 = {
         type: jsPsychMultipleSlider,
-        questions: expbrexit_items3,
+        questions: BrexitExplicitMeasures4_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
         <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
         <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "brexitendingsurvey3"
+            screen: "BrexitExplicitMeasures4"
         },
         on_start: function(){
     let bar = document.createElement('div');
@@ -2856,28 +2887,37 @@ var expbrexit3 = [
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 
 
-// first immigration 'are' (3/4)
+// timeline.push(BrexitExplicitMeasures4);
 
 
-var expimmg3 = [
-        {stimulus: "Immigrant numbers are going down"},
-        {stimulus: "Immigrant numbers are getting higher"},
-        {stimulus: "The immigrant population is expanding"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        {stimulus: "Immigrant numbers aren't rising"},
-        { stimulus: "The immigrant population isn't shrinking"},
-    ]
 
+//1
+var ImmigrationExplicitMeasures1_Stimuli = [
+{stimulus: 'Immigrant numbers are rising'},
+{stimulus: 'The immigrant population is not shrinking'},
+{stimulus: 'Immigrant numbers are going down'},
+{stimulus: 'The immigrant population isn’t climbing'},
+{stimulus: 'Immigrant numbers are getting higher'},
+{stimulus: 'Please select <em>Strongly Agree</em> for this question'}
+];
 
-    var expimmg_items3 = []
-    for (const item of expimmg3) {
-        expimmg_items3.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+    var ImmigrationExplicitMeasures1_Items = []
+    for (const item of ImmigrationExplicitMeasures1_Stimuli) {
+        ImmigrationExplicitMeasures1_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2887,68 +2927,20 @@ var expimmg3 = [
     }
 
 
-    var immigrationendingsurvey3 = {
+    var ImmigrationExplicitMeasures1 = {
         type: jsPsychMultipleSlider,
-        questions: expimmg_items3,
+        questions: ImmigrationExplicitMeasures1_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
         <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
         <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
-            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`,
-        require_movement: true,
-        slider_width: 400,
-        data: {
-            screen: "immigrationendingsurvey3"
-        },
-        on_start: function(){
-    let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      bar.style.zIndex = '0';
-      document.body.appendChild(bar);
-  },
-        };
-
-
-
-// brexit are part 2 (4/4)
-
-var expbrexit4 = [
-    { stimulus: "The 'Remain' campaign won"},
-        {stimulus: "The UK is in the EU"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        {stimulus: "The UK didn't exit the EU"},
-        {stimulus: "The UK is still part of the EU"}
-]
-
-var expbrexit_items4 = []
-    for (const item of expbrexit4) {
-        expbrexit_items4.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-
-    var brexitendingsurvey4 = {
-        type: jsPsychMultipleSlider,
-        questions: expbrexit_items4,
-        randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
-        <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
-        <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "brexitendingsurvey4"
+            screen: "ImmigrationExplicitMeasures1"
         },
         on_start: function(){
     let bar = document.createElement('div');
@@ -2956,34 +2948,35 @@ var expbrexit_items4 = []
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 
-// second immigration 'are' (4/4)
 
-var expimmg4 = [
-        {stimulus: "Immigrant numbers are rising"},
-        {stimulus: "The immigrant population is shrinking"},
-        {stimulus: "Immigrant numbers aren't going down"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        {stimulus: "Immigrant numbers aren't getting higher"},
-        { stimulus: "The immigrant population isn't climbing"},
-    ]
+// timeline.push(ImmigrationExplicitMeasures1)
 
-var expimmg4 = [
-        {stimulus: "Immigrant numbers are rising"},
-        {stimulus: "Immigrant numbers are increasing"},
-        {stimulus: "The immigrant population is climbing"},
-        {stimulus: "Please answer 'Strongly Disagree' to this question"},
-        {stimulus: "Immigrant numbers aren't going down"},
-        { stimulus: "The immigrant population isn't shrinking"},
-    ]
 
-    var expimmg_items4 = []
-    for (const item of expimmg4) {
-        expimmg_items4.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 20px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale2,
+var ImmigrationExplicitMeasures2_Stimuli = [
+{stimulus: 'Immigrant numbers aren’t getting higher'},
+{stimulus: 'The immigrant population is shrinking'},
+{stimulus: 'Immigrant numbers aren’t rising'},
+{stimulus: 'The immigrant population is expanding'},
+{stimulus: 'Immigrant numbers are not going down'},
+{stimulus: 'Please select <em>Strongly Agree</em> for this question'}
+];
+
+    var ImmigrationExplicitMeasures2_Items = []
+    for (const item of ImmigrationExplicitMeasures2_Stimuli) {
+        ImmigrationExplicitMeasures2_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
             required: true,
             min: 0,
             max: 1,
@@ -2993,20 +2986,20 @@ var expimmg4 = [
     }
 
 
-    var immigrationendingsurvey4 = {
+    var ImmigrationExplicitMeasures2 = {
         type: jsPsychMultipleSlider,
-        questions: expimmg_items4,
+        questions: ImmigrationExplicitMeasures2_Items,
         randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
         <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
         <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 565px; width:600px; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; font-size: 12px; line-height: 1em"> 
-            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`,
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
         data: {
-            screen: "immigrationendingsurvey4"
+            screen: "ImmigrationExplicitMeasures2"
         },
         on_start: function(){
     let bar = document.createElement('div');
@@ -3014,11 +3007,546 @@ var expimmg4 = [
       bar.style.zIndex = '0';
       document.body.appendChild(bar);
   },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
         };
 
 
+        // timeline.push(ImmigrationExplicitMeasures2)
 
 
+
+//3
+        var ImmigrationExplicitMeasures3_Stimuli = [
+{stimulus: 'The immigrant population should’t expand'},
+{stimulus: 'Immigrant numbers shouldn’t increase'},
+{stimulus: 'Immigrant numbers should decrease'},
+{stimulus: 'The immigrant population shouldn’t get smaller'},
+{stimulus: 'Immigrant numbers should increase'},
+{stimulus: 'Please select <em>Strongly Disaree</em> for this question'}
+];
+
+    var ImmigrationExplicitMeasures3_Items = []
+    for (const item of ImmigrationExplicitMeasures3_Stimuli) {
+        ImmigrationExplicitMeasures3_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+
+    var ImmigrationExplicitMeasures3 = {
+        type: jsPsychMultipleSlider,
+        questions: ImmigrationExplicitMeasures3_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "ImmigrationExplicitMeasures3"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
+
+
+        // timeline.push(ImmigrationExplicitMeasures3)
+
+
+//4
+var ImmigrationExplicitMeasures4_Stimuli = [
+{stimulus: 'The immigrant population should climb'},
+{stimulus: 'Immigrant numbers shouldn’t decline'},
+{stimulus: 'Immigrant numbers shouldn’t decrease'},
+{stimulus: 'The immigrant population should get smaller'},
+{stimulus: 'Immigrant numbers should decline'},
+{stimulus: 'Please select <em>Strongly Agree</em> for this question'}
+];
+
+    var ImmigrationExplicitMeasures4_Items = []
+    for (const item of ImmigrationExplicitMeasures4_Stimuli) {
+        ImmigrationExplicitMeasures4_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+
+    var ImmigrationExplicitMeasures4 = {
+        type: jsPsychMultipleSlider,
+        questions: ImmigrationExplicitMeasures4_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "ImmigrationExplicitMeasures4"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
+
+
+        // timeline.push(ImmigrationExplicitMeasures4)
+
+        //other
+
+        var BrexitExplicitMeasures5_Stimuli = [
+{stimulus: 'In general, I am strongly opinionated'},
+{stimulus: 'Regarding politics, I am strongly opinionated'},
+{stimulus: '"Leaving the EU was a good thing"'},
+{stimulus: 'I have strong opinions about Brexit'},
+{stimulus: 'People judge the political beliefs of others a lot'},
+{stimulus: "People's political beliefs should be judged"},
+];
+
+    var BrexitExplicitMeasures5_Items = []
+    for (const item of BrexitExplicitMeasures5_Stimuli) {
+        BrexitExplicitMeasures5_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+
+    var BrexitExplicitMeasures5 = {
+        type: jsPsychMultipleSlider,
+        questions: BrexitExplicitMeasures5_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "BrexitExplicitMeasures5"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
+
+
+        // timeline.push(BrexitExplicitMeasures5)
+
+//6
+
+var ImmigrationExplicitMeasures5_Stimuli = [
+{stimulus: 'In general, I am strongly opinionated'},
+{stimulus: 'Regarding politics, I am strongly opinionated'},
+{stimulus: '"Immigration rising is a good thing"'},
+{stimulus: 'I have strong opinions about Immigration'},
+{stimulus: 'People judge the political beliefs of others a lot'},
+{stimulus: "People's political beliefs should be judged"},
+];
+
+    var ImmigrationExplicitMeasures5_Items = []
+    for (const item of ImmigrationExplicitMeasures5_Stimuli) {
+        ImmigrationExplicitMeasures5_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+
+    var ImmigrationExplicitMeasures5 = {
+        type: jsPsychMultipleSlider,
+        questions: ImmigrationExplicitMeasures5_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "ImmigrationExplicitMeasures5"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form')
+    form.style.position = 'fixed'
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
+
+
+        timeline.push(ImmigrationExplicitMeasures5)
+
+
+
+var ImmigrationExplicitMeasures6_Stimuli = [
+{stimulus: 'How much political content (e.g. news articles/programmes, social media posts/channels) do you consume per day?'},
+{stimulus: 'What proportion of the political content (e.g. news articles/programmes, social media posts/channels) you consume do you disagree with?'},
+{stimulus: 'People judge the views of others about immigration a lot'},
+{stimulus: "People's views on immigration should be judged"},
+{stimulus: 'How would you describe your political views on economic issues?'},
+{stimulus: 'How would you describe your political views on social issues?'},
+];
+
+    var ImmigrationExplicitMeasures6_Items = []
+    for (const item of ImmigrationExplicitMeasures6_Stimuli) {
+        ImmigrationExplicitMeasures6_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 2.5%; font-size: 13px; ">${item.stimulus}</div>`,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+    // <p>Political content is a broad category that includes current affairs, news, and any content about topics affecting society.</div>
+
+
+    var ImmigrationExplicitMeasures6 = {
+        type: jsPsychMultipleSlider,
+        questions: ImmigrationExplicitMeasures6_Items,
+        randomize_question_order: false,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 15%; left: 50%; transform: translateX(-50%); height: 70%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 0.1%; padding-bottom:20px;font-size: 12px; line-height: 1.11em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "ImmigrationExplicitMeasures6"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let button = document.getElementById('jspsych-multiple-slider-next')
+    button.style.bottom = '-17%';
+    let form = document.getElementById('jspsych-multiple-slider-form');
+    form.style.position = 'fixed';
+    let slider0 = document.getElementById('jspsych-html-slider-response-response-0');
+    let slider1 = document.getElementById('jspsych-html-slider-response-response-1');
+    let slider2 = document.getElementById('jspsych-html-slider-response-response-2');
+    let slider3 = document.getElementById('jspsych-html-slider-response-response-3');
+    let slider4 = document.getElementById('jspsych-html-slider-response-response-4');
+    let slider5 = document.getElementById('jspsych-html-slider-response-response-5');
+    let slider0area = slider0.getBoundingClientRect();
+    let slider1area = slider1.getBoundingClientRect();
+    let slider2area = slider2.getBoundingClientRect();
+    let slider3area = slider3.getBoundingClientRect();
+    let slider4area = slider4.getBoundingClientRect();
+    let slider5area = slider5.getBoundingClientRect();
+    slider0.style.marginBottom = '1.5%';
+    slider1.style.marginBottom = '1.5%';
+    slider2.style.marginBottom = '1.5%';
+    slider3.style.marginBottom = '1.5%';
+    slider4.style.marginBottom = '1.5%';
+    slider5.style.marginBottom = '1.5%';
+
+    let labels0 = document.createElement('div');
+    labels0.id = 'labels0';
+    let labels1 = document.createElement('div');
+    labels1.id = 'labels1';
+    let labels2 = document.createElement('div');
+    labels2.id = 'labels2';
+    let labels3 = document.createElement('div');
+    labels3.id = 'labels3';
+    let labels4 = document.createElement('div');
+    labels4.id = 'labels4';
+    let labels5 = document.createElement('div');
+    labels5.id = 'labels5';
+
+    labels0.style.position = 'fixed';
+    labels0.style.top = `${slider0area.top + slider0area.height*1.5}px`;
+    labels0.style.left = `${slider0area.left - (slider0area.width * 0.11)}px`;
+    labels0.style.left = 'translateX(-50%)';
+    labels0.style.width = `${slider0area.width * 1.25}px`;
+    labels0.style.height = `${slider0area.height}px`;
+    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    document.body.appendChild(labels0);
+
+    labels1.style.position = 'fixed';
+    labels1.style.top = `${slider1area.top + slider1area.height*2}px`;
+    labels1.style.left = `${slider1area.left - (slider1area.width * 0.11)}px`;
+    labels1.style.left = 'translateX(-50%)';
+    labels1.style.width = `${slider1area.width * 1.25}px`;
+    labels1.style.height = `${slider1area.height}px`;
+    labels1.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    document.body.appendChild(labels1);
+
+
+    labels2.style.position = 'fixed';
+    labels2.style.top = `${slider2area.top + slider2area.height*2.2}px`;
+    labels2.style.left = `${slider2area.left - (slider2area.width * 0.11)}px`;
+    labels2.style.width = `${slider2area.width * 1.25}px`;
+    labels1.style.left = 'translateX(-50%)';
+    labels2.style.height = `${slider2area.height}px`;
+    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`
+    document.body.appendChild(labels2);
+
+    labels3.style.position = 'fixed';
+    labels3.style.top = `${slider3area.top + slider3area.height*2.5}px`;
+    labels3.style.left = `${slider3area.left - (slider3area.width * 0.1)}px`;
+    labels3.style.width = `${slider3area.width * 1.2}px`;
+    labels3.style.left = 'translateX(-50%)';
+    labels3.style.height = `${slider3area.height}px`;
+    labels3.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`
+    document.body.appendChild(labels3);
+
+    labels4.style.position = 'fixed';
+    labels4.style.top = `${slider4area.top + slider4area.height*3.2}px`;
+    labels4.style.left = `${slider4area.left - (slider4area.width * 0.115)}px`;
+    labels4.style.width = `${slider4area.width * 1.25}px`;
+    labels4.style.left = 'translateX(-50%)';
+    labels4.style.height = `${slider4area.height}px`;
+    labels4.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    document.body.appendChild(labels4);
+
+    labels5.style.position = 'fixed';
+    labels5.style.top = `${slider5area.top + slider5area.height*3.5}px`;
+    labels5.style.left = `${slider5area.left - (slider5area.width * 0.115)}px`;
+    labels5.style.width = `${slider5area.width * 1.25}px`;
+    labels5.style.left = 'translateX(-50%)';
+    labels5.style.height = `${slider5area.height}px`;
+    labels5.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    document.body.appendChild(labels5);
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+            document.body.removeChild(labels0);
+            document.body.removeChild(labels1);
+            document.body.removeChild(labels2);
+            document.body.removeChild(labels3);
+            document.body.removeChild(labels4);
+            document.body.removeChild(labels5);
+  }
+        };
+
+
+        timeline.push(ImmigrationExplicitMeasures6)
+
+//
+
+
+var BrexitExplicitMeasures6 = {
+        type: jsPsychMultipleSlider,
+        questions: BrexitExplicitMeasures6_Items,
+        randomize_question_order: false,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 15%; left: 50%; transform: translateX(-50%); height: 70%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 0.1%; padding-bottom:20px;font-size: 12px; line-height: 1.11em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "BrexitExplicitMeasures6"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let button = document.getElementById('jspsych-multiple-slider-next')
+    button.style.bottom = '-17%';
+    let form = document.getElementById('jspsych-multiple-slider-form');
+    form.style.position = 'fixed';
+    let slider0 = document.getElementById('jspsych-html-slider-response-response-0');
+    let slider1 = document.getElementById('jspsych-html-slider-response-response-1');
+    let slider2 = document.getElementById('jspsych-html-slider-response-response-2');
+    let slider3 = document.getElementById('jspsych-html-slider-response-response-3');
+    let slider4 = document.getElementById('jspsych-html-slider-response-response-4');
+    let slider5 = document.getElementById('jspsych-html-slider-response-response-5');
+    let slider0area = slider0.getBoundingClientRect();
+    let slider1area = slider1.getBoundingClientRect();
+    let slider2area = slider2.getBoundingClientRect();
+    let slider3area = slider3.getBoundingClientRect();
+    let slider4area = slider4.getBoundingClientRect();
+    let slider5area = slider5.getBoundingClientRect();
+    slider0.style.marginBottom = '1.5%';
+    slider1.style.marginBottom = '1.5%';
+    slider2.style.marginBottom = '1.5%';
+    slider3.style.marginBottom = '1.5%';
+    slider4.style.marginBottom = '1.5%';
+    slider5.style.marginBottom = '1.5%';
+
+    let labels0 = document.createElement('div');
+    labels0.id = 'labels0';
+    let labels1 = document.createElement('div');
+    labels1.id = 'labels1';
+    let labels2 = document.createElement('div');
+    labels2.id = 'labels2';
+    let labels3 = document.createElement('div');
+    labels3.id = 'labels3';
+    let labels4 = document.createElement('div');
+    labels4.id = 'labels4';
+    let labels5 = document.createElement('div');
+    labels5.id = 'labels5';
+
+    labels0.style.position = 'fixed';
+    labels0.style.top = `${slider0area.top + slider0area.height*1.5}px`;
+    labels0.style.left = `${slider0area.left - (slider0area.width * 0.11)}px`;
+    labels0.style.left = 'translateX(-50%)';
+    labels0.style.width = `${slider0area.width * 1.25}px`;
+    labels0.style.height = `${slider0area.height}px`;
+    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    document.body.appendChild(labels0);
+
+    labels1.style.position = 'fixed';
+    labels1.style.top = `${slider1area.top + slider1area.height*2}px`;
+    labels1.style.left = `${slider1area.left - (slider1area.width * 0.11)}px`;
+    labels1.style.left = 'translateX(-50%)';
+    labels1.style.width = `${slider1area.width * 1.25}px`;
+    labels1.style.height = `${slider1area.height}px`;
+    labels1.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    document.body.appendChild(labels1);
+
+
+    labels2.style.position = 'fixed';
+    labels2.style.top = `${slider2area.top + slider2area.height*2.2}px`;
+    labels2.style.left = `${slider2area.left - (slider2area.width * 0.11)}px`;
+    labels2.style.width = `${slider2area.width * 1.25}px`;
+    labels1.style.left = 'translateX(-50%)';
+    labels2.style.height = `${slider2area.height}px`;
+    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`
+    document.body.appendChild(labels2);
+
+    labels3.style.position = 'fixed';
+    labels3.style.top = `${slider3area.top + slider3area.height*2.5}px`;
+    labels3.style.left = `${slider3area.left - (slider3area.width * 0.1)}px`;
+    labels3.style.width = `${slider3area.width * 1.2}px`;
+    labels3.style.left = 'translateX(-50%)';
+    labels3.style.height = `${slider3area.height}px`;
+    labels3.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`
+    document.body.appendChild(labels3);
+
+    labels4.style.position = 'fixed';
+    labels4.style.top = `${slider4area.top + slider4area.height*3.2}px`;
+    labels4.style.left = `${slider4area.left - (slider4area.width * 0.115)}px`;
+    labels4.style.width = `${slider4area.width * 1.25}px`;
+    labels4.style.left = 'translateX(-50%)';
+    labels4.style.height = `${slider4area.height}px`;
+    labels4.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    document.body.appendChild(labels4);
+
+    labels5.style.position = 'fixed';
+    labels5.style.top = `${slider5area.top + slider5area.height*3.5}px`;
+    labels5.style.left = `${slider5area.left - (slider5area.width * 0.115)}px`;
+    labels5.style.width = `${slider5area.width * 1.25}px`;
+    labels5.style.left = 'translateX(-50%)';
+    labels5.style.height = `${slider5area.height}px`;
+    labels5.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    document.body.appendChild(labels5);
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+            document.body.removeChild(labels0);
+            document.body.removeChild(labels1);
+            document.body.removeChild(labels2);
+            document.body.removeChild(labels3);
+            document.body.removeChild(labels4);
+            document.body.removeChild(labels5);
+  }
+        };
+
+
+        timeline.push(BrexitExplicitMeasures6)
+
+
+
+
+
+// <div style="height: 650; width:450; margin-top: 20%; overflow-y: auto; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px;">
 
 
     var exclusionform = {
@@ -3026,14 +3554,21 @@ var expimmg4 = [
     //     preamble: `<div style="font-size: 12px;">
     //   <h1 style="text-align: center;">Exclusion</h1>
     // </div>`,
-        html: `<div style="height: 650; width:450; margin-top: 20%; overflow-y: auto; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px;">
+        html: `<div style="height:100%;width="100%">
+                    <div style="position:fixed; top: 30%; left: 50%; transform: translateX(-50%); height:20%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 0.1%; padding-bottom:20px;font-size: 12px; line-height: 1.11em"> 
+
 
     <div style="width: 400px; margin: auto; text-align: center; align-items: center">
       
       <p>If there is any reason why your data shouldn't be included, please explain here:</p>
-      <div style="width:400px; align-items: center"><input type="text" name="exclusion" style="width: 50%"></div>
-    </div>
+      <div style="width:100%; align-items: center"><input type="text" name="exclusion" style="width: 100%;height:100px"></div>
+    </div></div>
   `,
+  on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);},
 button_label: "Continue",
   on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
   const content = document.querySelector('.jspsych-content')
@@ -3046,9 +3581,12 @@ button_label: "Continue",
     const content = document.querySelector('.jspsych-content')
             if (content) {
                 content.style.marginTop = 'auto';
-            }
-}}
-// timeline.push(exclusionform)
+            };
+            let bar = document.getElementById('bottom=bar');
+            document.body.removeChild(bar);}
+
+};
+timeline.push(exclusionform)
 
 
 var exitfullscreen = {
