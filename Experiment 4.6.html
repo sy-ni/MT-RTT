@@ -188,8 +188,8 @@
   <script>
 
 // TO DO (with help): make sure data is SAVED at halfway point
-// ask if it is a good idea to have a warning for moving to early ('goodness')
-// add a button to return to full screen?
+// Is it a good idea to have a warning for moving to early ('have coded as 'goodness')?
+// add a button to return to full screen? don't want to unintentionally encourage people to exit, however
 // in 'help' there is a 'too slow' warning, and a word-by-word trial format rather than the entire sentence at once
 
 
@@ -390,7 +390,7 @@ var fullscreentrial = {
         fullscreen_mode: true,
         message: `<div><p>When you press 'Continue', the window will become full-screen. <br><br>Please keep the window full-screen until you are advised to close it at the end of the experiment.</p>
             <p><strong>If you exit full-screen before being told it is okay to do so, the resulting data will be unusable</strong></p>`,
-	button_label: `<strong>Continue</strong>`,
+        button_label: `<strong>Continue</strong>`,
         on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         let bar = document.createElement('div');
              bar.id = 'bottom-bar';
@@ -682,6 +682,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(B_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
@@ -725,6 +726,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(B_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
@@ -767,6 +769,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(B_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -809,6 +812,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(B_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -851,6 +855,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -893,6 +898,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -935,6 +941,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -977,6 +984,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -1019,6 +1027,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -1061,6 +1070,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1103,6 +1113,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -1145,6 +1156,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1187,6 +1199,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -1229,6 +1242,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(I_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1271,6 +1285,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(I_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -1313,6 +1328,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(I_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -2643,7 +2659,8 @@ var conditionchange = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p><br>
     <p> If you need a short break, take one now.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
-        as you may need these to resume the experiment`},
+        as you may need these to resume the experiment.<br>
+        If you exit fullscreen mode, please restart the experiment and enter the above codes to continue from this point.`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2666,7 +2683,7 @@ var B_NtDconditionchange = {
     <p>the statements are going to be about whether the UK <em>has left</em> the EU.</p>
     <p>That is, they will state either that the UK has left the EU, or that it is still in the EU</p>
     <br><br>
-    <p> If you need a short break, take one now.</p><br>
+    <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
     as you may need these to resume the experiment</p>
     `},
@@ -2692,7 +2709,7 @@ var B_DtNconditionchange = {
     <p>the statements are going to be about if the UK <em>should have</em> left the EU.</p>
     <p>That is, they will express an opinion about the UK leaving the EU</p>
         <br><br>
-    <p> If you need a short break, take one now.</p><br>
+    <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
     as you may need these to resume the experiment</p>`},
     on_start: function(){
@@ -2717,7 +2734,7 @@ var I_DtNconditionchange = {
     <p>the statements are going to be about if immigrant numbers <em>should be</em> changing.</p>
     <p>That is, they will express an opinion about immigrant numbers increasing </p>
         <br><br>
-    <p> If you need a short break, take one now.</p><br>
+    <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
     as you may need these to resume the experiment</p>`},
     on_start: function(){
@@ -2742,7 +2759,7 @@ var I_NtDconditionchange = {
     <p>the statements are going to be about whether immigrant numbers <em>are</em> changing.</p>
     <p>That is, they will state either that immigrant numbers are increasing or decreasingU</p>
     <br><br>
-    <p> If you need a short break, take one now.</p><br>
+    <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
     as you may need these to resume the experiment</p>
     `},
