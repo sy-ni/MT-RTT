@@ -388,8 +388,9 @@ var buttoncalibration = {
 var fullscreentrial = {
     type: jsPsychFullscreen,
         fullscreen_mode: true,
-        message: `<div><p>When you press 'Continue', the window will become full-screen. <br><br>Please keep the window full-screen until you are advised to close it at the end of the experiment.`,
-        button_label: `<strong>Continue</strong>`,
+        message: `<div><p>When you press 'Continue', the window will become full-screen. <br><br>Please keep the window full-screen until you are advised to close it at the end of the experiment.</p>
+            <p><strong>If you exit full-screen before being told it is okay to do so, the resulting data will be unusable</strong></p>`,
+	button_label: `<strong>Continue</strong>`,
         on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         let bar = document.createElement('div');
              bar.id = 'bottom-bar';
