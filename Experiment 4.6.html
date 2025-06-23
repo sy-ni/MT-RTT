@@ -187,30 +187,13 @@
   
   <script>
 
-    //to-do:
-    // do surveys nicely
-    // ask dom maybe: selecting right answer after will be highly variable?
-    // make sure all trials are collecting data > add 'condition' , remove spare 'calibration' or 'calibration a'
-    // add a button to return to full screen
-    // check all the document.body removes
-
-
-    // done/not doing:
-    // add 'too slow!' thing // (done in help)
-    // get 'words' to note down what sentence it showed and what the correct response is // (done in 'help')
-    // make you have to click button once sentence has appeared - not sure i should do this
-    // get 'test' to match correct response? wdym.
-    // WAIT maybe I want it within one trial in case people move before the sentence is over.
+// TO DO (with help): make sure data is SAVED at halfway point
+// ask if it is a good idea to have a warning for moving to early ('goodness')
+// add a button to return to full screen?
+// in 'help' there is a 'too slow' warning, and a word-by-word trial format rather than the entire sentence at once
 
 
 
-// notes
-// 4x10 inducer takes 1 min 50
-// a block of 20x2 proper takes around 2.5 minutes, even if they are hard.
-// so 1/2 (40) test block of inducer 2x10 (55 seconds) and 20x1 (75 seconds) is 130 seconds; 260 seconds for 80.
-// second practice block is 2.5 mins
-// second test block is also 260 seconds
-// total for one (desc/nondesc) is ~15
 
 
     var jsPsych = initJsPsych({
@@ -225,7 +208,6 @@
     var timeline = [];
 
     var fulfill = 0
-
 
 
 
@@ -251,8 +233,7 @@
         a link to a separate form to submit your email for the prize draw.
        
         <br>None of the statements presented will be of an abusive or extreme nature. However, given the topic matter, 
-        they may nonetheless be distressing for some people. Please consult the NHS webpage for resources to deal with distress here:
-        https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress. This will also be presented at the end.
+        they may nonetheless be distressing for some people. Please consult <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/" target="_blank">this NHS webpage for resources to deal with distress</a> . This will also be presented at the end.
         <br>
         
         <br>No identifying information will be collected in the experiment, meaning your answers will be anonymous and not traceable to you. 
@@ -283,11 +264,13 @@
         be directed to ss2651@sussex.ac.uk.</p></ul>
     </div> <div style="display: flex; justify-content: space-around;flex-wrap:wrap">
      <div style="width:400px; text-align: left; margin-top: 10px; font-size: 12px;">
-      <label><input type="checkbox" id="18-checkbox"> I am over the age of 18</label><br>
-      <label><input type="checkbox" id="english-checkbox"> I am not clicking this with a touchscreen</label>
+      <label><input type="checkbox" id="18-checkbox">I am over the age of 18</label><br>
+      <label><input type="checkbox" id="touchscreen-checkbox"> I am not using a touchscreen to interact with this page</label><br>
+    <label><input type="checkbox" id="english-checkbox"> I speak English fluently</label>
+
     </div>
     <div style="width:400px; text-align: left; margin-top: 10px; font-size: 12px;">
-      <label><input type="checkbox" id="UK-checkbox"> I currently reside in the UK and speak English fluently</label><br>
+      <label><input type="checkbox" id="UK-checkbox">I am either British by nationality or currently reside in the UK</label><br>
       <label><input type="checkbox" id="consent-checkbox"> I have read and understood the above and consent to taking part</label>
     </div> </div>
   `,
@@ -299,18 +282,21 @@
     const agecheckbox = document.getElementById('18-checkbox');
     const englishcheckbox = document.getElementById('english-checkbox');
     const UKcheckbox = document.getElementById('UK-checkbox');
+    const touchscreencheckbox = document.getElementById('touchscreen-checkbox');
     Iconsentbutton.disabled = true;
     function updateConsentState() {
       const consentchecked = consentcheckbox.checked;
       const agechecked = agecheckbox.checked;
       const englishchecked = englishcheckbox.checked;
       const UKchecked = UKcheckbox.checked;
-      Iconsentbutton.disabled = !(consentchecked && agechecked && englishchecked && UKchecked);
+      const touchscreenchecked = touchscreencheckbox.checked;
+      Iconsentbutton.disabled = !(consentchecked && agechecked && englishchecked && UKchecked && touchscreenchecked);
     }
     consentcheckbox.addEventListener('change', updateConsentState);
     agecheckbox.addEventListener('change', updateConsentState);
     englishcheckbox.addEventListener('change',updateConsentState);
     UKcheckbox.addEventListener('change',updateConsentState);
+    touchscreencheckbox.addEventListener('change',updateConsentState)
     document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
   on_finish: function() {
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
@@ -320,14 +306,13 @@
     let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
-      console.log(jspsych_id, theme)},
   data: { screen: "consent" }
-};
+}};
 
 
 
 
-// timeline.push(consent);
+timeline.push(consent);
 
 var jspsych_id = ""
 var block2code = ""
@@ -344,6 +329,59 @@ var contbutton;
 var ID = ''
 
 
+var xcord = 0;
+var ycord = 0;
+var calibrationarray = [];
+var cal = ''
+var clickwhere;
+
+function recordmouse(event){
+    xcord = event.clientX;
+    ycord = event.clientY;
+    calibrationarray.push({x:xcord, y:ycord});
+    clickcount++;
+    }
+
+var calstim  = function(){
+    const clickwhere = document.getElementById('clickwhere')
+    if (clickcount===1) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom left</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===2) {clickwhere.innerHTML = 'Please press:<br>the <strong>top left</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===3) {clickwhere.innerHTML = 'Please press:<br>the <strong>top right</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===4) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom right</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===5) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom left</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===6) {clickwhere.innerHTML = 'Please press:<br>the <strong>top left</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===7) {clickwhere.innerHTML = 'Please press:<br>the <strong>top right</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===8) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom right</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
+    else if (clickcount===9) {clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>, in the centre'}
+    else if (clickcount===10) {clickwhere.innerHTML = 'Great! Please click once more to continue<br>'}
+    else if (clickcount === 11){
+        document.removeEventListener('click', recordmouse);
+        document.removeEventListener('click', calstim);
+        jsPsych.data.addProperties({calibration: calibrationarray});
+        jsPsych.finishTrial()}
+}
+    
+
+var buttoncalibration = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `
+    <div id="clickwhere"></div>
+     <button id="dummy1" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>
+     <button id="dummy1" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
+     <button class="jspsych-btn-2" style="width: 15px; height: 15px; background-color: white; border: 2px solid black; border-radius: 0px; padding: 0"></button>
+    `},
+    choices: [],
+    button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
+    on_start: function(){
+      document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+    },
+    on_load: function(){
+        const clickwhere = document.getElementById('clickwhere')
+        clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>';
+        document.addEventListener('click', recordmouse)
+        document.addEventListener('click', calstim)
+    }
+    };
 
 
 
@@ -365,7 +403,7 @@ var fullscreentrial = {
 });
 }
 };
-timeline.push(fullscreentrial)
+// timeline.push(fullscreentrial)
 
         beforeqfun = function(){
     const participated = document.querySelector('input[name="participated"]:checked')?.value;
@@ -378,7 +416,7 @@ var beforequestion = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){
         return `<div style="position:fixed; top:20%; left:50%; transform:translateX(-50%);"><p><strong>Select which applies to you:</strong></p></div>
-            <div style="display: flex; flex-direction:column;height: 10.5%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 16px; position:absolute; z-index:-1;top:26.5%;left:50%;transform: translateX(-50%);">
+            <div style="display: flex; flex-direction:column;height: 10.5%; width:40%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 16px; position:absolute; z-index:-1;top:26.5%;left:50%;transform: translateX(-50%);">
                 <label style="margin-bottom:4%"><input type="radio" name="participated" value="Yes"> I have already completed some of the experiment</label><label><input type="radio" name="participated" value="No"> I have not completed any of the experiment before</label><br>
                 </div>
         `
@@ -424,12 +462,84 @@ var beforequestion = {
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
-            // jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome)};
 }};
-// timeline.push(beforequestion);
+timeline.push(beforequestion);
 
+    
 
+var immnondescinstructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this block, the rules and sentences are going to be about what <strong>should be</strong> the case,</p>
+    <p>rather than what <strong>is</strong> the case</p>.
+    <p>They will express an opinion about whether immigrant numbers <strong>should</strong> increase or decrease.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar)}
+};
+
+var brexitnondescinstructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this block, the rules and sentences are going to be about what <strong>should be</strong> the case,</p>
+    <p>rather than what <strong>is</strong> the case</p>.
+    <p>They will express an opinion about whether the UK <strong>should</strong> have left or remained in the EU.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar)}
+};
+
+var immdescinstructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this block, the rules and sentences are going to be about what <strong>is</strong> the case,</p>
+    <p>rather than what <strong>should be</strong> the case</p>.
+    <p>They will express an opinion about whether immigrant numbers <strong>are</strong> increasing or decreasing.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar)}
+};
+
+var brexitdescinstructions = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: `<p>In this block, the rules and sentences are going to be about what <strong>is</strong> the case,</p>
+    <p>rather than what <strong>should be</strong> the case</p>.
+    <p>They will express an opinion about whether the UK <strong>has</strong> left or remained in the EU.</p>`,
+    choices: ['Continue'],
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+    on_finish: function(){
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar)}
+};
 
 var beenherebefore = {
         type: jsPsychSurveyHtmlForm,
@@ -514,59 +624,6 @@ var welcomeA = {
 };
 
 
-var xcord = 0;
-var ycord = 0;
-var calibrationarray = [];
-var cal = ''
-var clickwhere;
-
-function recordmouse(event){
-    xcord = event.clientX;
-    ycord = event.clientY;
-    calibrationarray.push({x:xcord, y:ycord});
-    clickcount++;
-    }
-
-var calstim  = function(){
-    const clickwhere = document.getElementById('clickwhere')
-    if (clickcount===1) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom left</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===2) {clickwhere.innerHTML = 'Please press:<br>the <strong>top left</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===3) {clickwhere.innerHTML = 'Please press:<br>the <strong>top right</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===4) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom right</strong> corner of the <strong>left</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===5) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom left</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===6) {clickwhere.innerHTML = 'Please press:<br>the <strong>top left</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===7) {clickwhere.innerHTML = 'Please press:<br>the <strong>top right</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===8) {clickwhere.innerHTML = 'Please press:<br>the <strong>bottom right</strong> corner of the <strong>right</strong> button<br>as close to the edge as you can'}
-    else if (clickcount===9) {clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>, in the centre'}
-    else if (clickcount===10) {clickwhere.innerHTML = 'Great! Please click once more to continue<br>'}
-    else if (clickcount === 11){
-        document.removeEventListener('click', recordmouse);
-        document.removeEventListener('click', calstim);
-        jsPsych.data.addProperties({calibration: calibrationarray});
-        jsPsych.finishTrial()}
-}
-    
-
-var buttoncalibration = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: function(){return `
-    <div id="clickwhere"></div>
-     <button id="dummy1" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>
-     <button id="dummy1" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>
-     <button class="jspsych-btn-2" style="width: 15px; height: 15px; background-color: white; border: 2px solid black; border-radius: 0px; padding: 0"></button>
-    `},
-    choices: [],
-    button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
-    on_start: function(){
-      document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-    },
-    on_load: function(){
-        const clickwhere = document.getElementById('clickwhere')
-        clickwhere.innerHTML = 'Please press:<br>the <strong>square button below</strong>';
-        document.addEventListener('click', recordmouse)
-        document.addEventListener('click', calstim)
-    }
-    };
 
 // timeline.push(buttoncalibration);
 
@@ -604,7 +661,7 @@ var ontorealblocks = {
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar'),
-            console.log(theme,condition1,rule1,rule2,block2code,block2only)
+            console.log(jspsych_id,theme,condition1,rule1,rule2,block2code,block2only)
         if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
             jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
@@ -623,7 +680,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40instructions)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_DtNconditionchange)
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
@@ -642,7 +699,10 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
@@ -663,7 +723,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_false_block40instructions)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
     jsPsych.timeline.insert(brexit_desc_false_block40procedure)
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_DtNconditionchange)
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
@@ -682,7 +742,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
@@ -703,7 +765,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange);
+    jsPsych.timeline.insert(B_DtNconditionchange);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -722,7 +784,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
@@ -743,7 +807,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_DtNconditionchange)
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -762,7 +826,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
@@ -783,7 +849,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_NtDconditionchange)
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -802,7 +868,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
@@ -823,7 +891,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_NtDconditionchange)
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -842,7 +910,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
@@ -863,7 +933,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_NtDconditionchange)
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -882,7 +952,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
@@ -903,7 +975,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(B_NtDconditionchange)
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -922,7 +994,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
@@ -943,7 +1017,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_DtNconditionchange)
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -962,7 +1036,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
@@ -983,7 +1059,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_DtNconditionchange)
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1002,7 +1078,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
@@ -1023,7 +1101,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_DtNconditionchange)
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -1042,7 +1120,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
@@ -1063,7 +1143,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_DtNconditionchange)
     jsPsych.timeline.insert(immigration_nondesc_true_instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
@@ -1082,7 +1162,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
@@ -1103,7 +1185,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_DtNconditionchange)
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -1122,7 +1204,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
@@ -1143,7 +1227,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_NtDconditionchange)
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1162,7 +1246,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
@@ -1183,7 +1269,7 @@ var ontorealblocks = {
     jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(I_NtDconditionchange)
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -1202,7 +1288,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
@@ -1220,10 +1308,10 @@ var ontorealblocks = {
     jsPsych.timeline.insert(rulechange);
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(conditionchange)
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(I_NtDconditionchange)
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -1242,32 +1330,36 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code ==="BNT" && block2only===1) {
-    // jsPsych.timeline.insert(instructions);
-    // jsPsych.timeline.insert(inducer_procedure);
-    // jsPsych.timeline.insert(ontorealblocks);
-    // jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    // jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    // jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    // jsPsych.timeline.insert(rulechange);
-    // jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    // jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    // jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    // jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
         jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures2);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BNF" && block2only===1){
@@ -1292,7 +1384,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDT" && block2only===1){
@@ -1317,7 +1411,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDF" && block2only===1){
@@ -1342,7 +1438,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform)
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen)
 
   }
@@ -1368,7 +1466,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="INF" && block2only===1){
@@ -1393,7 +1493,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDT" && block2only===1){
@@ -1418,7 +1520,9 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDF" && block2only===1){
@@ -1443,14 +1547,15 @@ var ontorealblocks = {
     jsPsych.timeline.insert(ImmigrationExplicitMeasures4);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionform);
+    jsPsych.timeline.insert(experimentover2)
     jsPsych.timeline.insert(exitfullscreen);
   }
     }
         };
 
         // timeline.push(welcome);
-
 
 
 
@@ -1635,6 +1740,7 @@ var stopconstants = 0;
 var start;
 var mousebad = 0;
 mousetrackingerror = 0;
+var totalmousebad = 0;
 
 function handleLeftMouse() {console.log("left mouse move"), mousebad = 1};
 function handleRightMouse() {console.log("right mouse move"), mousebad = 1};
@@ -1682,6 +1788,7 @@ function handleBottomMouse() {console.log("bottom mouse move"), mousebad = 1};
     if (topfix) topfix.removeEventListener('mouseover', handleTopMouse);
     if (bottomfix) bottomfix.removeEventListener('mouseover', handleBottomMouse);
         data.mousetrackingerror = mousetrackingerror
+        console.log(mousebad)
         data.earlymove = mousebad
     }
         };
@@ -1731,16 +1838,20 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
             console.log("dummy clicked at", wrongtimes);
             dummyclicks = dummyclicks+1; console.log(dummyclicks);
             wrongdiv.innerHTML = 'X'
-        })},
+        });
+
+    },
       on_finish: function(data){
         if (wrongtimes.length === 0) {data.correct=1}
         else {data.correct=0}
         data.wrongattempts = wrongtimes.length
         data.wrongrts = wrongtimes
-        var trials = jsPsych.data.get().filter({task: 'inducer'});
-        var correct_trials = trials.filter({correct: 1});
-        var accuracy = Math.round(correct_trials.count() / trials.count() * 100);
-        console.log("accuracy =",accuracy)
+        var trials = jsPsych.data.get().filter({task: 'fixation'});
+        var goodtrials = trials.filter({earlymove: 0});
+        var goodness = Math.round(goodtrials.count() / trials.count() * 100)
+        if (goodness < 90) {console.log('goodness okay;',goodness)}
+        else {console.log('goodnessbad;',goodness)}
+
       },
 };
 
@@ -1759,7 +1870,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       timeline: [start_button, fixation, test1],
       timeline_variables: inducer_stimuli,
       // 2 4
-      repetitions: 4,
+      repetitions: 1,
       randomize_order: true,
       data: {block:'inducer'} 
       };
@@ -1792,12 +1903,13 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 
 
 
+
 //block one (descriptive, true)
     
     var brexit_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this next block, please respond as if the UK <strong>left</strong> the EU.</p>
-    <p>For example, if the sentence says '<em>The UK has pulled out of the EU</em>' respond as if the sentence is true.</p>
+    stimulus: `<p>In this block, please respond as if the UK <strong>has left</strong> the EU.</p>
+    <p>For example, if the sentence says '<em>The UK has pulled out of the EU</em>' respond as if the sentence is <strong>true</strong>.</p>
     <p>Press any button to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -1814,7 +1926,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 };
 var immigration_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this next block, please respond as if immigration to the UK is<strong>increasing</strong>.</p>
+    stimulus: `<p>In this block, please respond as if immigration to the UK is<strong>increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigration levels are low', you should response as if the sentence is <strong>false</strong>.</p>
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -1844,7 +1956,7 @@ var immigration_desc_true_instructions = {
       { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
       { stimulus: "The UK isn’t in the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
       { stimulus: "The UK isn't part of the EU",  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has remained in the EU",  correct_response: 0,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has remained in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
       { stimulus: "The UK has stayed in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
       { stimulus: "The UK has kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
       { stimulus: "The UK is in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
@@ -1869,14 +1981,14 @@ var immigration_desc_true_instructions = {
 
     };
 
-    // var brexit_desc_true_block40procedure  = {
-    //   timeline: [start_button, fixation, test1],
-    //   timeline_variables: brexit_desc_true_rightwrong_stimuli,
-    //   repetitions: 1,
-    //   randomize_order: true
-    //   data: {block:'BDT'} 
+    var brexit_desc_true_block40procedure  = {
+      timeline: [start_button, fixation, test1],
+      timeline_variables: brexit_desc_true_rightwrong_stimuli,
+      repetitions: 1,
+      randomize_order: true,
+      data: {block:'BDT'} 
 
-    // };
+    };
 
     // 2
         var brexit_desc_true_block40procedure  = {
@@ -1934,9 +2046,9 @@ var immigration_desc_true_block40procedure  = {
 
 var brexit_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this next block, please respond as if the UK <strong>is still</strong> in the EU.</p>
+    stimulus: `<p>In this block, please respond as if the UK <strong>is still</strong> in the EU.</p>
     <p>That is, as if the UK did not leave the EU.</p>
-    <p>For example, if the sentence says 'The UK has pulled out of the EU' respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'The UK has remained in the EU' respond as if the sentence is <strong>true</strong>.</p>
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -1954,11 +2066,11 @@ var brexit_desc_false_instructions = {
 };
 var immigration_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this next block, please respond as if the number of immigrants is getting <strong>smaller</strong>.</p>
+    stimulus: `<p>In this block, please respond as if the number of immigrants is getting <strong>smaller</strong>.</p>
     <p>That is, as if each year, the number of immigrants in the UK is declining.</p>
-    <p>For example, if the sentence says 'Immigration numbers are decreasing', respond as if the sentence is true.</p>
-    <p> If the sentence says 'The immigrant population is increasing',respond as if the sentence is false.</p>
-    <p> If the sentence says 'The immigrant population isn't increasing', respond as if the sentence is true</p>
+    <p>For example, if the sentence says '<em>Immigration numbers are decreasing</em>', respond as if the sentence is <strong>true</strong>.</p>
+    <p> If the sentence says '<em>The immigrant population is increasing</em>',respond as if the sentence is <strong>false</strong>.</p>
+    <p> If the sentence says '<em>The immigrant population isn't increasing</em>', respond as if the sentence is <strong>true</strong></p>
     <p> Please note that this does not imply a value judgement about whether the assertion is good or bad.</p>
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -1988,7 +2100,7 @@ var brexit_desc_false_stimuli = [
       { stimulus: "The UK hasn’t kept being in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
       { stimulus: "The UK isn’t in the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
       { stimulus: "The UK isn't part of the EU",  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has remined in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+      { stimulus: "The UK has remained in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
       { stimulus: "The UK has stayed in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
       { stimulus: "The UK has kept being in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
       { stimulus: "The UK is in the EU",correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
@@ -2012,21 +2124,15 @@ var brexit_desc_false_stimuli = [
       data: {block:'BDFintro'} 
     };
 
-    // var brexit_desc_false_block40procedure  = {
-    //   timeline: [start_button, fixation, test1],
-    //   timeline_variables: brexit_desc_false_rightwrong_stimuli,
-    //   repetitions: 1,
-    //   randomize_order: true,
-    //   data: {block:'BDF'} 
-    // };
-
-    // 2
     var brexit_desc_false_block40procedure  = {
       timeline: [start_button, fixation, test1],
-      timeline_variables: rightwrong2stimuli,
+      timeline_variables: brexit_desc_false_rightwrong_stimuli,
       repetitions: 1,
-      randomize_order: true
+      randomize_order: true,
+      data: {block:'BDF'} 
     };
+
+    // 2
 
     var immigration_desc_false_stimuli = [
     { stimulus: "Immigrant numbers are rising",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
@@ -2078,10 +2184,10 @@ var immigration_desc_false_block40procedure  = {
 var brexit_nondesc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `
-    <p>In this round, please respond as the UK <strong>should have</strong> left the EU;</p>
+    <p>In this block, please respond as the UK <strong>should have</strong> left the EU;</p>
     <p> That it was the right thing to do, and a good thing to have happened. </p>
-    <p>For example, if the sentence says "<em>'Leave' should have won</em>", you should say press the <strong>left</strong> button.</p>
-    <p><br>Press to continue.</p>`,
+    <p>For example, if the sentence says "<em>'Leave' should have won</em>", you should respond as if the sentence is <strong>true</strong>.</p>
+    <p><br>Press to continue</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2097,13 +2203,9 @@ var brexit_nondesc_true_instructions = {
 };
 var immigration_nondesc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this block, the rules and sentences are not going to be about what <strong>is</strong> the case.</p>
-    <p>Instead, they are going to be about what <strong>should</strong> be the case</p>.
-    <p>They will express an opinion about whether immigrant numbers <strong>should</strong> increase or decrease.</p>
-    
-    <p>In this next block, please respond as if immigration to the UK <strong>should increase</strong>.</p>
+    stimulus: `<p>In this block, please respond as if immigration to the UK <strong>should increase</strong>.</p>
     <p>For example, if the sentence says 'Immigration levels should decrease', you should respond as if that statement is <strong>false</strong>.</p>
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2211,9 +2313,9 @@ var immigration_nondesc_true_block40procedure  = {
 
 var brexit_nondesc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: ` <p>In this next block, please respond as if the UK <strong>should have stayed</strong> in the EU.</p>
-    <p>For example, if the sentence says 'The UK should have remained in the EU', respond as if the sentence is TRUE.</p>
-    <p>If the sentence says 'The UK shouldn't have stayed in the EU', respond as if the sentence is FALSE.</p>
+    stimulus: ` <p>In this block, please respond as if the UK <strong>should have stayed</strong> in the EU.</p>
+    <p>For example, if the sentence says 'The UK should have remained in the EU', respond as if the sentence is <strong>true</strong>.</p>
+    <p>If the sentence says 'The UK shouldn't have stayed in the EU', respond as if the sentence is <strong>false</strong>.</p>
     <p>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -2230,9 +2332,9 @@ var brexit_nondesc_false_instructions = {
 };
 var immigration_nondesc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this next block, please respond as if immigrant numbers should <strong>decrease</strong>.</p>
-    <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is false.</p>
-    <p>If the sentence says 'Immigrant numbers should go down', respond as if the sentence is true.</p>
+    stimulus: `<p>In this block, please respond as if immigrant numbers should <strong>decrease</strong>.</p>
+    <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is <strong>false</strong>.</p>
+    <p>If the sentence says 'Immigrant numbers should go down', respond as if the sentence is <strong>true</strong>.</p>
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -2253,7 +2355,7 @@ var immigration_nondesc_false_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false' from before.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>should decrease</strong>.</p>
-    <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is false.</p>
+    <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is <strong>false</strong>.</p>
     <p>For words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2275,7 +2377,7 @@ var immigration_nondesc_true_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>should</strong> increase.</p>
-    <p>For example, if the sentence says 'Immigration numbers should rise', respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'Immigration numbers should rise', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2298,7 +2400,7 @@ var immigration_desc_false_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are decreasing</strong>.</p>
-    <p>For example, if the sentence says 'Immigrant numbers are decreasing', respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'Immigrant numbers are decreasing', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2320,7 +2422,7 @@ var immigration_desc_true_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are increasing</strong>.</p>
-    <p>For example, if the sentence says 'Immigrant numbers are rising', respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'Immigrant numbers are rising', respond as if the sentence is <strong>true</strong>.</p>
     <p>As before, for words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2342,7 +2444,7 @@ var brexit_nondesc_false_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> remained in the EU.</p>
-    <p>For example, if the sentence says 'The UK should be in the EU', respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'The UK should be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2364,7 +2466,7 @@ var brexit_nondesc_true_block40instructions = {
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> left the EU.</p>
-    <p>For example, if the sentence says 'The UK should not be in the EU', respond as if the sentence is true.</p>
+    <p>For example, if the sentence says 'The UK should not be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2385,8 +2487,8 @@ var brexit_desc_false_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
-    <p>That is, continue responding as if the UK <strong>remained</strong> in the EU.</p>
-    <p>For example, if the sentence says 'The UK is in the EU', respond as if the sentence is true.</p>
+    <p>That is, continue responding as if the UK <strong>is still</strong> in the EU.</p>
+    <p>For example, if the sentence says 'The UK remained in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2407,8 +2509,8 @@ var brexit_desc_true_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
     <p>Continue responding with the same rules as the previous two blocks.</p>
-    <p>That is, continue responding as if the UK <strong>left</strong> the EU.</p>
-    <p>For example, if the sentence says 'The UK is not in the EU', respond as if the sentence is true.</p>
+    <p>That is, continue responding as if the UK <strong>has left</strong> the EU.</p>
+    <p>For example, if the sentence says 'The UK is not in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2533,31 +2635,13 @@ var rulechange = {
     data: {screen:'rulechange'} 
 };
 
-var brexitrulechange = {
-    type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>Great.<br> In the next block, the rule is going to change.</p>
-    <p>Instead of being about whether the UK left the EU,</p>
 
-    `,
-    choices: ['Continue'],
-    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-    on_start: function(){
-    let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      document.body.appendChild(bar);
-      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
-    on_finish: function(){
-        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-                    let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar);
-    },
-    data: {screen:'brexitrulechange'} 
-};
+
 
 var conditionchange = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p>
-    <p> If you would like to take a break, feel free to do so.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p><br>
+    <p> If you need a short break, take one now.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
         as you may need these to resume the experiment`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
@@ -2576,10 +2660,15 @@ var conditionchange = {
 
 var B_NtDconditionchange = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: function(){return `<p>In the next block, the statements and rule are going to change.</p>
+    stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
     <p>Instead of being about whether the UK <strong>should have left</strong> the EU,</p>
     <p>the statements are going to be about whether the UK <em>has left</em> the EU.</p>
-    <p>That is, they will state either that the UK has left the EU, or that it is still in the EU</p>`},
+    <p>That is, they will state either that the UK has left the EU, or that it is still in the EU</p>
+    <br><br>
+    <p> If you need a short break, take one now.</p><br>
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    as you may need these to resume the experiment</p>
+    `},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2600,7 +2689,11 @@ var B_DtNconditionchange = {
     stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
     <p<br>>Instead of being about whether the UK left the EU,</p>
     <p>the statements are going to be about if the UK <em>should have</em> left the EU.</p>
-    <p>That is, they will express an opinion about the UK leaving the EU</p>`},
+    <p>That is, they will express an opinion about the UK leaving the EU</p>
+        <br><br>
+    <p> If you need a short break, take one now.</p><br>
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    as you may need these to resume the experiment</p>`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2621,7 +2714,11 @@ var I_DtNconditionchange = {
     stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
     <p<br>>Instead of being about whether immigrant numbers <strong>are</strong> changing,</p>
     <p>the statements are going to be about if immigrant numbers <em>should be</em> changing.</p>
-    <p>That is, they will express an opinion about immigrant numbers increasing </p>`},
+    <p>That is, they will express an opinion about immigrant numbers increasing </p>
+        <br><br>
+    <p> If you need a short break, take one now.</p><br>
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    as you may need these to resume the experiment</p>`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2637,12 +2734,38 @@ var I_DtNconditionchange = {
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
 };
 
+var I_NtDconditionchange = {
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
+    <p>Instead of being about whether immigrant numbers <strong>should be</strong>changing,</p>
+    <p>the statements are going to be about whether immigrant numbers <em>are</em> changing.</p>
+    <p>That is, they will state either that immigrant numbers are increasing or decreasingU</p>
+    <br><br>
+    <p> If you need a short break, take one now.</p><br>
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    as you may need these to resume the experiment</p>
+    `},
+    on_start: function(){
+        block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar),
+        document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')},
+        on_finish: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);},
+    choices: ['Continue'],
+    data: {screen:'I_NtD_conditionchange'},
+    button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+};
 
 //end of experiment
 
 var experimentover ={
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p> Thank you. Now you will do some survey questions </p>`,
+    stimulus: `<p> Thank you, the main part of the experiment is now over.</p>
+    <p>The final part of the experiment consists of a brief survey.</p>`,
     choices: [''],
     button_html: '<button id="btn-expover" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
@@ -2847,9 +2970,9 @@ var BrexitExplicitMeasures4_Stimuli = [
 {stimulus: 'The UK should have pulled out of the EU'},
 {stimulus: 'The UK shouldn’t have remained in the EU'},
 {stimulus: 'The UK shouldn’t have kept being in the EU'},
-{stimulus: 'The UK shouldn’t have withdrawn form the EU'},
+{stimulus: 'The UK shouldn’t have withdrawn from the EU'},
 {stimulus: 'The UK should have stayed in the EU'},
-{stimulus: 'Please select <em>Stronly disagree</em> for this question'}
+{stimulus: 'Please select <em>Strongly disagree</em> for this question'}
 ];
 
     var BrexitExplicitMeasures4_Items = []
@@ -3255,7 +3378,7 @@ var ImmigrationExplicitMeasures5_Stimuli = [
         };
 
 
-        timeline.push(ImmigrationExplicitMeasures5)
+        // timeline.push(ImmigrationExplicitMeasures5)
 
 
 
@@ -3347,7 +3470,7 @@ var ImmigrationExplicitMeasures6_Stimuli = [
     labels0.style.left = 'translateX(-50%)';
     labels0.style.width = `${slider0area.width * 1.25}px`;
     labels0.style.height = `${slider0area.height}px`;
-    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`;
     document.body.appendChild(labels0);
 
     labels1.style.position = 'fixed';
@@ -3356,17 +3479,17 @@ var ImmigrationExplicitMeasures6_Stimuli = [
     labels1.style.left = 'translateX(-50%)';
     labels1.style.width = `${slider1area.width * 1.25}px`;
     labels1.style.height = `${slider1area.height}px`;
-    labels1.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    labels1.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`;
     document.body.appendChild(labels1);
 
 
     labels2.style.position = 'fixed';
     labels2.style.top = `${slider2area.top + slider2area.height*2.2}px`;
     labels2.style.left = `${slider2area.left - (slider2area.width * 0.11)}px`;
-    labels2.style.width = `${slider2area.width * 1.25}px`;
+    labels2.style.width = `${slider2area.width * 1.22}px`;
     labels1.style.left = 'translateX(-50%)';
     labels2.style.height = `${slider2area.height}px`;
-    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`
+    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`;
     document.body.appendChild(labels2);
 
     labels3.style.position = 'fixed';
@@ -3375,7 +3498,7 @@ var ImmigrationExplicitMeasures6_Stimuli = [
     labels3.style.width = `${slider3area.width * 1.2}px`;
     labels3.style.left = 'translateX(-50%)';
     labels3.style.height = `${slider3area.height}px`;
-    labels3.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`
+    labels3.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`;
     document.body.appendChild(labels3);
 
     labels4.style.position = 'fixed';
@@ -3384,7 +3507,7 @@ var ImmigrationExplicitMeasures6_Stimuli = [
     labels4.style.width = `${slider4area.width * 1.25}px`;
     labels4.style.left = 'translateX(-50%)';
     labels4.style.height = `${slider4area.height}px`;
-    labels4.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    labels4.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`;
     document.body.appendChild(labels4);
 
     labels5.style.position = 'fixed';
@@ -3393,7 +3516,7 @@ var ImmigrationExplicitMeasures6_Stimuli = [
     labels5.style.width = `${slider5area.width * 1.25}px`;
     labels5.style.left = 'translateX(-50%)';
     labels5.style.height = `${slider5area.height}px`;
-    labels5.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`
+    labels5.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Very<br>Left-wing</span><span style="display:inline-block;">Moderately<br>Left-wing</span><span style="display:inline-block;">Centrist</span><span style="display:inline-block;">Moderately<br>Right-wing</span><span style="display:inline-block;">Very<br>Right-wing</span></div>`;
     document.body.appendChild(labels5);
   },
   on_finish: function(){
@@ -3409,10 +3532,30 @@ var ImmigrationExplicitMeasures6_Stimuli = [
         };
 
 
-        timeline.push(ImmigrationExplicitMeasures6)
+        // timeline.push(ImmigrationExplicitMeasures6)
 
 //
 
+var BrexitExplicitMeasures6_Stimuli = [
+{stimulus: 'How much political content (e.g. news articles/programmes, social media posts/channels) do you consume per day?'},
+{stimulus: 'What proportion of the political content (e.g. news articles/programmes, social media posts/channels) you consume do you disagree with?'},
+{stimulus: 'People judge the views of others about the UK leaving the EU a lot'},
+{stimulus: "People's views on the UK leaving the EU should be judged"},
+{stimulus: 'How would you describe your political views on economic issues?'},
+{stimulus: 'How would you describe your political views on social issues?'},
+];
+
+    var BrexitExplicitMeasures6_Items = []
+    for (const item of BrexitExplicitMeasures6_Stimuli) {
+        BrexitExplicitMeasures6_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 2.5%; font-size: 13px; ">${item.stimulus}</div>`,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
 
 var BrexitExplicitMeasures6 = {
         type: jsPsychMultipleSlider,
@@ -3478,7 +3621,7 @@ var BrexitExplicitMeasures6 = {
     labels0.style.left = 'translateX(-50%)';
     labels0.style.width = `${slider0area.width * 1.25}px`;
     labels0.style.height = `${slider0area.height}px`;
-    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">0%</span><span style="display:inline-block;">25%</span><span style="display:inline-block;">50%</span><span style="display:inline-block;">75%</span><span style="display:inline-block;">100%</span></div>`
+    labels0.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`;
     document.body.appendChild(labels0);
 
     labels1.style.position = 'fixed';
@@ -3497,7 +3640,7 @@ var BrexitExplicitMeasures6 = {
     labels2.style.width = `${slider2area.width * 1.25}px`;
     labels1.style.left = 'translateX(-50%)';
     labels2.style.height = `${slider2area.height}px`;
-    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">None</span><span style="display:inline-block;">30 minutes</span><span style="display:inline-block;">1 hour</span><span style="display:inline-block;">1.5 hours</span><span style="display:inline-block;">2+ hours</span></div>`
+    labels2.innerHTML = `<div style="display:flex; justify-content: space-around; font-size:11px;line-height:0.85em;text-align:center"><span style="display:inline-block">Strongly<br>Disagree</span><span style="display:inline-block;">Moderately<br>Disagree</span><span style="display:inline-block;">Neither Agree<br>Nor Disagree</span><span style="display:inline-block;">Moderately<br>Agree</span><span style="display:inline-block;">Strongly<br>Agree</span></div>`
     document.body.appendChild(labels2);
 
     labels3.style.position = 'fixed';
@@ -3540,11 +3683,130 @@ var BrexitExplicitMeasures6 = {
         };
 
 
-        timeline.push(BrexitExplicitMeasures6)
+        // timeline.push(BrexitExplicitMeasures6)
+
+//
+
+        var BrexitExplicitMeasures7_Stimuli = [
+{stimulus: 'I have felt judged about my opinions on the UK leaving the EU'},
+{stimulus: "I judge people's views on the UK leaving the EU"},
+{stimulus: "People shouldn't be outspoken about thinking the UK should have left the EU"},
+{stimulus: "People shouldn't be outspoken about thinking the UK should have remained in the EU"},
+{stimulus: 'I refrain from sharing my opinions on the UK leaving the EU to avoid judgement or discomfort'},
+{stimulus: 'People judge you for thinking the UK should have left the EU'},
+{stimulus: "People judge you for thinking the UK should have stayed in the EU"},
+];
+
+    var BrexitExplicitMeasures7_Items = []
+    for (const item of BrexitExplicitMeasures7_Stimuli) {
+        BrexitExplicitMeasures7_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
 
 
+    var BrexitExplicitMeasures7 = {
+        type: jsPsychMultipleSlider,
+        questions: BrexitExplicitMeasures7_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "BrexitExplicitMeasures7"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form');
+    form.style.position = 'fixed';
+    let button = document.getElementById('jspsych-multiple-slider-next');
+    button.style.bottom = '-15.75%';
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
 
 
+// timeline.push(BrexitExplicitMeasures7)
+
+
+var ImmigrationExplicitMeasures7_Stimuli = [
+{stimulus: 'I have felt judged about my opinions on immigration'},
+{stimulus: 'I judge people who think immigration should decrease'},
+{stimulus: "People shouldn't be outspoken about thinking that immigration should decrease"},
+{stimulus: "People shouldn't be outspoken about thinking that immigration should increase"},
+{stimulus: 'I refrain from sharing my opinions on immigration to avoid judgement or discomfort'},
+{stimulus: 'People judge you for thinking that immigration should decrease'},
+{stimulus: "People judge you for thinking that immigration should increase"},
+];
+
+    var ImmigrationExplicitMeasures7_Items = []
+    for (const item of ImmigrationExplicitMeasures7_Stimuli) {
+        ImmigrationExplicitMeasures7_Items.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+
+
+    var ImmigrationExplicitMeasures7 = {
+        type: jsPsychMultipleSlider,
+        questions: ImmigrationExplicitMeasures7_Items,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "ImmigrationtExplicitMeasures7"
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-multiple-slider-form');
+    form.style.position = 'fixed';
+    let button = document.getElementById('jspsych-multiple-slider-next');
+    button.style.bottom = '-17%';
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  }
+        };
+
+
+// timeline.push(ImmigrationExplicitMeasures7)
 
 // <div style="height: 650; width:450; margin-top: 20%; overflow-y: auto; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px;">
 
@@ -3561,7 +3823,7 @@ var BrexitExplicitMeasures6 = {
     <div style="width: 400px; margin: auto; text-align: center; align-items: center">
       
       <p>If there is any reason why your data shouldn't be included, please explain here:</p>
-      <div style="width:100%; align-items: center"><input type="text" name="exclusion" style="width: 100%;height:100px"></div>
+      <div style="width:100%; align-items: center">  <textarea name="exclusion" style="width: 100%; height: 100px; resize: vertical;"></textarea></div>
     </div></div>
   `,
   on_start: function(){
@@ -3582,12 +3844,35 @@ button_label: "Continue",
             if (content) {
                 content.style.marginTop = 'auto';
             };
-            let bar = document.getElementById('bottom=bar');
+            let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);}
 
 };
-timeline.push(exclusionform)
+// timeline.push(exclusionform)
 
+
+var experimentover2 ={
+    type: jsPsychHtmlButtonResponse,
+    stimulus: function(){return `<p> You have now finished. Thank you for your participation.</p>
+    <p>As a reminder, your ID is: <strong>${jspsych_id}</strong></p>
+    <p> If at any point before 01/08/25 you would like to withdraw your data, this may be requested via an email: ss2651@sussex.ac.uk.</p>
+    <p>This email may also be contacted if you have any other concerns or wish to receive the results of the study when they become available.</p>
+    <p> If you are experiencing distress, please refer to <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/" target="_blank">the NHS webpage here</a> for resources.</p>
+    <p> Thank you again for your time.</p>`},
+    choices: [''],
+    button_html: '<button id="btn-expover" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+      console.log(jspsych_id)
+  },    
+  data: {screen:'experimentover'},
+  on_finish: function() {
+    document.getElementById('bottom-bar')?.remove();
+    document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+}};
 
 var exitfullscreen = {
         type: jsPsychFullscreen,
@@ -3595,8 +3880,6 @@ var exitfullscreen = {
         message: `<div><p>When you press 'Continue', the window will exit full-screen.
             Thank you for taking part!</p>`,
         };
-
-        // timeline.push(exitfullscreen)
 
     jsPsych.run(timeline);
 
