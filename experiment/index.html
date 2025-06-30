@@ -467,6 +467,9 @@ var beforequestion = {
 }};
 // timeline.push(beforequestion);
 
+
+    
+
 //DO
 
 var halfbeenherebefore = {
@@ -624,8 +627,18 @@ var beenherebefore = {
 };
     
 
-// timeline.push(beenherebefore)
+timeline.push(beenherebefore)
 
+timeline.push({
+    type: jsPsychPipe,
+    action: "save",
+    experiment_id: "HcISuNoo7PGZ",
+    filename: `${jspsych_id}_Full.csv`,
+    data_string: () => jsPsych.data.get().csv(),
+    on_finish: function () {
+        finished_experiment = true
+     }
+})
 
 var welcomeA = {
     type: jsPsychHtmlButtonResponse,
