@@ -437,17 +437,15 @@ var beforequestion = {
         if (block2only === 1) {
             jsPsych.timeline.insert(beenherebefore);
             jsPsych.timeline.insert(welcomeA);
-            // jsPsych.timeline.insert(fullscreentrial);
-            // jsPsych.timeline.insert(buttoncalibration);
-            // jsPsych.timeline.insert(welcome);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
             }
         else if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
             data.theme=theme
-            // jsPsych.data.addProperties({theme: theme});
             condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
-            // jsPsych.data.addProperties({jspsych_id: jspsych_id});
             data.jspsych_id=jspsych_id;
             if (condition1 === "desc") {condition2 = "nondesc"}
             else if (condition1 ==="nondesc") {condition2 = "desc"};
@@ -460,16 +458,16 @@ var beforequestion = {
             jsPsych.data.addProperties({block2code: block2code})
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
-            // jsPsych.timeline.insert(fullscreentrial);
-            // jsPsych.timeline.insert(buttoncalibration);
-            // jsPsych.timeline.insert(welcome)
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome)
           }
         else if (block2only === 3){
             jsPsych.timeline.insert(halfbeenherebefore);
             jsPsych.timeline.insert(welcomeA);
-            // jsPsych.timeline.insert(fullscreentrial);
-            // jsPsych.timeline.insert(buttoncalibration);
-            // jsPsych.timeline.insert(welcome);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
         };
 }};
 timeline.push(beforequestion);
