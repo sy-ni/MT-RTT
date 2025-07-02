@@ -485,7 +485,7 @@ var getthemefun = function(){
   console.log("getthemefun ran");
   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
   if (lasttheme ==="BrexitTheme") {theme="Immigration"}
-  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"};
+  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
 }
 
 var halfbeenherebefore = {
@@ -513,7 +513,6 @@ var halfbeenherebefore = {
       document.body.appendChild(bar);
         },
         on_load: function(){
-          console.log("halfbeenherebefore");
           document.addEventListener('click',getthemefun);
           document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
@@ -1952,6 +1951,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       on_finish: function(data){
         if (wrongtimes.length === 0) {data.correct=1}
         else {data.correct=0}
+        data.sentence=stimulus
         data.wrongattempts = wrongtimes.length
         data.wrongrts = wrongtimes
         var trials = jsPsych.data.get().filter({task: 'fixation'});
