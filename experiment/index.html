@@ -440,6 +440,7 @@ var beforequestion = {
             jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome);
+            jsPsych.timeline.insert(experimentover2)
             }
         else if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
@@ -460,7 +461,8 @@ var beforequestion = {
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
-            jsPsych.timeline.insert(welcome)
+            jsPsych.timeline.insert(welcome);
+            jsPsych.timeline.insert(experimentover2)
           }
         else if (block2only === 3){
             jsPsych.timeline.insert(halfbeenherebefore);
@@ -468,6 +470,7 @@ var beforequestion = {
             jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome);
+            jsPsych.timeline.insert(experimentover2)
         };
 }};
 timeline.push(beforequestion);
@@ -524,20 +527,16 @@ var halfbeenherebefore = {
     data.theme=theme
     condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
     data.condition1=condition1
-    // jsPsych.data.addProperties({condition: condition1});
     if (condition1 === "desc") {condition2 = "nondesc"}
     else if (condition1 ==="nondesc") {condition2 = "desc"};
     data.condition2=condition2;
     rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule1=rule1;
-    // jsPsych.data.addProperties({condition: rule1});
             rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule2=rule2;
-            // jsPsych.data.addProperties({condition: rule2});
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
             data.block2code=block2code
-            // jsPsych.data.addProperties({block2code: block2code});
             block2only=0;
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
@@ -637,7 +636,6 @@ var welcomeA = {
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-              jsPsych.timeline.insert(experimentover2)
         }
 };
 
