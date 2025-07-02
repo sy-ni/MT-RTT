@@ -516,13 +516,15 @@ var halfbeenherebefore = {
         button_html: '<button id="beenherebtn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
-            beenherebtn = document.getElementById('beenherebtn');
-            beenherebtn.disabled=true;
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
-      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-      document.addEventListener('click',getthemefun)
 
+        },
+        on_load: function(){
+          beenherebtn = document.getElementById('beenherebtn');
+          beenherebtn.disabled=true;
+          document.addEventListener('click',getthemefun);
+          document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
           document.removeEventListener('click',getthemefun);
