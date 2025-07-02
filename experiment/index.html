@@ -485,8 +485,7 @@ var getthemefun = function(){
   console.log("getthemefun ran");
   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
   if (lasttheme ==="BrexitTheme") {theme="Immigration"}
-  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
-  if (document.querySelector('input[name="lasttheme"]:checked')) {beenherebtn.disabled = false}
+  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"};
 }
 
 var halfbeenherebefore = {
@@ -514,9 +513,7 @@ var halfbeenherebefore = {
       document.body.appendChild(bar);
         },
         on_load: function(){
-          console.log("halfbeenherebefore")
-          beenherebtn = document.getElementById('beenherebtn');
-          beenherebtn.disabled=true;
+          console.log("halfbeenherebefore");
           document.addEventListener('click',getthemefun);
           document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
