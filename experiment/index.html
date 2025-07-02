@@ -482,7 +482,7 @@ timeline.push(beforequestion);
 
 
 var getthemefun = function(){
-  console.log("getthemefun ran")
+  console.log("getthemefun ran");
   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
   if (lasttheme ==="BrexitTheme") {theme="Immigration"}
   else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
@@ -513,9 +513,9 @@ var halfbeenherebefore = {
             let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
-
         },
         on_load: function(){
+          console.log("halfbeenherebefore")
           beenherebtn = document.getElementById('beenherebtn');
           beenherebtn.disabled=true;
           document.addEventListener('click',getthemefun);
