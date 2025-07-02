@@ -479,13 +479,7 @@ timeline.push(beforequestion);
 
 //DO
 
-beforeqfun = function(){
-    const participated = document.querySelector('input[name="participated"]:checked')?.value;
-    if (participated === "Yes") {block2only = 1} 
-    else if (participated ==="No") {block2only=0}
-    else if (participated ==="Half") {block2only=3}
-    if (document.querySelector('input[name="participated"]:checked')) {contbutton.disabled = false}
-}
+
 
 var getthemefun = function(){
   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
@@ -513,7 +507,7 @@ var halfbeenherebefore = {
             <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
 `,
             data: { screen: "beenherebefore" },
-        button_html: '<button id="beenherebtn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+        button_html: '<button id="beenherebtn" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
       bar.id = 'bottom-bar';
