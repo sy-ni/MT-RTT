@@ -479,6 +479,21 @@ timeline.push(beforequestion);
 
 //DO
 
+beforeqfun = function(){
+    const participated = document.querySelector('input[name="participated"]:checked')?.value;
+    if (participated === "Yes") {block2only = 1} 
+    else if (participated ==="No") {block2only=0}
+    else if (participated ==="Half") {block2only=3}
+    if (document.querySelector('input[name="participated"]:checked')) {contbutton.disabled = false}
+}
+
+var getthemefun = function(){
+  const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+  if (lasttheme ==="BrexitTheme") {theme="Immigration"}
+  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
+  if (document.querySelector('input[name="lasttheme"]:checked')) {beenherebtn.disabled = false}
+}
+
 var halfbeenherebefore = {
         type: jsPsychSurveyHtmlForm,
         preamble:`
@@ -498,14 +513,19 @@ var halfbeenherebefore = {
             <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
 `,
             data: { screen: "beenherebefore" },
-        button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+        button_html: '<button id="beenherebtn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
+            beenherebtn = getElementById('beenherebtn');
+            beenherebtn.disabled=true;
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+      document.addEventListener('click',getthemefun)
+
         },
         on_finish: function(data){
+          document.removeEventListener('click',getthemefun);
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
@@ -526,7 +546,7 @@ var halfbeenherebefore = {
             // jsPsych.data.addProperties({condition: rule2});
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
-            data.block2code=code
+            data.block2code=block2code
             // jsPsych.data.addProperties({block2code: block2code});
             block2only=0;
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
