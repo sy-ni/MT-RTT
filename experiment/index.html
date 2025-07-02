@@ -491,7 +491,7 @@ var halfbeenherebefore = {
   <p>Participant ID:</p>
   <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
-  <p><br>Condition:</p>
+  <p><br>Theme last session:</p>
         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
         </div>
@@ -509,8 +509,8 @@ var halfbeenherebefore = {
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    if (lasttheme ==="Brexit") {theme="Immigration"}
-    else if (lasttheme==="Immigration"){theme="Brexit"}
+    if (lasttheme ==="BrexitTheme") {theme="Immigration"}
+    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
     data.theme=theme
     condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
     data.condition1=condition1
