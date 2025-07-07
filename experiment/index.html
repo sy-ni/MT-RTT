@@ -260,7 +260,7 @@
     <label><input type="checkbox" id="english-checkbox"> I speak English fluently</label>
 
     </div>
-    <div style="width:400px; text-align: left; margin-top: 10px; font-size: 12px;">
+    <div style="width:500px; text-align: left; margin-top: 10px; font-size: 12px;">
       <label><input type="checkbox" id="UK-checkbox">I am either British by nationality or currently reside in the UK</label><br>
             <label><input type="checkbox" id="voluntary">I understand my participation is voluntary and I may withdraw at any time</label><br>
       <label><input type="checkbox" id="consent-checkbox"> I have read and understood the above and consent to taking part</label>
@@ -1499,8 +1499,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BNF" && block2only===1){
@@ -1526,8 +1526,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDT" && block2only===1){
@@ -1553,8 +1553,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDF" && block2only===1){
@@ -1580,8 +1580,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform)
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover);
     jsPsych.timeline.insert(exitfullscreen)
 
   }
@@ -1608,8 +1608,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="INF" && block2only===1){
@@ -1635,8 +1635,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDT" && block2only===1){
@@ -1662,8 +1662,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDF" && block2only===1){
@@ -1689,8 +1689,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionform);
-    jsPsych.timeline.insert(experimentover_block2only)
+    jsPsych.timeline.insert(exclusionformblock2only);
+    jsPsych.timeline.insert(experimentover)
     jsPsych.timeline.insert(exitfullscreen);
   }
     }
@@ -1730,57 +1730,57 @@ jsPsych.timeline.insert(participant_info3);
 
 // <div style="font-size: 12px; text-align:center; position:absolute; top:12%" <p><strong>Please enter the following information:</strong></p></div>
 
-    var participant_info2 = {
-        type: jsPsychSurveyHtmlForm,
-        html: `
-    <div style="width:400px;font-size: 16px; text-align:center; position:absolute; top:17%;left: 52%;transform: translateX(-50%);" <p><strong>Please enter the following information:</strong></p></div>
+//     var participant_info2 = {
+//         type: jsPsychSurveyHtmlForm,
+//         html: `
+//     <div style="width:400px;font-size: 16px; text-align:center; position:absolute; top:17%;left: 52%;transform: translateX(-50%);" <p><strong>Please enter the following information:</strong></p></div>
 
-    <div style="height: 55%; width: 30%; margin: auto; text-align: center; align-items: center; position:fixed;top:21%;left: 52%;transform: translateX(-50%);font-size:16px; overflow-y: auto;">
+//     <div style="height: 55%; width: 30%; margin: auto; text-align: center; align-items: center; position:fixed;top:21%;left: 52%;transform: translateX(-50%);font-size:16px; overflow-y: auto;">
       
-      <div><p>Age (in years, e.g., "31"):</p></div>
-      <div style="width:400px; align-items: center;font-size:15px"><input type="text" name="age" style="width: 15%" required></div>
+//       <div><p>Age (in years, e.g., "31"):</p></div>
+//       <div style="width:400px; align-items: center;font-size:15px"><input type="text" name="age" style="width: 15%" required></div>
 
-      <div style="justify-"><p><br>Gender:</p></div>
-      <div style="width:140px;text-align: left; font-size:15px;align-items: left; position: relative; left:52%;transform: translateX(-50%);">
-        <label><input type="radio" name="gender" value="Female" required> Female</label><br>
-        <label><input type="radio" name="gender" value="Male"> Male</label><br>
-        <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label><br>
-      </div>
+//       <div style="justify-"><p><br>Gender:</p></div>
+//       <div style="width:140px;text-align: left; font-size:15px;align-items: left; position: relative; left:52%;transform: translateX(-50%);">
+//         <label><input type="radio" name="gender" value="Female" required> Female</label><br>
+//         <label><input type="radio" name="gender" value="Male"> Male</label><br>
+//         <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label><br>
+//       </div>
 
-      <div><p>Highest completed education level:</p></div>
-      <div style="width:200px;text-align: left;font-size:15px; align-items: left; position: relative; left:52%;transform: translateX(-50%);">
-        <label><input type="radio" name="education" value="GCSE/Equivalent" required> GCSE/Equivalent</label><br>
-        <label><input type="radio" name="education" value="A-Level/Equivalent"> A-Level/Equivalent</label><br>
-        <label><input type="radio" name="education" value="Some university"> Some university</label><br>
-        <label><input type="radio" name="education" value="Undergraduate Degree"> Undergraduate Degree</label><br>
-        <label><input type="radio" name="education" value="Postgraduate Degree"> Postgraduate Degree</label><br>
-        <label><input type="radio" name="education" value="Doctorate">  Doctorate</label><br>
-      </div>
+//       <div><p>Highest completed education level:</p></div>
+//       <div style="width:200px;text-align: left;font-size:15px; align-items: left; position: relative; left:52%;transform: translateX(-50%);">
+//         <label><input type="radio" name="education" value="GCSE/Equivalent" required> GCSE/Equivalent</label><br>
+//         <label><input type="radio" name="education" value="A-Level/Equivalent"> A-Level/Equivalent</label><br>
+//         <label><input type="radio" name="education" value="Some university"> Some university</label><br>
+//         <label><input type="radio" name="education" value="Undergraduate Degree"> Undergraduate Degree</label><br>
+//         <label><input type="radio" name="education" value="Postgraduate Degree"> Postgraduate Degree</label><br>
+//         <label><input type="radio" name="education" value="Doctorate">  Doctorate</label><br>
+//       </div>
 
-    </div>
-    <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:52%;transform: translateX(-50%);"></div>
+//     </div>
+//     <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:52%;transform: translateX(-50%);"></div>
 
-  `,
-button_label: "Continue",
-  on_load: function(){
-    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-  let bar = document.createElement('div');
-             bar.id = 'bottom-bar';
-             document.body.appendChild(bar);
-//   const content = document.querySelector('.jspsych-content')
-//             if (content) {
-//                 content.style.marginTop = '5%';
+//   `,
+// button_label: "Continue",
+//   on_load: function(){
+//     document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+//   let bar = document.createElement('div');
+//              bar.id = 'bottom-bar';
+//              document.body.appendChild(bar);
+// //   const content = document.querySelector('.jspsych-content')
+// //             if (content) {
+// //                 content.style.marginTop = '5%';
+// //             }
+//   },
+//   on_finish: function() {
+//     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+//     let bar = document.getElementById('bottom-bar');
+//     document.body.removeChild(bar);
+//     // const content = document.querySelector('.jspsych-content')
+//     //         if (content) {
+//     //             content.style.marginTop = 'auto';
 //             }
-  },
-  on_finish: function() {
-    document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-    let bar = document.getElementById('bottom-bar');
-    document.body.removeChild(bar);
-    // const content = document.querySelector('.jspsych-content')
-    //         if (content) {
-    //             content.style.marginTop = 'auto';
-            }
-};
+// };
 
 
 var participant_info2 = {
@@ -1799,6 +1799,21 @@ var participant_info2 = {
         <label><input type="radio" name="gender" value="Male"> Male</label><br>
         <label><input type="radio" name="gender" value="Non-binary"> Non-binary</label><br>
       </div>
+
+
+          <div style="justify-"><p><br>Ethnicity:</p></div>
+      <div style="width:140px;text-align: left; font-size:15px;align-items: left; position: relative; left:52%;transform: translateX(-50%);">
+        <label><input type="radio" name="ethnicity" value="Asian" required>Asian, Asian British, Asian Welsh</label><br>
+        <label><input type="radio" name="ethnicity" value="Black">Black, Black British, Black Welsh, Caribbean, or African</label><br>
+        <label><input type="radio" name="ethnicity" value="Mixed">Mixed or Multiple</label><br>
+        <label><input type="radio" name="ethnicity" value="White">White</label><br>
+        <label><input type="radio" name="ethnicity" value="Other">Other ethnic group</label><br>
+        <label><input type="radio" name="ethnicity" value="Preferno">Prefer not to say</label><br>
+      </div>
+
+      
+      <div><p>If 'Other' was selected, you may provide more detail (not required):</p></div>
+      <div style="width:400px; align-items: center;font-size:15px"><input type="text" name="age" style="width: 15%"></div>
 
       <div><p>Highest completed education level:</p></div>
       <div style="width:200px;text-align: left;font-size:15px; align-items: left; position: relative; left:52%;transform: translateX(-50%);">
@@ -2282,7 +2297,6 @@ var immigration_desc_true_block40procedure  = {
 var brexit_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this block, please respond as if the UK <strong>is still</strong> in the EU.</p>
-    <p>That is, as if the UK did not leave the EU.</p>
     <p>For example, if the sentence says 'The UK has remained in the EU' respond as if the sentence is <strong>true</strong>.</p>
     <p><br>Press any button to continue.</p>`,
     choices: ['Continue'],
@@ -2421,7 +2435,7 @@ var brexit_nondesc_true_instructions = {
     stimulus: `
     <p>In this block, please respond as the UK <strong>should have</strong> left the EU;</p>
     <p> That it was the right thing to do, and a good thing to have happened. </p>
-    <p>For example, if the sentence says "<em>'Leave' should have won</em>", you should respond as if the sentence is <strong>true</strong>.</p>
+    <p>For example, if the sentence says "<em>The UK should have exited the EU</em>", you should respond as if the sentence is <strong>true</strong>.</p>
     <p><br>Press to continue</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -2588,7 +2602,7 @@ var immigration_nondesc_false_instructions = {
 var immigration_nondesc_false_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false' from before.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if immigrant numbers <strong>should decrease</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is <strong>false</strong>.</p>
     <p>For words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
@@ -2610,7 +2624,7 @@ var immigration_nondesc_false_block40instructions = {
 var immigration_nondesc_true_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if immigrant numbers <strong>should</strong> increase.</p>
     <p>For example, if the sentence says 'Immigration numbers should rise', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2633,7 +2647,7 @@ var immigration_nondesc_true_block40instructions = {
 var immigration_desc_false_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are decreasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are decreasing', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2655,7 +2669,7 @@ var immigration_desc_false_block40instructions = {
 var immigration_desc_true_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if immigrant numbers <strong>are increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are rising', respond as if the sentence is <strong>true</strong>.</p>
     <p>As before, for words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
@@ -2677,7 +2691,7 @@ var immigration_desc_true_block40instructions = {
 var brexit_nondesc_false_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> remained in the EU.</p>
     <p>For example, if the sentence says 'The UK should be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2699,7 +2713,7 @@ var brexit_nondesc_false_block40instructions = {
 var brexit_nondesc_true_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if the UK <strong>should have</strong> left the EU.</p>
     <p>For example, if the sentence says 'The UK should not be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2721,7 +2735,7 @@ var brexit_nondesc_true_block40instructions = {
 var brexit_desc_false_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if the UK <strong>is still</strong> in the EU.</p>
     <p>For example, if the sentence says 'The UK remained in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2743,7 +2757,7 @@ var brexit_desc_false_block40instructions = {
 var brexit_desc_true_block40instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>This block will contain the statements from the previous block, and words meaning 'true' or 'false'.</p>
-    <p>Continue responding with the same rules as the previous two blocks.</p>
+    <p>Continue responding with the same rules.</p>
     <p>That is, continue responding as if the UK <strong>has left</strong> the EU.</p>
     <p>For example, if the sentence says 'The UK is not in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
@@ -2925,7 +2939,7 @@ var B_NtDconditionchange = {
 var B_DtNconditionchange = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
-    <p<br>>Instead of being about whether the UK left the EU,</p>
+    <p<br>>Instead of being about whether the UK <em>did</em> leave the EU,</p>
     <p>the statements are going to be about if the UK <em>should have</em> left the EU.</p>
     <p>That is, they will express an opinion about the UK leaving the EU</p>
         <br><br>
@@ -4077,6 +4091,21 @@ var ImmigrationExplicitMeasures7_Stimuli = [
 // <div style="height: 650; width:450; margin-top: 20%; overflow-y: auto; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px;">
 
 
+  const filenamewhole = function(){
+  return `${jspsych_id}-${formatted_date}-O.csv`
+}
+
+var pipe = {
+  type: jsPsychPipe,
+    action: "save",
+    experiment_id: "8xnrIVBxMHny",
+    filename: filenamewhole,
+    data_string: () => jsPsych.data.get().csv(),
+    on_finish: function () {
+        finished_experiment = true
+     }
+}
+
     var exclusionform = {
         type: jsPsychSurveyHtmlForm,
     //     preamble: `<div style="font-size: 12px;">
@@ -4111,7 +4140,65 @@ button_label: "Continue",
                 content.style.marginTop = 'auto';
             };
             let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar);}
+            document.body.removeChild(bar);
+            jsPsych.timeline.insert(pipe)}
+
+};
+
+
+const filenameblock2only = function(){
+  return `${jspsych_id}-${formatted_date}-B.csv`
+}
+
+
+var pipeblock2only = {
+  type: jsPsychPipe,
+    action: "save",
+    experiment_id: "8xnrIVBxMHny",
+    filename: filenameblock2only,
+    data_string: () => jsPsych.data.get().csv(),
+    on_finish: function () {
+        finished_experiment = true
+     }
+}
+
+
+var exclusionformblock2only = {
+        type: jsPsychSurveyHtmlForm,
+    //     preamble: `<div style="font-size: 12px;">
+    //   <h1 style="text-align: center;">Exclusion</h1>
+    // </div>`,
+        html: `<div style="height:100%;width="100%">
+                    <div style="position:fixed; top: 30%; left: 50%; transform: translateX(-50%); height:20%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 0.1%; padding-bottom:20px;font-size: 12px; line-height: 1.11em"> 
+
+
+    <div style="width: 400px; margin: auto; text-align: center; align-items: center">
+      
+      <p>If there is any reason why your data shouldn't be included, please explain here:</p>
+      <div style="width:100%; align-items: center">  <textarea name="exclusion" style="width: 100%; height: 100px; resize: vertical;"></textarea></div>
+    </div></div>
+  `,
+  on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);},
+button_label: "Continue",
+  on_load: function(){document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
+  const content = document.querySelector('.jspsych-content')
+            if (content) {
+                content.style.marginTop = '5%';
+            }
+  },
+  on_finish: function() {
+    document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+    const content = document.querySelector('.jspsych-content')
+            if (content) {
+                content.style.marginTop = 'auto';
+            };
+            let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+            jsPsych.timeline.insert(pipeblock2only)}
 
 };
 // timeline.push(exclusionform)
@@ -4119,20 +4206,7 @@ button_label: "Continue",
 
 
 
-const filenamewhole = function(){
-  return `${jspsych_id}-${formatted_date}-O.csv`
-}
 
-var pipe = {
-  type: jsPsychPipe,
-    action: "save",
-    experiment_id: "8xnrIVBxMHny",
-    filename: filenamewhole,
-    data_string: () => jsPsych.data.get().csv(),
-    on_finish: function () {
-        finished_experiment = true
-     }
-}
 
 var experimentover2 ={
     type: jsPsychHtmlButtonResponse,
@@ -4155,25 +4229,10 @@ var experimentover2 ={
   on_finish: function() {
     document.getElementById('bottom-bar')?.remove();
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-    jsPsych.timeline.insert(pipe)
 }};
 
 
-const filenameblock2only = function(){
-  return `${jspsych_id}-${formatted_date}-B.csv`
-}
 
-
-var pipeblock2only = {
-  type: jsPsychPipe,
-    action: "save",
-    experiment_id: "8xnrIVBxMHny",
-    filename: filenameblock2only,
-    data_string: () => jsPsych.data.get().csv(),
-    on_finish: function () {
-        finished_experiment = true
-     }
-}
 
 var experimentover_block2only ={
     type: jsPsychHtmlButtonResponse,
@@ -4196,7 +4255,6 @@ var experimentover_block2only ={
   on_finish: function() {
     document.getElementById('bottom-bar')?.remove();
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-    jsPsych.timeline.insert(pipeblock2only)
 }};
 
 
@@ -4208,6 +4266,7 @@ var pipefirsthalf = {
   type: jsPsychPipe,
     action: "save",
     experiment_id: "8xnrIVBxMHny",
+    wait_message: `<p>Saving progress. Please do not close this page.</p>`,
     filename: filenamefirsthalf,
     data_string: () => jsPsych.data.get().csv(),
 }
