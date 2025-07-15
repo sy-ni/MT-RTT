@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Experiment</title>
+    <title>MT-RTT</title>
     <script src="https://unpkg.com/jspsych@7.3.4"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@1.1.3"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@1.1.3"></script>
@@ -172,6 +172,11 @@
     width: 300px;
     height: 110px;
   }
+
+  #jspsych-survey-likert-next {
+    font-weight: bold;
+  }
+
 
 
 
@@ -1477,22 +1482,23 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code ==="BNT" && block2only===1) {
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
+    // jsPsych.timeline.insert(instructions);
+    // jsPsych.timeline.insert(inducer_procedure);
+    // jsPsych.timeline.insert(ontorealblocks);
+    // jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    // jsPsych.timeline.insert(rulechange);
+    // jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    // jsPsych.timeline.insert(experimentover);
         jsPsych.timeline.insert(BrexitExplicitMeasures1);
+        jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(BrexitExplicitMeasures2);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
@@ -1923,7 +1929,7 @@ var part1cont= {
         as fast as you can.</p>
         <br>
         <p>Before each trial, you will press a button on the bottom of the screen.</p>
-        <p> Please keep the mouse on the button until the screen changes.</p>
+        <p style="color:red"><strong>Please keep the mouse still until the word appears.</strong></p>
         <br>
         <p> If you get an answer wrong, a red cross will appear. Please press the correct answer as fast as you can.</p>
             <p>Press 'Continue' to begin.</p>
@@ -2030,7 +2036,6 @@ function handleBottomMouse() {console.log("bottom mouse move"), mousebad = 1};
     if (topfix) topfix.removeEventListener('mouseover', handleTopMouse);
     if (bottomfix) bottomfix.removeEventListener('mouseover', handleBottomMouse);
         data.mousetrackingerror = mousetrackingerror
-        console.log(mousebad)
         data.earlymove = mousebad
     }
         };
@@ -2151,6 +2156,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this block, please respond as if the UK <strong>has left</strong> the EU.</p>
     <p>For example, if the sentence says '<em>The UK has pulled out of the EU</em>' respond as if the sentence is <strong>true</strong>.</p>
+            <p style="color:red"><strong>Remember to keep the mouse still until the word appears.</strong></p>
     <p>Press any button to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -3020,6 +3026,62 @@ var experimentover ={
 }};
 //   timeline.push(experimentover);
 
+
+
+var likert_scale = [
+  "Strongly Disagree", 
+  "", 
+  "", 
+  "", 
+  "",
+  "",
+  "Strongly Agree"
+];
+
+var BIDR = {
+  type: jsPsychSurveyLikert,
+  questions: [
+    {prompt: "I have not always been honest with myself.", name: 'BIDR1', labels: likert_scale},
+    {prompt: "I always know why I like things", name: 'BIDR2', labels: likert_scale},
+    {prompt: "It's hard for me to shut off a disturbing thought.", name: 'BIDR3', labels: likert_scale},
+    {prompt: "I never regret my decisions", name: 'BIDR4', labels: likert_scale},
+    {prompt: "I sometimes lose out on things because I can't make up my mind soon enough", name: 'BIDR5', labels: likert_scale},
+    {prompt: "I am a completely rational person", name: 'BIDR6', labels: likert_scale},
+    {prompt: "I am very confident of my judgements", name: 'BIDR7', labels: likert_scale},
+    {prompt: "I have sometimes doubted my ability as a lover", name: 'BIDR8', labels: likert_scale},
+    {prompt: "I sometimes tell lies if I have to", name: 'BIDR9', labels: likert_scale},
+    {prompt: "I never cover up my mistakes", name: 'BIDR10', labels: likert_scale},
+    {prompt: "There have been occasions when I have taken advantage of someone", name: 'BIDR11', labels: likert_scale},
+    {prompt: "I sometimes try to get even rather than forgive and forget", name: 'BIDR12', labels: likert_scale},
+    {prompt: "I have said something bad about a friend behind his/her back", name: 'BIDR13', labels: likert_scale},
+    {prompt: "When I hear people talking privately, I avoid listening", name: 'BIDR14', labels: likert_scale},
+    {prompt: "I never take things that don't belong to me", name: 'BIDR15', labels: likert_scale},
+    {prompt: "I don't gossip about other people's business", name: 'BIDR16', labels: likert_scale},
+  ],
+  preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="overflow-y:auto; position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1.6em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+    on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    let form = document.getElementById('jspsych-survey-likert-form');
+    let button = document.getElementById('jspsych-survey-likert-next');
+    let bar = document.getElementById('bottom-bar')
+    if (button && bar) {bar.appendChild(button)}
+  },
+  on_finish: function(){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar)
+  },
+  randomize_question_order: true
+};
 
 var scale1 = ['<span style="font-size: 12px"><em>Strongly Disagree</em></span>', '<span style="font-size: 12px"><em>Strongly Agree</em></span>']
 
