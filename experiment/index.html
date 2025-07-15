@@ -3028,6 +3028,30 @@ var experimentover ={
 
 
 
+var endtrialfun = function(){
+    let button = document.getElementById('jspsych-survey-likert-next');
+    button.removeEventListener('click',endtrialfun);
+    document.removeEventListener('click',checkbuttonfun);
+    jsPsych.finishTrial()
+};
+
+
+var checkbuttonfun = function(){
+    console.log('check button fun is running')
+    let form = document.getElementById('jspsych-survey-likert-form');
+    const questions = form.querySelectorAll('.jspsych-survey-likert-opts');
+    let allAnswered = false;
+    questions.forEach((q) => {
+      const radios = q.querySelectorAll('input[type="radio"]');
+      const oneChecked = Array.from(radios).some(r => r.checked);
+      if (!oneChecked) {allAnswered = false}
+      else {allAnswered = true}});
+    console.log('all answered?',allAnswered);
+      if (allAnswered===true) {
+        button = document.getElementById('jspsych-survey-likert-next')
+        button.disabled=false};
+};
+
 var likert_scale = [
   "Strongly Disagree", 
   "", 
@@ -3060,8 +3084,9 @@ var BIDR = {
   ],
   preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
-        <p> Please answer the following questions according to your own opinion</p></div>
+        <div style="position: fixed; top: 7.5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p>This part of the questionnaire presents a number of characteristics that may or may not describe you. Please select the answer that best indicates the extent to which you agree or disagree with the
+statement. Be as honest as possible, but rely on your initial feelings and do not think too much.</p></div>
         <div style="overflow-y:auto; position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1.6em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
     on_start: function(){
@@ -3075,13 +3100,43 @@ var BIDR = {
     let button = document.getElementById('jspsych-survey-likert-next');
     let bar = document.getElementById('bottom-bar')
     if (button && bar) {bar.appendChild(button)}
+    button.addEventListener('click',endtrialfun)
+    button.disabled = true;
+    document.addEventListener('click',checkbuttonfun)
+    button.style.fontWeight='bold'
+
   },
-  on_finish: function(){
+  on_finish: function(data){
     let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar)
+            document.body.removeChild(bar);
+            let form = document.getElementById('jspsych-survey-likert-form');
+            const questions = form.querySelectorAll('.jspsych-survey-likert-opts');
+            var itemorder = [];
+            var responses = [];
+            questions.forEach((q) => {
+                var BIDRitem = q.getAttribute('data-name');
+                itemorder.push(BIDRitem);
+                var radios = q.querySelectorAll('input[type="radio"]');
+                radios.forEach((r) => {
+                    if (r.checked){responses.push(r.value), console.log('responses:',responses)}
+                })
+            });
+            order = [];
+            itemorder.forEach((i) =>{
+                var item = i.substring(4);
+                order.push(item)
+            });
+                data.Qorder = itemorder;
+                data.order = order;
+                data.Likertresponse = responses;
+                data.screen = 'BIDR';
   },
-  randomize_question_order: true
+  randomize_question_order: true,
 };
+
+timeline.push(BIDR)
+
+
 
 var scale1 = ['<span style="font-size: 12px"><em>Strongly Disagree</em></span>', '<span style="font-size: 12px"><em>Strongly Agree</em></span>']
 
