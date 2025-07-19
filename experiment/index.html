@@ -429,7 +429,7 @@ var fullscreentrial = {
 }
 }
 
-// timeline.push(fullscreentrial)
+timeline.push(fullscreentrial)
 
         beforeqfun = function(){
     const participated = document.querySelector('input[name="participated"]:checked')?.value;
@@ -619,18 +619,6 @@ var beenherebefore = {
 };
     
 
-// timeline.push(beenherebefore)
-
-// timeline.push({
-//     type: jsPsychPipe,
-//     action: "save",
-//     experiment_id: "HcISuNoo7PGZ",
-//     filename: `${jspsych_id}_Full.csv`,
-//     data_string: () => jsPsych.data.get().csv(),
-//     on_finish: function () {
-//         finished_experiment = true
-//      }
-// })
 
 var welcomeA = {
     type: jsPsychHtmlButtonResponse,
@@ -3047,7 +3035,6 @@ var experimentover ={
 
 
 var endtrialfun = function(){
-  console.log('endtrialfun is running')
     let button = document.getElementById('jspsych-survey-likert-next');
     button.removeEventListener('click',endtrialfun);
     document.removeEventListener('click',checkbuttonfun);
@@ -3056,19 +3043,15 @@ var endtrialfun = function(){
 
 
 var checkbuttonfun = function(){
-    console.log('check button fun is running')
     let form = document.getElementById('jspsych-survey-likert-form');
     const questions = form.querySelectorAll('.jspsych-survey-likert-opts');
     let allAnswered = false;
     let answeredqs = 0
     questions.forEach((q) => {
       const radios = q.querySelectorAll('input[type="radio"]');
-      const oneChecked = Array.from(radios).some(r => r.checked);
-      if (oneChecked) {answeredqs++}
+      radios.forEach((r) => {if (r.checked===true){answeredqs++}})
       });
       if (answeredqs===16) {allAnswered=true};
-      console.log('answered:',answeredqs);
-    console.log('all answered?',allAnswered);
       if (allAnswered===true) {
         button = document.getElementById('jspsych-survey-likert-next')
         button.disabled=false};
@@ -3127,7 +3110,6 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
     button.disabled = true;
     document.addEventListener('click',checkbuttonfun);
     button.style.fontWeight='bold';
-    console.log('BIDR1 (copied from index) start');
   },
   on_finish: function(data){
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar-and-button');
@@ -3142,7 +3124,7 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
                 itemorder.push(BIDRitem);
                 var radios = q.querySelectorAll('input[type="radio"]');
                 radios.forEach((r) => {
-                    if (r.checked){responses.push(r.value), console.log('responses:',responses)}
+                    if (r.checked){responses.push(r.value)}
                 })
             });
             order = [];
