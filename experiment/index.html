@@ -3060,11 +3060,13 @@ var checkbuttonfun = function(){
     let form = document.getElementById('jspsych-survey-likert-form');
     const questions = form.querySelectorAll('.jspsych-survey-likert-opts');
     let allAnswered = false;
+    let answeredqs = 0
     questions.forEach((q) => {
       const radios = q.querySelectorAll('input[type="radio"]');
       const oneChecked = Array.from(radios).some(r => r.checked);
-      if (!oneChecked) {allAnswered = false}
+      if (!oneChecked) {answeredqs++}
       });
+      if (answeredqs===16) {allAnswered=true}
     console.log('all answered?',allAnswered);
       if (allAnswered===true) {
         button = document.getElementById('jspsych-survey-likert-next')
