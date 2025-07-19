@@ -3064,7 +3064,7 @@ var checkbuttonfun = function(){
       const radios = q.querySelectorAll('input[type="radio"]');
       const oneChecked = Array.from(radios).some(r => r.checked);
       if (!oneChecked) {allAnswered = false}
-      else {allAnswered = true}});
+      });
     console.log('all answered?',allAnswered);
       if (allAnswered===true) {
         button = document.getElementById('jspsych-survey-likert-next')
