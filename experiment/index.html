@@ -3115,6 +3115,7 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
       document.body.appendChild(bar);
   },
   on_load: function(){
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button')
     let form = document.getElementById('jspsych-survey-likert-form');
     let button = document.getElementById('jspsych-survey-likert-next');
     let bar = document.getElementById('bottom-bar');
@@ -3124,7 +3125,6 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
     document.addEventListener('click',checkbuttonfun);
     button.style.fontWeight='bold';
     console.log('BIDR1 (copied from index) start');
-    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button')
   },
   on_finish: function(data){
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar-and-button');
