@@ -226,7 +226,6 @@
 
     var fulfill = 0
 
-
     var consent = {
   type: jsPsychHtmlButtonResponse,
   stimulus: `
@@ -470,8 +469,8 @@ var beforequestion = {
         if (block2only === 1) {
             jsPsych.timeline.insert(beenherebefore);
             jsPsych.timeline.insert(welcomeA);
-            // jsPsych.timeline.insert(fullscreentrial);
-            // jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome);
             }
         else if (block2only===0) {
@@ -1505,15 +1504,15 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
         jsPsych.timeline.insert(BrexitExplicitMeasures1);
-        jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(BrexitExplicitMeasures2);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures4);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
+    jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BNF" && block2only===1){
@@ -1540,7 +1539,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDT" && block2only===1){
@@ -1567,7 +1566,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BDF" && block2only===1){
@@ -1594,7 +1593,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
     jsPsych.timeline.insert(BrexitExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(experimentover_block2only);
     jsPsych.timeline.insert(exitfullscreen)
 
   }
@@ -1622,7 +1621,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="INF" && block2only===1){
@@ -1649,7 +1648,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDT" && block2only===1){
@@ -1676,7 +1675,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="IDF" && block2only===1){
@@ -1703,7 +1702,7 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures7);
     jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
+    jsPsych.timeline.insert(experimentover_block2only)
     jsPsych.timeline.insert(exitfullscreen);
   }
     }
@@ -2164,7 +2163,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
     stimulus: `<p>In this block, please respond as if the UK <strong>has left</strong> the EU.</p>
     <p>For example, if the sentence says '<em>The UK has pulled out of the EU</em>' respond as if the sentence is <strong>true</strong>.</p>
             <p style="color:red"><strong>Remember to keep the mouse still until the word appears.</strong></p>
-    <p>Press any button to continue.</p>`,
+    <p>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2182,7 +2181,7 @@ var immigration_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this block, please respond as if immigration to the UK is<strong>increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigration levels are low', you should response as if the sentence is <strong>false</strong>.</p>
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2298,7 +2297,7 @@ var brexit_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this block, please respond as if the UK <strong>is still</strong> in the EU.</p>
     <p>For example, if the sentence says 'The UK has remained in the EU' respond as if the sentence is <strong>true</strong>.</p>
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2321,7 +2320,7 @@ var immigration_desc_false_instructions = {
     <p> If the sentence says '<em>The immigrant population is increasing</em>',respond as if the sentence is <strong>false</strong>.</p>
     <p> If the sentence says '<em>The immigrant population isn't increasing</em>', respond as if the sentence is <strong>true</strong></p>
     <p> Please note that this does not imply a value judgement about whether the assertion is good or bad.</p>
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2584,7 +2583,7 @@ var immigration_nondesc_false_instructions = {
     stimulus: `<p>In this block, please respond as if immigrant numbers should <strong>decrease</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is <strong>false</strong>.</p>
     <p>If the sentence says 'Immigrant numbers should go down', respond as if the sentence is <strong>true</strong>.</p>
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2606,7 +2605,7 @@ var immigration_nondesc_false_block40instructions = {
     <p>That is, continue responding as if immigrant numbers <strong>should decrease</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers should rise', respond as if the sentence is <strong>false</strong>.</p>
     <p>For words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2628,7 +2627,7 @@ var immigration_nondesc_true_block40instructions = {
     <p>That is, continue responding as if immigrant numbers <strong>should</strong> increase.</p>
     <p>For example, if the sentence says 'Immigration numbers should rise', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2651,7 +2650,7 @@ var immigration_desc_false_block40instructions = {
     <p>That is, continue responding as if immigrant numbers <strong>are decreasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are decreasing', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2673,7 +2672,7 @@ var immigration_desc_true_block40instructions = {
     <p>That is, continue responding as if immigrant numbers <strong>are increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigrant numbers are rising', respond as if the sentence is <strong>true</strong>.</p>
     <p>As before, for words that mean 'true' or 'agree', click the left button. For words that mean 'false' or 'disagree', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2695,7 +2694,7 @@ var brexit_nondesc_false_block40instructions = {
     <p>That is, continue responding as if the UK <strong>should have</strong> remained in the EU.</p>
     <p>For example, if the sentence says 'The UK should be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2717,7 +2716,7 @@ var brexit_nondesc_true_block40instructions = {
     <p>That is, continue responding as if the UK <strong>should have</strong> left the EU.</p>
     <p>For example, if the sentence says 'The UK should not be in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2739,7 +2738,7 @@ var brexit_desc_false_block40instructions = {
     <p>That is, continue responding as if the UK <strong>is still</strong> in the EU.</p>
     <p>For example, if the sentence says 'The UK remained in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2761,7 +2760,7 @@ var brexit_desc_true_block40instructions = {
     <p>That is, continue responding as if the UK <strong>has left</strong> the EU.</p>
     <p>For example, if the sentence says 'The UK is not in the EU', respond as if the sentence is <strong>true</strong>.</p>
     <p>For words that mean 'true', click the left button. For words that mean 'false', click the right button.
-    <p><br>Press any button to continue.</p>`,
+    <p><br>Press to continue.</p>`,
     choices: ['Continue'],
     button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     on_start: function(){
@@ -2806,8 +2805,7 @@ var brexit_nondesc_false_stimuli = [
     var brexit_nondesc_false_procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_nondesc_false_stimuli,
-      // 2
-      repetitions: 1,
+      repetitions: 2,
       randomize_order: true,
       data: {block:'BNFintro'} 
     };
@@ -3132,7 +3130,6 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
                 var item = i.substring(4);
                 order.push(item)
             });
-                data.Qorder = itemorder;
                 data.order = order;
                 data.Likertresponse = responses;
                 data.screen = 'BIDR';
