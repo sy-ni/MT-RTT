@@ -60,6 +60,11 @@
   padding-bottom: 5%;
 }
 
+.jspsych-content-wrapper.with-bottom-bar-and-button {
+  padding-bottom: 5%;
+  z-index: 0;
+}
+
 .jspsych-survey-html-form-preamble {
     margin-top: 5%
 }
@@ -178,6 +183,20 @@
   }
 
 
+  #jspsych-survey-likert-next1 {
+    position: fixed;
+    left: 50%;
+    bottom: -24%;
+    transform: translateX(-50%); 
+    padding: 0px;
+    margin-bottom: 15px;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    width: 120px; 
+    height: 30px;
+    font-weight: bold
+  }
 
 
 </style>
@@ -451,8 +470,8 @@ var beforequestion = {
         if (block2only === 1) {
             jsPsych.timeline.insert(beenherebefore);
             jsPsych.timeline.insert(welcomeA);
-            jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
+            // jsPsych.timeline.insert(fullscreentrial);
+            // jsPsych.timeline.insert(buttoncalibration);
             jsPsych.timeline.insert(welcome);
             }
         else if (block2only===0) {
@@ -1497,17 +1516,17 @@ jsPsych.timeline.insert(participant_info3);
     // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     // jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
+        // jsPsych.timeline.insert(BrexitExplicitMeasures1);
         jsPsych.timeline.insert(BIDR);
-    jsPsych.timeline.insert(BrexitExplicitMeasures2);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures4);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-    jsPsych.timeline.insert(BrexitExplicitMeasures6);
-    jsPsych.timeline.insert(BrexitExplicitMeasures7);
-    jsPsych.timeline.insert(exclusionformblock2only);
-    jsPsych.timeline.insert(experimentover)
-    jsPsych.timeline.insert(exitfullscreen);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures6);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures7);
+    // jsPsych.timeline.insert(exclusionformblock2only);
+    // jsPsych.timeline.insert(experimentover)
+    // jsPsych.timeline.insert(exitfullscreen);
   }
   else if (block2code==="BNF" && block2only===1){
     jsPsych.timeline.insert(instructions);
@@ -3027,8 +3046,8 @@ var experimentover ={
 //   timeline.push(experimentover);
 
 
-
 var endtrialfun = function(){
+  console.log('endtrialfun is running')
     let button = document.getElementById('jspsych-survey-likert-next');
     button.removeEventListener('click',endtrialfun);
     document.removeEventListener('click',checkbuttonfun);
@@ -3098,15 +3117,17 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
   on_load: function(){
     let form = document.getElementById('jspsych-survey-likert-form');
     let button = document.getElementById('jspsych-survey-likert-next');
-    let bar = document.getElementById('bottom-bar')
-    if (button && bar) {bar.appendChild(button)}
-    button.addEventListener('click',endtrialfun)
+    let bar = document.getElementById('bottom-bar');
+    if (button && bar) {bar.appendChild(button)};
+    button.addEventListener('click',endtrialfun);
     button.disabled = true;
-    document.addEventListener('click',checkbuttonfun)
-    button.style.fontWeight='bold'
-
+    document.addEventListener('click',checkbuttonfun);
+    button.style.fontWeight='bold';
+    console.log('BIDR1 (copied from index) start');
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button')
   },
   on_finish: function(data){
+    document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar-and-button');
     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
             let form = document.getElementById('jspsych-survey-likert-form');
@@ -3134,7 +3155,7 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
   randomize_question_order: true,
 };
 
-timeline.push(BIDR)
+
 
 
 
@@ -4318,6 +4339,9 @@ var experimentover2 ={
     <p>As a reminder, your ID is: <strong>${jspsych_id}</strong></p>
     <p> If at any point before 01/08/25 you would like to withdraw your data, this may be requested via an email: ss2651@sussex.ac.uk.</p>
     <p>This email may also be contacted if you have any other concerns or wish to receive the results of the study when they become available.</p>
+
+        <p> If you would like to enter the prize draw to win a £25 voucher, please enter your email <a href="https://universityofsussex.eu.qualtrics.com/jfe/form/SV_3XgXJHdhMw6mH6C">on this website</a>
+
     <p> If you are experiencing distress, please refer to <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/" target="_blank">the NHS webpage here</a> for resources.</p>
     <p> Thank you again for your time.</p>`},
     choices: [''],
@@ -4344,6 +4368,9 @@ var experimentover_block2only ={
     <p>As a reminder, your ID is: <strong>${jspsych_id}</strong></p>
     <p> If at any point before 01/08/25 you would like to withdraw your data, this may be requested via an email: ss2651@sussex.ac.uk.</p>
     <p>This email may also be contacted if you have any other concerns or wish to receive the results of the study when they become available.</p>
+
+    <p> If you would like to enter the prize draw to win a £25 voucher, please enter your email <a href="https://universityofsussex.eu.qualtrics.com/jfe/form/SV_3XgXJHdhMw6mH6C">on this website</a>
+
     <p> If you are experiencing distress, please refer to <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/" target="_blank">the NHS webpage here</a> for resources.</p>
     <p> Thank you again for your time.</p>`},
     choices: [''],
