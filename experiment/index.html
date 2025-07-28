@@ -1443,7 +1443,6 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(BrexitExplicitMeasures6);
-    jsPsych.timeline.insert(BrexitExplicitMeasures7);
     // jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
@@ -3626,6 +3625,7 @@ sliderIDs.forEach(id => {
     for (const item of BrexitExplicitMeasures5_Stimuli) {
         BrexitExplicitMeasures5_Items.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
             ticks: scale1,
             required: true,
             min: 0,
