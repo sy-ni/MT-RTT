@@ -3143,8 +3143,8 @@ var experimentover ={
     }
     SelectImmigrationNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationNondescStimuli,10);
     ImmigrationExplicitMeasures3_StimuliX.push(...SelectImmigrationNondescStimuli);
-    ImmigrationExplicitMeasures3_StimuliX.push(StronglyAgreeStronglyDisagree);
-    ImmigrationExplicitMeasures3_StimuliX.push(goodbadImmigration);
+    ImmigrationExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    ImmigrationExplicitMeasures3_StimuliX.push(...goodbadImmigration);
     for (const item of ImmigrationExplicitMeasures3_StimuliX) {
         ImmigrationExplicitMeasures3_ItemsX.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
