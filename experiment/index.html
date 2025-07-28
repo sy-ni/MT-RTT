@@ -1472,9 +1472,9 @@ jsPsych.timeline.insert(participant_info3);
     // jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
         jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures2);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures2);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures4);
+    // jsPsych.timeline.insert(BrexitExplicitMeasures4);
     // jsPsych.timeline.insert(BrexitExplicitMeasures5);
     // jsPsych.timeline.insert(BrexitExplicitMeasures6);
     // jsPsych.timeline.insert(BrexitExplicitMeasures7);
@@ -3142,10 +3142,8 @@ var experimentover ={
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
     if (theme==="Brexit"){
     SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
-    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli.slice(0,5));
-    BrexitExplicitMeasures1_StimuliX.splice(0,0,StronglyAgreeStronglyDisagree[0]);
-    BrexitExplicitMeasures2_StimuliX.push(...SelectBrexitDescStimuli.slice(5,10));
-    BrexitExplicitMeasures2_StimuliX.splice(0,0,StronglyAgreeStronglyDisagree[1]);
+    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
+    BrexitExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
     for (const item of BrexitExplicitMeasures1_StimuliX) {
         BrexitExplicitMeasures1_ItemsX.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
@@ -3158,25 +3156,10 @@ var experimentover ={
             slider_start: 0.5
         })
     }
-    for (const item of BrexitExplicitMeasures2_StimuliX) {
-        BrexitExplicitMeasures2_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            ticks: scale1,
-            name: item.name,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
     SelectBrexitNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitNondescStimuli,10);
-    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli.slice(0,5));
-    BrexitExplicitMeasures3_StimuliX.splice(0,0,StronglyAgreeStronglyDisagree[0]);
-    BrexitExplicitMeasures3_StimuliX.splice(0,0,goodbadBrexit[0]);
-    BrexitExplicitMeasures4_StimuliX.push(...SelectBrexitNondescStimuli.slice(5,10));
-    BrexitExplicitMeasures4_StimuliX.splice(0,0,StronglyAgreeStronglyDisagree[1]);
-    BrexitExplicitMeasures4_StimuliX.splice(0,0,goodbadBrexit[1]);
+    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli);
+    BrexitExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    BrexitExplicitMeasures3_StimuliX.push(...goodbadBrexit);
     for (const item of BrexitExplicitMeasures3_StimuliX) {
         BrexitExplicitMeasures3_ItemsX.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
@@ -3188,21 +3171,7 @@ var experimentover ={
             step: 0.01,
             slider_start: 0.5
         })
-    }
-    for (const item of BrexitExplicitMeasures4_StimuliX) {
-        BrexitExplicitMeasures4_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
     };
-    console.log('page3items=',BrexitExplicitMeasures3_ItemsX);
-    console.log('page4items=',BrexitExplicitMeasures4_ItemsX)
     }
     else if (theme==="Immigration"){
       SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
@@ -3422,17 +3391,39 @@ var IEM2order = [];
 var IEM3order = [];
 var IEM4order = [];
 
+var sliderendtrialfun = function(){
+    let button = document.getElementById('jspsych-multiple-slider-next');
+    button.removeEventListener('click',endtrialfun);
+    document.removeEventListener('click',checkbuttonfun);
+    jsPsych.finishTrial()
+};
 
 
-    var BrexitExplicitMeasures1 = {
+// var slidercheckbuttonfun = function(){
+//     let form = document.getElementById('jspsych-multiple-slider-form');
+//     const questions = form.querySelectorAll('.jspsych-multiple-slider');
+//     let allAnswered = false;
+//     let answeredqs = 0
+//     questions.forEach((q) => {
+//       const range = q.querySelectorAll('input[type="range"]');
+//       range.forEach((r) => {if (r.checked===true){answeredqs++}})
+//       });
+//       if (answeredqs===16) {allAnswered=true};
+//       if (allAnswered===true) {
+//         button = document.getElementById('jspsych-multiple-slider-next')
+//         button.disabled=false};
+// };
+
+
+var BrexitExplicitMeasures1 = {
         type: jsPsychMultipleSlider,
         questions: BrexitExplicitMeasures1_ItemsX,
         randomize_question_order: true,
         preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
         <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
-        <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+        <div style="position: fixed; top: 7.5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p>Please be as honest as possible, but rely on your initial feelings and do not think too much.</p></div>
+        <div style="overflow-y:auto; overflow-x:hidden; position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1.6em"> 
             <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
         require_movement: true,
         slider_width: 400,
@@ -3446,25 +3437,177 @@ var IEM4order = [];
       document.body.appendChild(bar);
   },
   on_load: function(){
+    console.log('new bem1 running')
     let form = document.getElementById('jspsych-multiple-slider-form');
     form.style.position = 'fixed';
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button');
+    let button = document.getElementById('jspsych-multiple-slider-next');
+    let bar = document.getElementById('bottom-bar');
+    if (button && bar) {bar.appendChild(button)};
+    button.addEventListener('click',sliderendtrialfun);
+    button.disabled = true;
+    // document.addEventListener('click',checkbuttonfun);
+    button.style.fontWeight='bold';
+    button.style.bottom='1%';
+    let sliderStatuses = {};
+let sliderIDs = [];
+var TheSliders = form.querySelectorAll('.jspsych-slider');
+TheSliders.forEach(s => {
+  let sliderID = s.getAttribute('id');
+  sliderIDs.push(sliderID);
+});
+sliderIDs.forEach(id => {
+  sliderStatuses[id] = false; 
+  console.log(sliderStatuses);
+  document.getElementById(id).addEventListener('click', () => {
+    sliderStatuses[id] = true;
+    console.log(sliderStatuses);
+    const allMoved = Object.values(sliderStatuses).every(moved => moved);
+    if (allMoved) {button.disabled=false}
+  });
+});
   },
   on_finish: function(data){
     let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-            let surveyorder = JSON.parse(data.question_order);
-    for (let i = 0; i<surveyorder.length; i++){
-      let questionno = Number(surveyorder[i]);
-      let qnum = BrexitExplicitMeasures1_ItemsX[questionno];
-      BEM1order.push(qnum.name);
-      // const questions = form.querySelectorAll('.jspsych-slider');
-      // let slideri = questions[i];
-      // let response = slideri.value
-    };
-    console.log('BEM1order=',BEM1order);
-    data.order = BEM1order;
-  }
-        };
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar-and-button');
+            let form = document.getElementById('jspsych-multiple-slider-form');
+            const questions = form.querySelectorAll('input[type="range"]');
+            order = [];
+            var responses = {};
+            var responses2 = [];
+            questions.forEach((q) => {
+                var BEMitem = q.getAttribute('data-name');
+                order.push(BEMitem);
+                var BEMscore = q.valueAsNumber
+                responses[BEMitem] = BEMscore
+                responses2.push({item: BEMitem, score: BEMscore})
+                });
+                data.screen = 'BrexitEMs1'
+                data.response = responses
+                data.responses2 = responses2
+            }
+        
+  };
+
+
+  var BrexitExplicitMeasures3 = {
+        type: jsPsychMultipleSlider,
+        questions: BrexitExplicitMeasures3_ItemsX,
+        randomize_question_order: true,
+        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+        <p><b> Ending Survey</b></p></div>
+        <div style="position: fixed; top: 7.5%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+        <p>Please be as honest as possible, but rely on your initial feelings and do not think too much.</p></div>
+        <div style="overflow-y:auto; overflow-x:hidden; position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1.6em"> 
+            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+        require_movement: true,
+        slider_width: 400,
+        data: {
+            screen: "BrexitExplicitMeasures3",
+        },
+        on_start: function(){
+    let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      bar.style.zIndex = '0';
+      document.body.appendChild(bar);
+  },
+  on_load: function(){
+    console.log('new bem1 running')
+    let form = document.getElementById('jspsych-multiple-slider-form');
+    form.style.position = 'fixed';
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button');
+    let button = document.getElementById('jspsych-multiple-slider-next');
+    let bar = document.getElementById('bottom-bar');
+    if (button && bar) {bar.appendChild(button)};
+    button.addEventListener('click',sliderendtrialfun);
+    button.disabled = true;
+    button.style.fontWeight='bold';
+    button.style.bottom='1%';
+    let sliderStatuses = {};
+let sliderIDs = [];
+var TheSliders = form.querySelectorAll('.jspsych-slider');
+TheSliders.forEach(s => {
+  let sliderID = s.getAttribute('id');
+  sliderIDs.push(sliderID);
+});
+sliderIDs.forEach(id => {
+  sliderStatuses[id] = false; 
+  console.log(sliderStatuses);
+  document.getElementById(id).addEventListener('click', () => {
+    sliderStatuses[id] = true;
+    console.log(sliderStatuses);
+    const allMoved = Object.values(sliderStatuses).every(moved => moved);
+    if (allMoved) {button.disabled=false}
+  });
+});
+  },
+  on_finish: function(data){
+    let bar = document.getElementById('bottom-bar');
+            document.body.removeChild(bar);
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar-and-button');
+            let form = document.getElementById('jspsych-multiple-slider-form');
+            const questions = form.querySelectorAll('input[type="range"]');
+            order = [];
+            var responses = {};
+            var responses2 = [];
+            questions.forEach((q) => {
+                var BEMitem = q.getAttribute('data-name');
+                order.push(BEMitem);
+                var BEMscore = q.valueAsNumber
+                responses[BEMitem] = BEMscore
+                responses2.push({item: BEMitem, score: BEMscore})
+                });
+                data.response = responses
+                data.responses2 = responses2
+            }
+        
+  };
+
+
+
+  //   var OLDBrexitExplicitMeasures1 = {
+  //       type: jsPsychMultipleSlider,
+  //       questions: BrexitExplicitMeasures1_ItemsX,
+  //       randomize_question_order: true,
+  //       preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+  //       <p><b> Ending Survey</b></p></div>
+  //       <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+  //       <p> Please answer the following questions according to your own opinion</p></div>
+  //       <div style="position:fixed; top: 20%; left: 50%; transform: translateX(-50%); height: 60%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+  //           <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+  //       require_movement: true,
+  //       slider_width: 400,
+  //       data: {
+  //           screen: "BrexitExplicitMeasures1",
+  //       },
+  //       on_start: function(){
+  //   let bar = document.createElement('div');
+  //     bar.id = 'bottom-bar';
+  //     bar.style.zIndex = '0';
+  //     document.body.appendChild(bar);
+  // },
+  // on_load: function(){
+  //   let form = document.getElementById('jspsych-multiple-slider-form');
+  //   form.style.position = 'fixed';
+  // },
+  // on_finish: function(data){
+  //   let bar = document.getElementById('bottom-bar');
+  //           document.body.removeChild(bar);
+  //           console.log('question order:',data.question_order)
+  //           let surveyorder = JSON.parse(data.question_order);
+  //   for (let i = 0; i<surveyorder.length; i++){
+  //     let questionno = Number(surveyorder[i]);
+  //     let qnum = BrexitExplicitMeasures1_ItemsX[questionno];
+  //     BEM1order.push(qnum.name);
+  //     // const questions = form.querySelectorAll('.jspsych-slider');
+  //     // let slideri = questions[i];
+  //     // let response = slideri.value
+  //   };
+  //   console.log('BEM1order=',BEM1order);
+  //   data.order = BEM1order;
+  // }
+  //       };
 
 
 
@@ -3529,6 +3672,7 @@ var IEM4order = [];
       document.body.appendChild(bar);
   },
   on_load: function(){
+    document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
     let form = document.getElementById('jspsych-multiple-slider-form')
     form.style.position = 'fixed'
   },
@@ -3575,45 +3719,45 @@ var IEM4order = [];
 //     }
 
 
-    var BrexitExplicitMeasures3 = {
-        type: jsPsychMultipleSlider,
-        questions: BrexitExplicitMeasures3_ItemsX,
-        randomize_question_order: true,
-        preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
-        <p><b> Ending Survey</b></p></div>
-        <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
-        <p> Please answer the following questions according to your own opinion</p></div>
-        <div style="position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
-            <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
-        require_movement: true,
-        slider_width: 400,
-        data: {
-            screen: "BrexitExplicitMeasures3"
-        },
-        on_start: function(){
-    let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      bar.style.zIndex = '0';
-      document.body.appendChild(bar);
-  },
-  on_load: function(){
-    let form = document.getElementById('jspsych-multiple-slider-form');
-    form.style.position = 'fixed';
-    let button = document.getElementById('jspsych-multiple-slider-next');
-    button.style.bottom = '-16%';
-  },
-  on_finish: function(data){
-    let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar);
-            let surveyorder = JSON.parse(data.question_order);
-    for (let i = 0; i<surveyorder.length; i++){
-      let questionno = Number(surveyorder[i]);
-      let qnum = BrexitExplicitMeasures3_ItemsX[questionno];
-      BEM3order.push(qnum.name);
-    };
-    data.order = BEM3order;
-  }
-        };
+  //   var BrexitExplicitMeasures3 = {
+  //       type: jsPsychMultipleSlider,
+  //       questions: BrexitExplicitMeasures3_ItemsX,
+  //       randomize_question_order: true,
+  //       preamble: `<div style="position: fixed; top: 5%; left: 50%; margin-bottom:5%;transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 16px;"
+  //       <p><b> Ending Survey</b></p></div>
+  //       <div style="position: fixed; top: 10%; left: 50%; transform: translateX(-50%); height: 10%; text-align: center; width: 600px;font-size: 12px;"
+  //       <p> Please answer the following questions according to your own opinion</p></div>
+  //       <div style="position:fixed; top: 18%; left: 50%; transform: translateX(-50%); height: 66%; width:40%; text-align: center; border: 1px solid #ccc; padding-left: 75px; padding-right: 75px; padding-top: 20px; padding-bottom:20px;font-size: 12px; line-height: 1em"> 
+  //           <div style="width: 400px; margin: auto; text-align: center; align-items: center">`, 
+  //       require_movement: true,
+  //       slider_width: 400,
+  //       data: {
+  //           screen: "BrexitExplicitMeasures3"
+  //       },
+  //       on_start: function(){
+  //   let bar = document.createElement('div');
+  //     bar.id = 'bottom-bar';
+  //     bar.style.zIndex = '0';
+  //     document.body.appendChild(bar);
+  // },
+  // on_load: function(){
+  //   let form = document.getElementById('jspsych-multiple-slider-form');
+  //   form.style.position = 'fixed';
+  //   let button = document.getElementById('jspsych-multiple-slider-next');
+  //   button.style.bottom = '-16%';
+  // },
+  // on_finish: function(data){
+  //   let bar = document.getElementById('bottom-bar');
+  //           document.body.removeChild(bar);
+  //           let surveyorder = JSON.parse(data.question_order);
+  //   for (let i = 0; i<surveyorder.length; i++){
+  //     let questionno = Number(surveyorder[i]);
+  //     let qnum = BrexitExplicitMeasures3_ItemsX[questionno];
+  //     BEM3order.push(qnum.name);
+  //   };
+  //   data.order = BEM3order;
+  // }
+  //       };
 
 
 
