@@ -2970,8 +2970,8 @@ var StronglyAgreeStronglyDisagree = [
 ];
 
 var goodbadBrexit = [
-{stimulus: 'In general, leaving the EU was a good thing', name: 'BE1'},
-{stimulus: 'In general, leaving the EU was a bad thing', name:'BE2'}
+{stimulus: 'Leaving the EU has had positive effects', name: 'BE1'},
+{stimulus: 'Leaving the EU has had negative effects', name:'BE2'}
 ]
 
 
@@ -3040,8 +3040,8 @@ var AllImmigrationDescStimuli = [
 
 
 var goodbadImmigration = [
-{stimulus: 'At its current level, immigration is a good thing', name: 'IE1'},
-{stimulus: 'At its current level, immigration is a bad thing', name:'IE2'}
+{stimulus: 'At its current level, immigration has positive effects', name: 'IE1'},
+{stimulus: 'At its current level, immigration has negative effects', name:'IE2'}
 ]
 
 
@@ -3246,6 +3246,8 @@ statement. Be as honest as possible, but rely on your initial feelings and do no
 
 
 var scale1 = ['<span style="font-size: 12px"><em>Strongly Disagree</em></span>', '<span style="font-size: 12px"><em>Strongly Agree</em></span>']
+var scale7 = ['<span style="font-size: 12px"><em>Very bad</em></span>', '<span style="font-size: 12px"><em>Very good</em></span>']
+
 
 
 //1 
@@ -3581,7 +3583,7 @@ sliderIDs.forEach(id => {
 {stimulus: 'I am anti-Brexit', name: 'BE4'},
 {stimulus: 'In general, I am strongly opinionated', name: 'GE5'},
 {stimulus: 'Regarding politics, I am strongly opinionated', name: 'GE6'},
-{stimulus: 'I have strong opinions about the UK leaving the EU', name: 'BE7'},
+{stimulus: 'I have strong opinions about the UK leaving the EU', name: 'BE8'},
 {stimulus: 'People judge the political beliefs of others a lot', name: 'BE13'},
 {stimulus: "People's political beliefs should be judged", name: 'GE8'},
 {stimulus: "My political views have changed a lot in the past 5 years", name: 'GE23'},
@@ -3596,7 +3598,12 @@ sliderIDs.forEach(id => {
 {stimulus: "People judge you for thinking the UK should have remained in the EU", name: 'BE16'}
 ];
 
-    var BrexitExplicitMeasures5_Items = []
+    var BrexitExplicitMeasures5_Items = [
+    {prompt:'The UK leaving the EU was overall a ________ thing', name: 'BE7', ticks: scale7, required:true,  min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5  }
+    ]
     for (const item of BrexitExplicitMeasures5_Stimuli) {
         BrexitExplicitMeasures5_Items.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
@@ -3736,7 +3743,7 @@ var ImmigrationExplicitMeasures5_Stimuli = [
 {stimulus: 'Regarding politics, I am strongly opinionated', name: 'GE6'},
 {stimulus: 'I am pro-immigration', name: 'IE3'},
 {stimulus: 'I am anti-immigration', name: 'IE4'},
-{stimulus: 'I have strong opinions about immigration', name: 'IE7'},
+{stimulus: 'I have strong opinions about immigration', name: 'IE8'},
 {stimulus: 'People judge the political beliefs of others a lot', name: 'GE13'},
 {stimulus: "People's political beliefs should be judged", name: 'GE8'},
 {stimulus: "My political views have changed a lot in the past 5 years", name: 'GE23'},
@@ -3751,7 +3758,12 @@ var ImmigrationExplicitMeasures5_Stimuli = [
 {stimulus: "People judge you for thinking that immigration should decrease", name: 'IE16'},
 ];
 
-    var ImmigrationExplicitMeasures5_Items = []
+    var ImmigrationExplicitMeasures5_Items = [
+      {prompt:'At its current level, immigration is overall a ________ thing', name: 'IE7', ticks: scale7, required:true,  min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5  }
+    ]
     for (const item of ImmigrationExplicitMeasures5_Stimuli) {
         ImmigrationExplicitMeasures5_Items.push({
             prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
