@@ -803,74 +803,7 @@ var welcomeA = {
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-            if (theme==="Brexit"){
-    SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
-    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
-    BrexitExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    for (const item of BrexitExplicitMeasures1_StimuliX) {
-        BrexitExplicitMeasures1_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-    SelectBrexitNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitNondescStimuli,10);
-    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli);
-    BrexitExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    BrexitExplicitMeasures3_StimuliX.push(...goodbadBrexit);
-    for (const item of BrexitExplicitMeasures3_StimuliX) {
-        BrexitExplicitMeasures3_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    };
-    }
-    else if (theme==="Immigration"){
-      SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
-    ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
-    ImmigrationExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    for (const item of ImmigrationExplicitMeasures1_StimuliX) {
-        ImmigrationExplicitMeasures1_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-    SelectImmigrationNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationNondescStimuli,10);
-    ImmigrationExplicitMeasures3_StimuliX.push(...SelectImmigrationNondescStimuli);
-    ImmigrationExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    ImmigrationExplicitMeasures3_StimuliX.push(...goodbadImmigration);
-    for (const item of ImmigrationExplicitMeasures3_StimuliX) {
-        ImmigrationExplicitMeasures3_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-};
-console.log(ImmigrationExplicitMeasures1_ItemsX,ImmigrationExplicitMeasures3_ItemsX,BrexitExplicitMeasures1_ItemsX,BrexitExplicitMeasures3_ItemsX, BrexitExplicitMeasures1_StimuliX,ImmigrationExplicitMeasures1_StimuliX)
-        }
+                    }
 };
 
 
@@ -979,20 +912,84 @@ var ontorealblocks = {
             <p>Let's start with some questions about yourself.</p>`,
         choices: ["Continue"],
         on_load: function(){
+          console.log('instructions 1 running')
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.createElement('div');
              bar.id = 'bottom-bar';
              document.body.appendChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-        },
+            if (theme==="Brexit"){
+            console.log('if brexit runnning')
+    SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
+    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
+    BrexitExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    for (const item of BrexitExplicitMeasures1_StimuliX) {
+        BrexitExplicitMeasures1_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+    SelectBrexitNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitNondescStimuli,10);
+    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli);
+    BrexitExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    BrexitExplicitMeasures3_StimuliX.push(...goodbadBrexit);
+    for (const item of BrexitExplicitMeasures3_StimuliX) {
+        BrexitExplicitMeasures3_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    };
+    }
+    else if (theme==="Immigration"){
+      console.log('if brexit runnning')
+      SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
+    ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
+    ImmigrationExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    for (const item of ImmigrationExplicitMeasures1_StimuliX) {
+        ImmigrationExplicitMeasures1_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+    SelectImmigrationNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationNondescStimuli,10);
+    ImmigrationExplicitMeasures3_StimuliX.push(...SelectImmigrationNondescStimuli);
+    ImmigrationExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    ImmigrationExplicitMeasures3_StimuliX.push(...goodbadImmigration);
+    for (const item of ImmigrationExplicitMeasures3_StimuliX) {
+        ImmigrationExplicitMeasures3_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })}}},
             data: { screen: "instructions1" },
         button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_finish: function(){
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
-            document.body.removeChild(bar);
-        }
-    }
+            document.body.removeChild(bar)}};
 
 
 
@@ -1042,6 +1039,7 @@ button_label: "Continue",
   let bar = document.createElement('div');
              bar.id = 'bottom-bar';
              document.body.appendChild(bar);
+             console.log(BrexitExplicitMeasures1_ItemsX, ImmigrationExplicitMeasures1_ItemsX, ImmigrationExplicitMeasures1_StimuliX)
 //   const content = document.querySelector('.jspsych-content')
 //             if (content) {
 //                 content.style.marginTop = '5%';
