@@ -618,6 +618,155 @@ var beenherebefore = {
 };
     
 
+var SelectBrexitNondescStimuli = [];
+var SelectBrexitDescStimuli = [];
+
+var BrexitExplicitMeasures1_StimuliX = []
+var BrexitExplicitMeasures2_StimuliX = []
+var BrexitExplicitMeasures3_StimuliX = []
+var BrexitExplicitMeasures4_StimuliX = []
+
+var AllBrexitDescStimuli = [
+{stimulus: 'The UK has left the EU', name: 'BD1'},
+{stimulus: 'The UK has exited the EU', name: 'BD2'},
+{stimulus: 'The UK has withdrawn from the EU', name: 'BD3'},
+{stimulus: 'The UK has pulled out of the EU', name: 'BD4'},
+{stimulus: 'The UK is out of the EU', name: 'BD5'},
+{stimulus: 'The UK hasn’t remained in the EU', name: 'BD6'},
+{stimulus: 'The UK hasn’t stayed in the EU', name: 'BD7'},
+{stimulus: 'The UK hasn’t kept being in the EU', name: 'BD8'},
+{stimulus: 'The UK isn’t part of the EU', name: 'BD9'},
+{stimulus: 'The UK isn’t in the EU', name: 'BD10'},
+{stimulus: 'The UK has remained in the EU', name: 'BD11'},
+{stimulus: 'The UK has stayed in the EU', name: 'BD12'},
+{stimulus: 'The UK has kept being in the EU', name: 'BD13'},
+{stimulus: 'The UK is part of the EU', name: 'BD14'},
+{stimulus: 'The UK is in the EU', name: 'BD15'},
+{stimulus: 'The UK hasn’t left the EU', name: 'BD16'},
+{stimulus: 'The UK hasn’t exited the EU', name: 'BD17'},
+{stimulus: 'The UK hasn’t withdrawn from the EU', name: 'BD18'},
+{stimulus: 'The UK hasn’t pulled out of the EU', name: 'BD19'},
+{stimulus: 'The UK isn’t out of the EU', name: 'BD20'},
+];
+
+var AllBrexitNondescStimuli = [
+{stimulus: 'The UK should have left the EU', name: 'BN1'},
+{stimulus: 'The UK should have exited the EU', name: 'BN2'},
+{stimulus: 'The UK should have withdrawn from the EU', name: 'BN3'},
+{stimulus: 'The UK should have pulled out of the EU', name: 'BN4'},
+{stimulus: 'The UK should be out of the EU', name: 'BN5'},
+{stimulus: 'The UK shouldn’t have remained in the EU', name: 'BN6'},
+{stimulus: 'The UK shouldn’t have stayed in the EU', name: 'BN7'},
+{stimulus: 'The UK shouldn’t have kept being in the EU', name: 'BN8'},
+{stimulus: 'The UK shouldn’t be part of the EU', name: 'BN9'},
+{stimulus: 'The UK shouldn’t be in the EU', name: 'BN10'},
+{stimulus: 'The UK should have remained in the EU', name: 'BN11'},
+{stimulus: 'The UK should have stayed in the EU', name: 'BN12'},
+{stimulus: 'The UK should have kept being in the EU', name: 'BN13'},
+{stimulus: 'The UK should be part of the EU', name: 'BN14'},
+{stimulus: 'The UK should be in the EU', name: 'BN15'},
+{stimulus: 'The UK shouldn’t have left the EU', name: 'BN16'},
+{stimulus: 'The UK shouldn’t have exited the EU', name: 'BN17'},
+{stimulus: 'The UK shouldn’t have withdrawn from the EU', name: 'BN18'},
+{stimulus: 'The UK shouldn’t have pulled out of the EU', name: 'BN19'},
+{stimulus: 'The UK shouldn’t be out of the EU', name: 'BN20'},
+];
+
+var StronglyAgreeStronglyDisagree = [
+{stimulus: 'Please select ’Strongly Agree’ for this question', name: 'SA1'},
+{stimulus: 'Please select ’Strongly Disagree’ for this question', name:'SD1'},
+];
+
+var goodbadBrexit = [
+{stimulus: 'Leaving the EU has had positive effects', name: 'BE1'},
+{stimulus: 'Leaving the EU has had negative effects', name:'BE2'},
+{stimulus: 'I am pro-Brexit', name: 'BE3'},
+{stimulus: 'I am anti-Brexit', name: 'BE4'},
+]
+
+
+var BrexitExplicitMeasures1_ItemsX = []
+var BrexitExplicitMeasures3_ItemsX = [
+{prompt:'The UK leaving the EU was overall a ________ thing', name: 'BE7', ticks: scale7, required:true,  min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5  }
+];
+
+// Immigration
+
+var SelectImmigrationNondescStimuli = [];
+var SelectImmigrationDescStimuli = [];
+
+var ImmigrationExplicitMeasures1_StimuliX = []
+var ImmigrationExplicitMeasures2_StimuliX = []
+var ImmigrationExplicitMeasures3_StimuliX = []
+var ImmigrationExplicitMeasures4_StimuliX = []
+
+var AllImmigrationNondescStimuli = [
+{stimulus: 'Immigrant numbers should rise', name: 'IN1'},
+{stimulus: 'Immigrant numbers should increase', name: 'IN2'},
+{stimulus: 'Immigrant numbers should get higher', name: 'IN3'},
+{stimulus: 'The immigrant population should climb', name: 'IN4'},
+{stimulus: 'The immigrant population should expand', name: 'IN5'},
+{stimulus: 'Immigrant numbers shouldn’t go down', name: 'IN6'},
+{stimulus: 'Immigrant numbers shouldn’t decrease', name: 'IN7'},
+{stimulus: 'Immigrant numbers shouldn’t get lower', name: 'IN8'},
+{stimulus: 'The immigrant population shouldn’t shrink', name: 'IN9'},
+{stimulus: 'The immigrant population shouldn’t get smaller', name: 'IN10'},
+{stimulus: 'Immigrant numbers should go down', name: 'IN11'},
+{stimulus: 'Immigrant numbers should decrease', name: 'IN12'},
+{stimulus: 'Immigrant numbers should get lower', name: 'IN13'},
+{stimulus: 'The immigrant population should shrink', name: 'IN14'},
+{stimulus: 'The immigrant population should get smaller', name: 'IN15'},
+{stimulus: 'Immigrant numbers shouldn’t rise', name: 'IN16'},
+{stimulus: 'Immigrant numbers shouldn’t increase', name: 'IN17'},
+{stimulus: 'Immigrant numbers shouldn’t get higher', name: 'IN18'},
+{stimulus: 'The immigrant population shouldn’t expand', name: 'IN19'},
+{stimulus: 'The immigrant population shouldn’t climb', name: 'IN20'},
+];
+
+
+var AllImmigrationDescStimuli = [
+{ stimulus: "Immigrant numbers are rising", name: 'ID1' },
+  { stimulus: "Immigrant numbers are increasing", name: 'ID2' },
+  { stimulus: "Immigrant numbers are getting higher", name: 'ID3' },
+  { stimulus: "The immigrant population is expanding", name: 'ID4' },
+  { stimulus: "The immigrant population is climbing", name: 'ID5' },
+  { stimulus: "Immigrant numbers aren't going down", name: 'ID6' },
+  { stimulus: "Immigrant numbers aren't decreasing", name: 'ID7' },
+  { stimulus: "Immigrant numbers aren't getting lower", name: 'ID8' },
+  { stimulus: "The immigrant population isn't shrinking", name: 'ID9' },
+  { stimulus: "The immigrant population isn't getting smaller.", name: 'ID10' },
+  { stimulus: "Immigrant numbers are going down", name: 'ID11' },
+  { stimulus: "Immigrant numbers are decreasing", name: 'ID12' },
+  { stimulus: "Immigrant numbers are getting lower", name: 'ID13' },
+  { stimulus: "The immigrant population is shrinking", name: 'ID14' },
+  { stimulus: "The immigrant population is getting smaller", name: 'ID15' },
+  { stimulus: "Immigrant numbers aren’t rising", name: 'ID16' },
+  { stimulus: "Immigrant numbers aren’t increasing", name: 'ID17' },
+  { stimulus: "Immigrant numbers aren’t getting higher", name: 'ID18' },
+  { stimulus: "The immigrant population isn't expanding", name: 'ID19' },
+  { stimulus: "The immigrant population isn't climbing", name: 'ID20' }
+];
+
+
+var goodbadImmigration = [
+{stimulus: 'At its current level, immigration has positive effects', name: 'IE1'},
+{stimulus: 'At its current level, immigration has negative effects', name:'IE2'},
+{stimulus: 'I am pro-immigration', name: 'IE3'},
+{stimulus: 'I am anti-immigration', name: 'IE4'},
+]
+
+
+var ImmigrationExplicitMeasures1_ItemsX = []
+var ImmigrationExplicitMeasures3_ItemsX = [
+  {prompt:'At its current level, immigration is overall a ________ thing', name: 'IE7', ticks: scale7, required:true,  min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5  }];
+
+
 
 var welcomeA = {
     type: jsPsychHtmlButtonResponse,
@@ -653,6 +802,72 @@ var welcomeA = {
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
+            if (theme==="Brexit"){
+    SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
+    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
+    BrexitExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    for (const item of BrexitExplicitMeasures1_StimuliX) {
+        BrexitExplicitMeasures1_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+    SelectBrexitNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitNondescStimuli,10);
+    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli);
+    BrexitExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    BrexitExplicitMeasures3_StimuliX.push(...goodbadBrexit);
+    for (const item of BrexitExplicitMeasures3_StimuliX) {
+        BrexitExplicitMeasures3_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    };
+    }
+    else if (theme==="Immigration"){
+      SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
+    ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
+    ImmigrationExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    for (const item of ImmigrationExplicitMeasures1_StimuliX) {
+        ImmigrationExplicitMeasures1_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+    SelectImmigrationNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationNondescStimuli,10);
+    ImmigrationExplicitMeasures3_StimuliX.push(...SelectImmigrationNondescStimuli);
+    ImmigrationExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
+    ImmigrationExplicitMeasures3_StimuliX.push(...goodbadImmigration);
+    for (const item of ImmigrationExplicitMeasures3_StimuliX) {
+        ImmigrationExplicitMeasures3_ItemsX.push({
+            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
+            name: item.name,
+            ticks: scale1,
+            required: true,
+            min: 0,
+            max: 1,
+            step: 0.01,
+            slider_start: 0.5
+        })
+    }
+}
         }
 };
 
@@ -749,805 +964,6 @@ var ontorealblocks = {
         document.body.removeChild(bar)}
 };
 
-
-    var welcome = {
-      type: jsPsychHtmlButtonResponse,
-      stimulus: function(){return `<p style="line-height:2.2em">Thank you; the display is now calibrated.<br>Please ensure you are in a place where you can focus without being interrupted,<br>
-         and that you have recorded your participant ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)</p>`},
-         choices: ['<strong>Continue</strong>'],
-         button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
-         on_start: function(){
-            document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
-        let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      document.body.appendChild(bar)},
-      on_finish: function(){
-        let bar = document.getElementById('bottom-bar');
-        document.body.removeChild(bar);
-            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar'),
-            console.log(jspsych_id,theme,condition1,rule1,rule2,block2code,block2only)
-        if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
-            jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BIDR);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-jsPsych.timeline.insert(BrexitExplicitMeasures3);
-jsPsych.timeline.insert(BrexitExplicitMeasures5);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions)
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure)
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure)
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions)
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure)
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure)
-    jsPsych.timeline.insert(pipefirsthalf)
-    jsPsych.timeline.insert(B_DtNconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
- else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_NtDconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_NtDconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
-    jsPsych.timeline.insert(instructions1);
-            jsPsych.timeline.insert(participant_info2);
-jsPsych.timeline.insert(participant_info3);
-jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
-            jsPsych.timeline.insert(part1cont);
-            jsPsych.timeline.insert(instructions);
-            jsPsych.timeline.insert(inducer_procedure);
-            jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_NtDconditionchange);
-    jsPsych.timeline.insert(fullscreentrial);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionform);
-  }
-  else if (block2code ==="BNT" && block2only===1) {
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="BNF" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="BDT" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="BDF" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(brexit_desc_false_instructions);
-    jsPsych.timeline.insert(brexit_desc_false_procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(brexit_desc_true_instructions);
-    jsPsych.timeline.insert(brexit_desc_true_procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code ==="INT" && block2only===1) {
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="INF" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="IDT" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-  else if (block2code==="IDF" && block2only===1){
-    jsPsych.timeline.insert(instructions);
-    jsPsych.timeline.insert(inducer_procedure);
-    jsPsych.timeline.insert(ontorealblocks);
-    jsPsych.timeline.insert(immigration_desc_false_instructions);
-    jsPsych.timeline.insert(immigration_desc_false_procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
-    jsPsych.timeline.insert(rulechange);
-    jsPsych.timeline.insert(immigration_desc_true_instructions);
-    jsPsych.timeline.insert(immigration_desc_true_procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
-        jsPsych.timeline.insert(experimentover);
-    jsPsych.timeline.insert(exclusionformblock2only);
-  }
-    }
-        };
 
 
 
@@ -2791,178 +2207,6 @@ var I_NtDconditionchange = {
 
 //end of experiment
 
-var SelectBrexitNondescStimuli = [];
-var SelectBrexitDescStimuli = [];
-
-var BrexitExplicitMeasures1_StimuliX = []
-var BrexitExplicitMeasures2_StimuliX = []
-var BrexitExplicitMeasures3_StimuliX = []
-var BrexitExplicitMeasures4_StimuliX = []
-
-var AllBrexitDescStimuli = [
-{stimulus: 'The UK has left the EU', name: 'BD1'},
-{stimulus: 'The UK has exited the EU', name: 'BD2'},
-{stimulus: 'The UK has withdrawn from the EU', name: 'BD3'},
-{stimulus: 'The UK has pulled out of the EU', name: 'BD4'},
-{stimulus: 'The UK is out of the EU', name: 'BD5'},
-{stimulus: 'The UK hasn’t remained in the EU', name: 'BD6'},
-{stimulus: 'The UK hasn’t stayed in the EU', name: 'BD7'},
-{stimulus: 'The UK hasn’t kept being in the EU', name: 'BD8'},
-{stimulus: 'The UK isn’t part of the EU', name: 'BD9'},
-{stimulus: 'The UK isn’t in the EU', name: 'BD10'},
-{stimulus: 'The UK has remained in the EU', name: 'BD11'},
-{stimulus: 'The UK has stayed in the EU', name: 'BD12'},
-{stimulus: 'The UK has kept being in the EU', name: 'BD13'},
-{stimulus: 'The UK is part of the EU', name: 'BD14'},
-{stimulus: 'The UK is in the EU', name: 'BD15'},
-{stimulus: 'The UK hasn’t left the EU', name: 'BD16'},
-{stimulus: 'The UK hasn’t exited the EU', name: 'BD17'},
-{stimulus: 'The UK hasn’t withdrawn from the EU', name: 'BD18'},
-{stimulus: 'The UK hasn’t pulled out of the EU', name: 'BD19'},
-{stimulus: 'The UK isn’t out of the EU', name: 'BD20'},
-];
-
-// var AllBrexitDescStimuli = [
-// {stimulus: 'The UK has left the EU'},
-// {stimulus: 'The UK hasn’t left the EU'},
-// {stimulus: 'The UK hasn’t exited the EU'},
-// {stimulus: 'The UK has exited the EU'},
-// {stimulus: 'The UK has withdrawn from the EU'},
-// {stimulus: 'The UK hasn’t withdrawn from the EU'},
-// {stimulus: 'The UK hasn’t pulled out of the EU'},
-// {stimulus: 'The UK has pulled out of the EU'},
-// {stimulus: 'The UK is out of the EU'},
-// {stimulus: 'The UK isn’t out of the EU'},
-// {stimulus: 'The UK hasn’t stayed in the EU'},
-// {stimulus: 'The UK has stayed in the EU'},
-// {stimulus: 'The UK hasn’t remained in the EU'},
-// {stimulus: 'The UK has remained in the EU'},
-// {stimulus: 'The UK has kept being in the EU'},
-// {stimulus: 'The UK hasn’t kept being in the EU'},
-// {stimulus: 'The UK isn’t in the EU'},
-// {stimulus: 'The UK is in the EU'},
-// {stimulus: 'The UK is part of the EU'},
-// {stimulus: 'The UK isn’t part of the EU'},
-// ];
-
-var AllBrexitNondescStimuli = [
-{stimulus: 'The UK should have left the EU', name: 'BN1'},
-{stimulus: 'The UK should have exited the EU', name: 'BN2'},
-{stimulus: 'The UK should have withdrawn from the EU', name: 'BN3'},
-{stimulus: 'The UK should have pulled out of the EU', name: 'BN4'},
-{stimulus: 'The UK should be out of the EU', name: 'BN5'},
-{stimulus: 'The UK shouldn’t have remained in the EU', name: 'BN6'},
-{stimulus: 'The UK shouldn’t have stayed in the EU', name: 'BN7'},
-{stimulus: 'The UK shouldn’t have kept being in the EU', name: 'BN8'},
-{stimulus: 'The UK shouldn’t be part of the EU', name: 'BN9'},
-{stimulus: 'The UK shouldn’t be in the EU', name: 'BN10'},
-{stimulus: 'The UK should have remained in the EU', name: 'BN11'},
-{stimulus: 'The UK should have stayed in the EU', name: 'BN12'},
-{stimulus: 'The UK should have kept being in the EU', name: 'BN13'},
-{stimulus: 'The UK should be part of the EU', name: 'BN14'},
-{stimulus: 'The UK should be in the EU', name: 'BN15'},
-{stimulus: 'The UK shouldn’t have left the EU', name: 'BN16'},
-{stimulus: 'The UK shouldn’t have exited the EU', name: 'BN17'},
-{stimulus: 'The UK shouldn’t have withdrawn from the EU', name: 'BN18'},
-{stimulus: 'The UK shouldn’t have pulled out of the EU', name: 'BN19'},
-{stimulus: 'The UK shouldn’t be out of the EU', name: 'BN20'},
-];
-
-var StronglyAgreeStronglyDisagree = [
-{stimulus: 'Please select ’Strongly Agree’ for this question', name: 'SA1'},
-{stimulus: 'Please select ’Strongly Disagree’ for this question', name:'SD1'},
-];
-
-var goodbadBrexit = [
-{stimulus: 'Leaving the EU has had positive effects', name: 'BE1'},
-{stimulus: 'Leaving the EU has had negative effects', name:'BE2'},
-{stimulus: 'I am pro-Brexit', name: 'BE3'},
-{stimulus: 'I am anti-Brexit', name: 'BE4'},
-]
-
-
-var BrexitExplicitMeasures1_ItemsX = []
-var BrexitExplicitMeasures3_ItemsX = [
-{prompt:'The UK leaving the EU was overall a ________ thing', name: 'BE7', ticks: scale7, required:true,  min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5  }
-];
-
-// Immigration
-
-var SelectImmigrationNondescStimuli = [];
-var SelectImmigrationDescStimuli = [];
-
-var ImmigrationExplicitMeasures1_StimuliX = []
-var ImmigrationExplicitMeasures2_StimuliX = []
-var ImmigrationExplicitMeasures3_StimuliX = []
-var ImmigrationExplicitMeasures4_StimuliX = []
-
-var AllImmigrationNondescStimuli = [
-{stimulus: 'Immigrant numbers should rise', name: 'IN1'},
-{stimulus: 'Immigrant numbers should increase', name: 'IN2'},
-{stimulus: 'Immigrant numbers should get higher', name: 'IN3'},
-{stimulus: 'The immigrant population should climb', name: 'IN4'},
-{stimulus: 'The immigrant population should expand', name: 'IN5'},
-{stimulus: 'Immigrant numbers shouldn’t go down', name: 'IN6'},
-{stimulus: 'Immigrant numbers shouldn’t decrease', name: 'IN7'},
-{stimulus: 'Immigrant numbers shouldn’t get lower', name: 'IN8'},
-{stimulus: 'The immigrant population shouldn’t shrink', name: 'IN9'},
-{stimulus: 'The immigrant population shouldn’t get smaller', name: 'IN10'},
-{stimulus: 'Immigrant numbers should go down', name: 'IN11'},
-{stimulus: 'Immigrant numbers should decrease', name: 'IN12'},
-{stimulus: 'Immigrant numbers should get lower', name: 'IN13'},
-{stimulus: 'The immigrant population should shrink', name: 'IN14'},
-{stimulus: 'The immigrant population should get smaller', name: 'IN15'},
-{stimulus: 'Immigrant numbers shouldn’t rise', name: 'IN16'},
-{stimulus: 'Immigrant numbers shouldn’t increase', name: 'IN17'},
-{stimulus: 'Immigrant numbers shouldn’t get higher', name: 'IN18'},
-{stimulus: 'The immigrant population shouldn’t expand', name: 'IN19'},
-{stimulus: 'The immigrant population shouldn’t climb', name: 'IN20'},
-];
-
-
-var AllImmigrationDescStimuli = [
-{ stimulus: "Immigrant numbers are rising", name: 'ID1' },
-  { stimulus: "Immigrant numbers are increasing", name: 'ID2' },
-  { stimulus: "Immigrant numbers are getting higher", name: 'ID3' },
-  { stimulus: "The immigrant population is expanding", name: 'ID4' },
-  { stimulus: "The immigrant population is climbing", name: 'ID5' },
-  { stimulus: "Immigrant numbers aren't going down", name: 'ID6' },
-  { stimulus: "Immigrant numbers aren't decreasing", name: 'ID7' },
-  { stimulus: "Immigrant numbers aren't getting lower", name: 'ID8' },
-  { stimulus: "The immigrant population isn't shrinking", name: 'ID9' },
-  { stimulus: "The immigrant population isn't getting smaller.", name: 'ID10' },
-  { stimulus: "Immigrant numbers are going down", name: 'ID11' },
-  { stimulus: "Immigrant numbers are decreasing", name: 'ID12' },
-  { stimulus: "Immigrant numbers are getting lower", name: 'ID13' },
-  { stimulus: "The immigrant population is shrinking", name: 'ID14' },
-  { stimulus: "The immigrant population is getting smaller", name: 'ID15' },
-  { stimulus: "Immigrant numbers aren’t rising", name: 'ID16' },
-  { stimulus: "Immigrant numbers aren’t increasing", name: 'ID17' },
-  { stimulus: "Immigrant numbers aren’t getting higher", name: 'ID18' },
-  { stimulus: "The immigrant population isn't expanding", name: 'ID19' },
-  { stimulus: "The immigrant population isn't climbing", name: 'ID20' }
-];
-
-
-var goodbadImmigration = [
-{stimulus: 'At its current level, immigration has positive effects', name: 'IE1'},
-{stimulus: 'At its current level, immigration has negative effects', name:'IE2'},
-{stimulus: 'I am pro-immigration', name: 'IE3'},
-{stimulus: 'I am anti-immigration', name: 'IE4'},
-]
-
-
-var ImmigrationExplicitMeasures1_ItemsX = []
-var ImmigrationExplicitMeasures3_ItemsX = [
-  {prompt:'At its current level, immigration is overall a ________ thing', name: 'IE7', ticks: scale7, required:true,  min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5  }];
-
-
 var experimentover ={
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p> Thank you, the main part of the experiment is now over.</p>
@@ -2980,72 +2224,7 @@ var experimentover ={
   on_finish: function() {
     document.getElementById('bottom-bar')?.remove();
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-    if (theme==="Brexit"){
-    SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
-    BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
-    BrexitExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    for (const item of BrexitExplicitMeasures1_StimuliX) {
-        BrexitExplicitMeasures1_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-    SelectBrexitNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitNondescStimuli,10);
-    BrexitExplicitMeasures3_StimuliX.push(...SelectBrexitNondescStimuli);
-    BrexitExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    BrexitExplicitMeasures3_StimuliX.push(...goodbadBrexit);
-    for (const item of BrexitExplicitMeasures3_StimuliX) {
-        BrexitExplicitMeasures3_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    };
-    }
-    else if (theme==="Immigration"){
-      SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
-    ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
-    ImmigrationExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    for (const item of ImmigrationExplicitMeasures1_StimuliX) {
-        ImmigrationExplicitMeasures1_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-    SelectImmigrationNondescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationNondescStimuli,10);
-    ImmigrationExplicitMeasures3_StimuliX.push(...SelectImmigrationNondescStimuli);
-    ImmigrationExplicitMeasures3_StimuliX.push(...StronglyAgreeStronglyDisagree);
-    ImmigrationExplicitMeasures3_StimuliX.push(...goodbadImmigration);
-    for (const item of ImmigrationExplicitMeasures3_StimuliX) {
-        ImmigrationExplicitMeasures3_ItemsX.push({
-            prompt: `<div style="margin-bottom: 1px; margin-top: 12px; font-size: 12px; ">${item.stimulus}</div>`,
-            name: item.name,
-            ticks: scale1,
-            required: true,
-            min: 0,
-            max: 1,
-            step: 0.01,
-            slider_start: 0.5
-        })
-    }
-}}};
+}};
   // timeline.push(experimentover);
 
 
@@ -4022,6 +3201,808 @@ var exitfullscreen = {
         message: `<div><p>When you press 'Continue', the window will exit full-screen.
             Thank you for taking part!</p>`,
         };
+
+
+        var welcome = {
+      type: jsPsychHtmlButtonResponse,
+      stimulus: function(){return `<p style="line-height:2.2em">Thank you; the display is now calibrated.<br>Please ensure you are in a place where you can focus without being interrupted,<br>
+         and that you have recorded your participant ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)</p>`},
+         choices: ['<strong>Continue</strong>'],
+         button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold" <strong>Continue</strong></button>',
+         on_start: function(){
+            document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar')
+        let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar)},
+      on_finish: function(){
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar);
+            document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar'),
+            console.log(jspsych_id,theme,condition1,rule1,rule2,block2code,block2only)
+        if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
+            jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+jsPsych.timeline.insert(BrexitExplicitMeasures3);
+jsPsych.timeline.insert(BrexitExplicitMeasures5);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions)
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure)
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure)
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions)
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure)
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure)
+    jsPsych.timeline.insert(pipefirsthalf)
+    jsPsych.timeline.insert(B_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(B_NtDconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+ else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_DtNconditionchange)
+    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
+    jsPsych.timeline.insert(instructions1);
+            jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+            jsPsych.timeline.insert(part1cont);
+            jsPsych.timeline.insert(instructions);
+            jsPsych.timeline.insert(inducer_procedure);
+            jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(pipefirsthalf);
+    jsPsych.timeline.insert(I_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionform);
+  }
+  else if (block2code ==="BNT" && block2only===1) {
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="BNF" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_nondesc_false_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_nondesc_true_instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="BDT" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="BDF" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(brexit_desc_false_instructions);
+    jsPsych.timeline.insert(brexit_desc_false_procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(brexit_desc_true_instructions);
+    jsPsych.timeline.insert(brexit_desc_true_procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40instructions);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(brexit_desc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code ==="INT" && block2only===1) {
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="INF" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_nondesc_false_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_nondesc_true_instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="IDT" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+  else if (block2code==="IDF" && block2only===1){
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
+    jsPsych.timeline.insert(ontorealblocks);
+    jsPsych.timeline.insert(immigration_desc_false_instructions);
+    jsPsych.timeline.insert(immigration_desc_false_procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_false_block40procedure);
+    jsPsych.timeline.insert(rulechange);
+    jsPsych.timeline.insert(immigration_desc_true_instructions);
+    jsPsych.timeline.insert(immigration_desc_true_procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40instructions);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+    jsPsych.timeline.insert(immigration_desc_true_block40procedure);
+        jsPsych.timeline.insert(experimentover);
+    jsPsych.timeline.insert(exclusionformblock2only);
+  }
+    }
+        };
+
+
 
     jsPsych.run(timeline);
 
