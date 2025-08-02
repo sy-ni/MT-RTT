@@ -335,7 +335,7 @@ timeline.push(consent);
 var jspsych_id = ""
 var block2code = ""
 var theme = ""
-var condition1 = ""
+var condition1 = "nondesc"
 var condition2 = ""
 var rule1 = ""
 var rule2 = ""
@@ -477,7 +477,7 @@ var beforequestion = {
         else if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
             data.theme=theme
-            condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
+            data.condition1=condition1
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
             if (condition1 === "desc") {condition2 = "nondesc"}
@@ -555,7 +555,6 @@ var halfbeenherebefore = {
     if (lasttheme ==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
     data.theme=theme
-    condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
     data.condition1=condition1
     if (condition1 === "desc") {condition2 = "nondesc"}
     else if (condition1 ==="nondesc") {condition2 = "desc"};
@@ -771,6 +770,10 @@ var ontorealblocks = {
             jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+jsPsych.timeline.insert(BrexitExplicitMeasures3);
+jsPsych.timeline.insert(BrexitExplicitMeasures5);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -801,16 +804,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure)
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -841,10 +844,6 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure)
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
@@ -881,16 +880,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -921,16 +920,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -961,16 +960,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1001,16 +1000,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1041,16 +1040,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1081,16 +1080,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
  else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1121,16 +1120,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "true" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1161,16 +1160,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1201,16 +1200,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "desc" && rule1 === "false" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1241,16 +1240,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1281,16 +1280,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "false"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1321,16 +1320,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "false" && rule2 === "true"){
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1361,16 +1360,16 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "false") {
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
+jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -1401,10 +1400,6 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionform);
   }
   else if (block2code ==="BNT" && block2only===1) {
@@ -1423,10 +1418,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-    jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="BNF" && block2only===1){
@@ -1445,10 +1436,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="BDT" && block2only===1){
@@ -1467,10 +1454,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="BDF" && block2only===1){
@@ -1489,10 +1472,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code ==="INT" && block2only===1) {
@@ -1511,11 +1490,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures6);
-    jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="INF" && block2only===1){
@@ -1534,10 +1508,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(immigration_nondesc_true_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="IDT" && block2only===1){
@@ -1556,10 +1526,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
   else if (block2code==="IDF" && block2only===1){
@@ -1578,10 +1544,6 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40procedure);
         jsPsych.timeline.insert(experimentover);
-        jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(exclusionformblock2only);
   }
     }
@@ -2000,7 +1962,7 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
 };
 var immigration_desc_true_instructions = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `<p>In this block, please respond as if immigration to the UK is<strong>increasing</strong>.</p>
+    stimulus: `<p>In this block, please respond as if immigration to the UK is <strong>increasing</strong>.</p>
     <p>For example, if the sentence says 'Immigration levels are low', you should response as if the sentence is <strong>false</strong>.</p>
     <p><br>Press to continue.</p>`,
     choices: ['Continue'],
@@ -2020,26 +1982,26 @@ var immigration_desc_true_instructions = {
 
 
     var brexit_desc_true_stimuli = [
-      { stimulus: "The UK has left the EU", colour: 'blue', stimulus2: 'BD1', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has exited the EU", colour: 'blue', stimulus2: 'BD2', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has withdrawn from the EU", colour: 'blue',stimulus2: 'BD3',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has pulled out of the EU",colour: 'blue', stimulus2: 'BD4',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK is out of the EU", colour: 'blue',stimulus2: 'BD5',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t remained in the EU",colour: 'blue', stimulus2: 'BD6',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t stayed in the EU",colour: 'blue', stimulus2: 'BD7',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t kept being in the EU",colour: 'blue', stimulus2: 'BD8',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK isn't part of the EU", colour: 'blue',stimulus2: 'BD9',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK isn’t in the EU",colour: 'blue', stimulus2: 'BD10',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has remained in the EU",colour: 'blue', stimulus2: 'BD11',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has stayed in the EU",colour: 'blue', stimulus2: 'BD12',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has kept being in the EU",colour: 'blue', stimulus2: 'BD13',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK is part of the EU",colour: 'blue', stimulus2: 'BD14',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK is in the EU",colour: 'blue', stimulus2: 'BD15',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t left the EU",colour: 'blue', stimulus2: 'BD16',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t exited the EU",colour: 'blue', stimulus2: 'BD17',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t withdrawn from the EU",colour: 'blue', stimulus2: 'BD18',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t pulled out of the EU",colour: 'blue',stimulus2: 'BD19',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK isn’t out of the EU", colour: 'blue',stimulus2: 'BD20',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
+      { stimulus: "The UK has left the EU", colour: 'Blue', stimulus2: 'BD1', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK has exited the EU", colour: 'Blue', stimulus2: 'BD2', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK has withdrawn from the EU", colour: 'Blue',stimulus2: 'BD3',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK has pulled out of the EU",colour: 'Blue', stimulus2: 'BD4',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK is out of the EU", colour: 'Blue',stimulus2: 'BD5',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK hasn’t remained in the EU",colour: 'Blue', stimulus2: 'BD6',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK hasn’t stayed in the EU",colour: 'Blue', stimulus2: 'BD7',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK hasn’t kept being in the EU",colour: 'Blue', stimulus2: 'BD8',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK isn't part of the EU", colour: 'Blue',stimulus2: 'BD9',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"TRUE></button>'},
+      { stimulus: "The UK isn’t in the EU",colour: 'blue', stimulus2: 'BD10',  correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+      { stimulus: "The UK has remained in the EU",colour: 'blue', stimulus2: 'BD11',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK has stayed in the EU",colour: 'blue', stimulus2: 'BD12',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK has kept being in the EU",colour: 'blue', stimulus2: 'BD13',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK is part of the EU",colour: 'blue', stimulus2: 'BD14',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK is in the EU",colour: 'blue', stimulus2: 'BD15',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK hasn’t left the EU",colour: 'blue', stimulus2: 'BD16',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK hasn’t exited the EU",colour: 'blue', stimulus2: 'BD17',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK hasn’t withdrawn from the EU",colour: 'blue', stimulus2: 'BD18',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK hasn’t pulled out of the EU",colour: 'blue',stimulus2: 'BD19',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+      { stimulus: "The UK isn’t out of the EU", colour: 'blue',stimulus2: 'BD20',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
     ];
 
     var brexit_desc_true_rightwrong_stimuli = brexit_desc_true_stimuli.concat(rightwrong2stimuli)
@@ -2067,26 +2029,26 @@ var immigration_desc_true_instructions = {
 
 
     var immigration_desc_true_stimuli = [
-    { stimulus: "Immigrant numbers are rising",  stimulus2: 'ID1', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers are increasing",  stimulus2: 'ID2', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers are getting higher",  stimulus2: 'ID3', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population is expanding",  stimulus2: 'ID4', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population is climbing",  stimulus2: 'ID5', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren't going down",  stimulus2: 'ID6', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren't decreasing",  stimulus2: 'ID7', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren't getting lower",  stimulus2: 'ID8', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population isn't shrinking",  stimulus2: 'ID9', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population isn't getting smaller.",  stimulus2: 'ID10', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers are going down",  stimulus2: 'ID11', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers are decreasing",  stimulus2: 'ID12', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers are getting lower",  stimulus2: 'ID13', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population is shrinking",  stimulus2: 'ID14', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population is getting smaller",  stimulus2: 'ID15', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren’t rising",  stimulus2: 'ID16', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren’t increasing",  stimulus2: 'ID17', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren’t getting higher",  stimulus2: 'ID18', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population isn't expanding",  stimulus2: 'ID19', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population isn't climbing",  stimulus2: 'ID20', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' }
+    { stimulus: "Immigrant numbers are rising",  stimulus2: 'ID1', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers are increasing",  stimulus2: 'ID2', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers are getting higher",  stimulus2: 'ID3', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population is expanding",  stimulus2: 'ID4', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population is climbing",  stimulus2: 'ID5', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren't going down",  stimulus2: 'ID6', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren't decreasing",  stimulus2: 'ID7', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren't getting lower",  stimulus2: 'ID8', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population isn't shrinking",  stimulus2: 'ID9', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population isn't getting smaller.",  stimulus2: 'ID10', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers are going down",  stimulus2: 'ID11', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers are decreasing",  stimulus2: 'ID12', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers are getting lower",  stimulus2: 'ID13', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population is shrinking",  stimulus2: 'ID14', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population is getting smaller",  stimulus2: 'ID15', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren’t rising",  stimulus2: 'ID16', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren’t increasing",  stimulus2: 'ID17', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren’t getting higher",  stimulus2: 'ID18', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population isn't expanding",  stimulus2: 'ID19', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population isn't climbing",  stimulus2: 'ID20', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' }
     ];
 
 var immigration_desc_true_rightwrong_stimuli = immigration_desc_true_stimuli.concat(rightwrong2stimuli)
@@ -2155,27 +2117,27 @@ var immigration_desc_false_instructions = {
 
 
 var brexit_desc_false_stimuli = [
-{ stimulus: "The UK has left the EU",colour: 'blue', stimulus2: 'BD1', correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'  },
-      { stimulus: "The UK has exited the EU", colour: 'blue',stimulus2: 'BD2',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has withdrawn from the EU", colour: 'blue',stimulus2: 'BD3',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has pulled out of the EU",colour: 'blue', stimulus2: 'BD4',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK is out of the EU",colour: 'blue', stimulus2: 'BD5',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-      { stimulus: "The UK hasn’t remained in the EU",colour: 'blue', stimulus2: 'BD6',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t stayed in the EU",colour: 'blue', stimulus2: 'BD7',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t kept being in the EU",colour: 'blue', stimulus2: 'BD8',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK isn't part of the EU",colour: 'blue', stimulus2: 'BD9',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK isn’t in the EU",colour: 'blue', stimulus2: 'BD10',  correct_response: 1,button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-      { stimulus: "The UK has remained in the EU",colour: 'blue', stimulus2: 'BD11', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has stayed in the EU",colour: 'blue', stimulus2: 'BD12', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK has kept being in the EU",colour: 'blue', stimulus2: 'BD13', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK is part of the EU",colour: 'blue', stimulus2: 'BD14', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-      { stimulus: "The UK is in the EU",colour: 'blue',stimulus2: 'BD15', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t left the EU", stimulus2: 'BD16', correct_response: 0,button: ['TRUE'],colour: 'blue', html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t exited the EU", stimulus2: 'BD17', correct_response: 0,colour: 'blue',button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t withdrawn from the EU", stimulus2: 'BD18',colour: 'blue', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK hasn’t pulled out of the EU", colour: 'blue',stimulus2: 'BD19', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-      { stimulus: "The UK isn’t out of the EU",colour: 'blue', stimulus2: 'BD20', correct_response: 0,button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-    ];
+{ stimulus: "The UK has left the EU", colour: 'blue', stimulus2: 'BD1', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK has exited the EU", colour: 'blue', stimulus2: 'BD2', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK has withdrawn from the EU", colour: 'blue', stimulus2: 'BD3', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK has pulled out of the EU", colour: 'blue', stimulus2: 'BD4', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK is out of the EU", colour: 'blue', stimulus2: 'BD5', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK hasn’t remained in the EU", colour: 'blue', stimulus2: 'BD6', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK hasn’t stayed in the EU", colour: 'blue', stimulus2: 'BD7', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK hasn’t kept being in the EU", colour: 'blue', stimulus2: 'BD8', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK isn't part of the EU", colour: 'blue', stimulus2: 'BD9', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK isn’t in the EU", colour: 'blue', stimulus2: 'BD10', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+{ stimulus: "The UK has remained in the EU", colour: 'blue', stimulus2: 'BD11', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK has stayed in the EU", colour: 'blue', stimulus2: 'BD12', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK has kept being in the EU", colour: 'blue', stimulus2: 'BD13', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK is part of the EU", colour: 'blue', stimulus2: 'BD14', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK is in the EU", colour: 'blue', stimulus2: 'BD15', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK hasn’t left the EU", stimulus2: 'BD16', correct_response: 0, button: ['TRUE'], colour: 'blue', html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK hasn’t exited the EU", stimulus2: 'BD17', correct_response: 0, colour: 'blue', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK hasn’t withdrawn from the EU", stimulus2: 'BD18', colour: 'blue', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK hasn’t pulled out of the EU", colour: 'blue', stimulus2: 'BD19', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+{ stimulus: "The UK isn’t out of the EU", colour: 'blue', stimulus2: 'BD20', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' }
+];
 
     var brexit_desc_false_rightwrong_stimuli = brexit_desc_false_stimuli.concat(rightwrong2stimuli)
 
@@ -2200,26 +2162,26 @@ var brexit_desc_false_stimuli = [
     // 2
 
     var immigration_desc_false_stimuli = [
-    { stimulus: "Immigrant numbers are rising",  stimulus2: 'ID1',  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers are increasing", stimulus2: 'ID2', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers are getting higher", stimulus2: 'ID3', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population is expanding", stimulus2: 'ID4', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population is climbing", stimulus2: 'ID5',correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren't going down", stimulus2: 'ID6', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren't decreasing",  stimulus2: 'ID7',correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers aren't getting lower", stimulus2: 'ID8', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population isn't shrinking", stimulus2: 'ID9', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The immigrant population isn't getting smaller.", stimulus2: 'ID10', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "Immigrant numbers are going down", stimulus2: 'ID11', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers are decreasing", stimulus2: 'ID12', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers are getting lower", stimulus2: 'ID13', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population is shrinking", stimulus2: 'ID14', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population is getting smaller", stimulus2: 'ID15', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren’t rising", stimulus2: 'ID16', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren’t increasing", stimulus2: 'ID17', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers aren't getting higher", stimulus2: 'ID18', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population isn't expanding", stimulus2: 'ID19', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population isn't climbing", stimulus2: 'ID20', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    { stimulus: "Immigrant numbers are rising",  stimulus2: 'ID1',  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers are increasing", stimulus2: 'ID2', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers are getting higher", stimulus2: 'ID3', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population is expanding", stimulus2: 'ID4', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population is climbing", stimulus2: 'ID5',correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren't going down", stimulus2: 'ID6', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren't decreasing",  stimulus2: 'ID7',correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers aren't getting lower", stimulus2: 'ID8', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population isn't shrinking", stimulus2: 'ID9', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The immigrant population isn't getting smaller.", stimulus2: 'ID10', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "Immigrant numbers are going down", stimulus2: 'ID11', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers are decreasing", stimulus2: 'ID12', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers are getting lower", stimulus2: 'ID13', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population is shrinking", stimulus2: 'ID14', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population is getting smaller", stimulus2: 'ID15', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren’t rising", stimulus2: 'ID16', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren’t increasing", stimulus2: 'ID17', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers aren't getting higher", stimulus2: 'ID18', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population isn't expanding", stimulus2: 'ID19', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population isn't climbing", stimulus2: 'ID20', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style="font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
     ];
 
 var immigration_desc_false_rightwrong_stimuli = immigration_desc_false_stimuli.concat(rightwrong2stimuli)
@@ -2287,26 +2249,26 @@ var immigration_nondesc_true_instructions = {
 
 
 var brexit_nondesc_true_stimuli = [
-  { stimulus: "The UK should have left the EU", stimulus2: "BN1", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have exited the EU", stimulus2: "BN2", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have withdrawn from the EU", stimulus2: "BN3", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have pulled out of the EU", stimulus2: "BN4", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should be out of the EU", stimulus2: "BN5", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have remained in the EU", stimulus2: "BN6", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have stayed in the EU", stimulus2: "BN7", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have kept being in the EU", stimulus2: "BN8", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be part of the EU", stimulus2: "BN9", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be in the EU", stimulus2: "BN10", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have remained in the EU", stimulus2: "BN11", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have stayed in the EU", stimulus2: "BN12", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have kept being in the EU", stimulus2: "BN13", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should be part of the EU", stimulus2: "BN14", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should be in the EU", stimulus2: "BN15", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have left the EU", stimulus2: "BN16", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have exited the EU", stimulus2: "BN17", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have withdrawn from the EU", stimulus2: "BN18", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have pulled out of the EU", stimulus2: "BN19", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be out of the EU", stimulus2: "BN20", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' }
+  { stimulus: "The UK should have left the EU", stimulus2: "BN1", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have exited the EU", stimulus2: "BN2", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have withdrawn from the EU", stimulus2: "BN3", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have pulled out of the EU", stimulus2: "BN4", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should be out of the EU", stimulus2: "BN5", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have remained in the EU", stimulus2: "BN6", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have stayed in the EU", stimulus2: "BN7", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have kept being in the EU", stimulus2: "BN8", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't be part of the EU", stimulus2: "BN9", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't be in the EU", stimulus2: "BN10", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have remained in the EU", stimulus2: "BN11", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have stayed in the EU", stimulus2: "BN12", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have kept being in the EU", stimulus2: "BN13", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should be part of the EU", stimulus2: "BN14", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should be in the EU", stimulus2: "BN15", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have left the EU", stimulus2: "BN16", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have exited the EU", stimulus2: "BN17", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have withdrawn from the EU", stimulus2: "BN18", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have pulled out of the EU", stimulus2: "BN19", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't be out of the EU", stimulus2: "BN20", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' }
 ];
 
     var brexit_nondesc_true_rightwrong_stimuli = brexit_nondesc_true_stimuli.concat(rightwrong2stimuli)
@@ -2331,26 +2293,26 @@ var brexit_nondesc_true_stimuli = [
 
 
     var immigration_nondesc_true_stimuli = [
-  { stimulus: "Immigrant numbers should rise", stimulus2: 'IN1', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers should increase", stimulus2: 'IN2', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers should get higher", stimulus2: 'IN3', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population should climb", stimulus2: 'IN4', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population should expand", stimulus2: 'IN5', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t go down", stimulus2: 'IN6', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t decrease", stimulus2: 'IN7', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t get lower", stimulus2: 'IN8', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "The immigrant population shouldn’t shrink", stimulus2: 'IN9', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+  { stimulus: "Immigrant numbers should rise", stimulus2: 'IN1', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers should increase", stimulus2: 'IN2', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers should get higher", stimulus2: 'IN3', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population should climb", stimulus2: 'IN4', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population should expand", stimulus2: 'IN5', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t go down", stimulus2: 'IN6', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t decrease", stimulus2: 'IN7', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t get lower", stimulus2: 'IN8', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  { stimulus: "The immigrant population shouldn’t shrink", stimulus2: 'IN9', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
   { stimulus: "The immigrant population shouldn't get smaller", stimulus2: 'IN10', correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers should go down", stimulus2: 'IN11', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers should decrease", stimulus2: 'IN12', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers should get lower", stimulus2: 'IN13', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "The immigrant population should shrink", stimulus2: 'IN14', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "The immigrant population should get smaller", stimulus2: 'IN15', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t rise", stimulus2: 'IN16', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t increase", stimulus2: 'IN17', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "Immigrant numbers shouldn’t get higher", stimulus2: 'IN18', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "The immigrant population shouldn't climb", stimulus2: 'IN19', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  { stimulus: "The immigrant population shouldn't expand", stimulus2: 'IN20', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'}
+  { stimulus: "Immigrant numbers should go down", stimulus2: 'IN11', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "Immigrant numbers should decrease", stimulus2: 'IN12', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "Immigrant numbers should get lower", stimulus2: 'IN13', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "The immigrant population should shrink", stimulus2: 'IN14', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "The immigrant population should get smaller", stimulus2: 'IN15', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t rise", stimulus2: 'IN16', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t increase", stimulus2: 'IN17', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "Immigrant numbers shouldn’t get higher", stimulus2: 'IN18', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "The immigrant population shouldn't climb", stimulus2: 'IN19', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  { stimulus: "The immigrant population shouldn't expand", stimulus2: 'IN20', correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'}
 ];
 
     var immigration_nondesc_true_rightwrong_stimuli = immigration_nondesc_true_stimuli.concat(rightwrong2stimuli)
@@ -2594,26 +2556,26 @@ var brexit_desc_true_block40instructions = {
 
 
 var brexit_nondesc_false_stimuli = [
-  { stimulus: "The UK should have left the EU", stimulus2: "BN1", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have exited the EU", stimulus2: "BN2", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have withdrawn from the EU", stimulus2: "BN3", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have pulled out of the EU", stimulus2: "BN4", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should be out of the EU", stimulus2: "BN5", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have remained in the EU", stimulus2: "BN6", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have stayed in the EU", stimulus2: "BN7", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have kept being in the EU", stimulus2: "BN8", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be part of the EU", stimulus2: "BN9", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be in the EU", stimulus2: "BN10", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>' },
-  { stimulus: "The UK should have remained in the EU", stimulus2: "BN11", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have left the EU", stimulus2: "BN12", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should have kept being in the EU", stimulus2: "BN13", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should be part of the EU", stimulus2: "BN14", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK should be in the EU", stimulus2: "BN15", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have left the EU", stimulus2: "BN16", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have exited the EU", stimulus2: "BN17", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have withdrawn from the EU", stimulus2: "BN18", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't have pulled out of the EU", stimulus2: "BN19", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' },
-  { stimulus: "The UK shouldn't be out of the EU", stimulus2: "BN20", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>' }
+  { stimulus: "The UK should have left the EU", stimulus2: "BN1", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have exited the EU", stimulus2: "BN2", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have withdrawn from the EU", stimulus2: "BN3", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have pulled out of the EU", stimulus2: "BN4", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should be out of the EU", stimulus2: "BN5", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have remained in the EU", stimulus2: "BN6", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have stayed in the EU", stimulus2: "BN7", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't have kept being in the EU", stimulus2: "BN8", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't be part of the EU", stimulus2: "BN9", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK shouldn't be in the EU", stimulus2: "BN10", correct_response: 1, button: ['FALSE'], html:'<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
+  { stimulus: "The UK should have remained in the EU", stimulus2: "BN11", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have left the EU", stimulus2: "BN12", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should have kept being in the EU", stimulus2: "BN13", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should be part of the EU", stimulus2: "BN14", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK should be in the EU", stimulus2: "BN15", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have left the EU", stimulus2: "BN16", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have exited the EU", stimulus2: "BN17", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have withdrawn from the EU", stimulus2: "BN18", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't have pulled out of the EU", stimulus2: "BN19", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' },
+  { stimulus: "The UK shouldn't be out of the EU", stimulus2: "BN20", correct_response: 0, button: ['TRUE'], html:'<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>' }
 ];
 
     var brexit_nondesc_false_rightwrong_stimuli = brexit_nondesc_false_stimuli.concat(rightwrong2stimuli)
@@ -2638,26 +2600,26 @@ var brexit_nondesc_false_stimuli = [
     };
 
 var immigration_nondesc_false_stimuli = [
-  {stimulus: "Immigrant numbers should rise", stimulus2: 'IN1', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers should increase", stimulus2: 'IN2', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers should get higher", stimulus2: 'IN3', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "The immigrant population should climb", stimulus2: 'IN4', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "The immigrant population should expand", stimulus2: 'IN5', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t go down", stimulus2: 'IN6', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t decrease", stimulus2: 'IN7', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t get lower", stimulus2: 'IN8', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "The immigrant population shouldn’t shrink", stimulus2: 'IN9', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "The immigrant population shouldn't get smaller", stimulus2: 'IN10', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers should go down", stimulus2: 'IN11', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers should decrease", stimulus2: 'IN12', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers should get lower", stimulus2: 'IN13', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "The immigrant population should shrink", stimulus2: 'IN14', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "The immigrant population should get smaller", stimulus2: 'IN15', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t rise", stimulus2: 'IN16', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t increase", stimulus2: 'IN17', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "Immigrant numbers shouldn’t get higher", stimulus2: 'IN18', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "The immigrant population shouldn't climb", stimulus2: 'IN19', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-  {stimulus: "The immigrant population shouldn't expand", stimulus2: 'IN20', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'}
+  {stimulus: "Immigrant numbers should rise", stimulus2: 'IN1', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers should increase", stimulus2: 'IN2', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers should get higher", stimulus2: 'IN3', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "The immigrant population should climb", stimulus2: 'IN4', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "The immigrant population should expand", stimulus2: 'IN5', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t go down", stimulus2: 'IN6', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t decrease", stimulus2: 'IN7', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t get lower", stimulus2: 'IN8', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "The immigrant population shouldn’t shrink", stimulus2: 'IN9', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "The immigrant population shouldn't get smaller", stimulus2: 'IN10', correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>'},
+  {stimulus: "Immigrant numbers should go down", stimulus2: 'IN11', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "Immigrant numbers should decrease", stimulus2: 'IN12', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "Immigrant numbers should get lower", stimulus2: 'IN13', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "The immigrant population should shrink", stimulus2: 'IN14', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "The immigrant population should get smaller", stimulus2: 'IN15', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t rise", stimulus2: 'IN16', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t increase", stimulus2: 'IN17', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "Immigrant numbers shouldn’t get higher", stimulus2: 'IN18', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "The immigrant population shouldn't climb", stimulus2: 'IN19', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+  {stimulus: "The immigrant population shouldn't expand", stimulus2: 'IN20', correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'}
 ];
 
 
@@ -3851,7 +3813,7 @@ sliderIDs.forEach(id => {
                 var IEMitem = q.getAttribute('data-name');
                 order.push(IEMitem);
                 var IEMscore = q.valueAsNumber
-                responses[IEMitem] = BEMscore
+                responses[IEMitem] = IEMscore
                 responses2.push({item: IEMitem, score: IEMscore})
                 });
                 data.response = responses
