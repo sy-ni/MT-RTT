@@ -952,7 +952,7 @@ var scale7 = ['<span style="font-size: 12px"><em>Very bad</em></span>', '<span s
     };
     }
     else if (theme==="Immigration"){
-      console.log('if brexit runnning')
+      console.log('if immigration runnning')
       SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
     ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
     ImmigrationExplicitMeasures1_StimuliX.push(...StronglyAgreeStronglyDisagree);
@@ -1038,7 +1038,6 @@ button_label: "Continue",
   let bar = document.createElement('div');
              bar.id = 'bottom-bar';
              document.body.appendChild(bar);
-             console.log(BrexitExplicitMeasures1_ItemsX, ImmigrationExplicitMeasures1_ItemsX, ImmigrationExplicitMeasures1_StimuliX)
 //   const content = document.querySelector('.jspsych-content')
 //             if (content) {
 //                 content.style.marginTop = '5%';
@@ -1118,7 +1117,6 @@ var part1cont= {
         button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     };
 
-    // timeline.push(part1cont);
 
 
     var instructions = {
@@ -1154,7 +1152,6 @@ var part1cont= {
         }
     };
 
-    // timeline.push(instructions);
 
 
     var inducer_stimuli = [
@@ -1323,7 +1320,6 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       randomize_order: true,
       data: {block:'inducer'} 
       };
-    // timeline.push(inducer_procedure);
 
 
 
@@ -1348,7 +1344,6 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
       },
     
     };
-    // timeline.push(summary1);
 
 
 
@@ -2220,7 +2215,6 @@ var experimentover ={
     document.getElementById('bottom-bar')?.remove();
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
 }};
-  // timeline.push(experimentover);
 
 
 var endtrialfun = function(){
@@ -2474,10 +2468,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -2622,10 +2614,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -2758,10 +2748,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -2887,10 +2875,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -2959,10 +2945,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -3108,7 +3092,6 @@ button_label: "Continue",
             jsPsych.timeline.insert(exitfullscreen);}
 
 };
-// timeline.push(exclusionform)
 
 
 
@@ -3203,6 +3186,9 @@ var exitfullscreen = {
         let bar = document.createElement('div');
       bar.id = 'bottom-bar';
       document.body.appendChild(bar)},
+      on_load:function(){
+        console.log('welcome trial starting');
+      }
       on_finish: function(){
         console.log('welcome trial finishing');
         let bar = document.getElementById('bottom-bar');
