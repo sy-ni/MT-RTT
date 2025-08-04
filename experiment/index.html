@@ -466,6 +466,7 @@ var beforequestion = {
         data.block2only=block2only;
         console.log('block2only is', block2only)
         if (block2only === 1) {
+          console.log('block2only is one, inserting halfbeenherebefore');
             jsPsych.timeline.insert(halfbeenherebefore);
             }
         else if (block2only===0) {
@@ -492,6 +493,7 @@ var beforequestion = {
             jsPsych.timeline.insert(welcome);
           }
         else if (block2only === 3){
+          console.log('block2only is three inserting halfbeenherebefore');
           rule1="true";
           rule2="true";
             jsPsych.timeline.insert(halfbeenherebefore);
@@ -2078,7 +2080,7 @@ var rulechange = {
 var conditionchange = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p><br>
-    <p> If you need a break, <strong>take one now</strong>.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p> If you need a break, <strong>take one now</strong>.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>)
         as you may need these to resume the experiment.<br>
         As a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.`},
     on_start: function(){
@@ -2106,7 +2108,7 @@ var B_NtDconditionchange = {
     <br><br>
 
       <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
-    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>)
     as you may need these to resume the experiment</p>
     `},
     on_start: function(){
@@ -2132,7 +2134,7 @@ var B_DtNconditionchange = {
     <p>That is, they will express an opinion about the UK leaving the EU</p>
         <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
-    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>)
     as you may need these to resume the experiment</p>
         <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
 `},
@@ -2159,7 +2161,7 @@ var I_DtNconditionchange = {
     <p>That is, they will express an opinion about immigrant numbers increasing </p>
         <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
-    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>)
     as you may need these to resume the experiment</p>
         <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
 `},
@@ -2186,7 +2188,7 @@ var I_NtDconditionchange = {
     <p>That is, they will state either that immigrant numbers are increasing or decreasingU</p>
     <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
-    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>)
     as you may need these to resume the experiment
         <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
 </p>
