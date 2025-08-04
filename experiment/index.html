@@ -508,14 +508,14 @@ timeline.push(beforequestion);
 
 
 
-var getthemefun = function(){
-  console.log("getthemefun ran");
-  const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-  console.log(lasttheme)
-  if (lasttheme ==="BrexitTheme") {theme="Immigration"}
-  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
-  console.log(theme)
-}
+// var getthemefun = function(){
+//   console.log("getthemefun ran");
+//   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+//   console.log(lasttheme)
+//   if (lasttheme ==="BrexitTheme") {theme="Immigration"}
+//   else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
+//   console.log(theme)
+// }
 
 var halfbeenherebefore = {
         type: jsPsychSurveyHtmlForm,
@@ -551,7 +551,7 @@ var halfbeenherebefore = {
           document.removeEventListener('click',getthemefun);
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
-    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+    const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
     if (block2only=1){theme=lasttheme;console.log('block2only=1 so theme is last theme')}
     else if (block2only=3){console.log('block2only=3 so theme is opposite')
     if (lasttheme ==="BrexitTheme") {theme="Immigration"}
