@@ -550,10 +550,11 @@ var halfbeenherebefore = {
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    if (block2only=1){theme=lasttheme}
-    else if (block2only=3){
+    if (block2only=1){theme=lasttheme;console.log('block2only=1 so theme is last theme')}
+    else if (block2only=3){console.log('block2only=3 so theme is opposite')
     if (lasttheme ==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}};
+    console.log('theme is', theme)
     data.theme=theme
     // if (condition1 === "desc") {condition2 = "nondesc"}
     // else if (condition1 ==="nondesc") {condition2 = "desc"};
@@ -562,7 +563,7 @@ var halfbeenherebefore = {
     data.rule1=rule1;
             // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule2=rule2;
-            code=theme[0]+condition2[0]+rule2[0];
+            // code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
             data.block2code=block2code
             block2only=0;
