@@ -334,8 +334,8 @@ var block2code = ""
 var theme = ""
 var condition1 = "nondesc"
 var condition2 = "desc"
-var rule1 = "true"
-var rule2 = "true"
+var rule1 = ""
+var rule2 = ""
 var code = ""
 var valid = 0
 var block2only = 0
@@ -473,8 +473,10 @@ var beforequestion = {
             }
         else if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
-            data.theme=theme
-            data.condition1=condition1
+            data.theme=theme;
+            rule1="true";
+            rule2="true";
+            data.condition1=condition1;
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
             // if (condition1 === "desc") {condition2 = "nondesc"}
@@ -493,6 +495,8 @@ var beforequestion = {
             jsPsych.timeline.insert(welcome);
           }
         else if (block2only === 3){
+          rule1="true";
+          rule2="true";
             jsPsych.timeline.insert(halfbeenherebefore);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
@@ -521,7 +525,7 @@ var halfbeenherebefore = {
         preamble:`
             <div style="position:fixed; top:15%;left: 50%; transform: translateX(-50%); width:30%; margin: auto">
             <p>Thank you for returning!</p>
-            <p>Please your participant ID and the theme of the statements from the last session.</p>`,
+            <p>Please your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
         html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
   <p>Participant ID:</p>
@@ -552,7 +556,6 @@ var halfbeenherebefore = {
     if (lasttheme ==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
     data.theme=theme
-    data.condition1=condition1
     // if (condition1 === "desc") {condition2 = "nondesc"}
     // else if (condition1 ==="nondesc") {condition2 = "desc"};
     data.condition2=condition2;
@@ -580,14 +583,17 @@ var beenherebefore = {
             <p>Thank you for returning!</p>
             <p>Please enter your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
         button_label: "Continue",
-        html: `<div style="width: 400px; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
+        html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
   <p>Participant ID:</p>
-  <div style="width:400px; align-items: center"><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
+  <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
-  <p>Condition code:</p>
-  <div style="width:400px; align-items: center"><input type="text" name="code" maxlength="12" minlength="1" required style="width: 50%"></div>
-</div>`,
+  <p><br>Theme last session:</p>
+        <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
+        <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
+        </div>
+            <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
+`,
             data: { screen: "beenherebefore" },
         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
@@ -599,10 +605,15 @@ var beenherebefore = {
         on_finish: function(data){
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
-    block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
-    data.block2code = block2code
-    if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
-    else if (block2code[0] === "B"){theme = "Brexit"};
+    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+    if (lasttheme ==="BrexitTheme") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
+    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"; block2code="BDT";console.log('code is BDT')}
+    data.theme=theme
+    data.block2code=block2code
+    // block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
+    // data.block2code = block2code
+    // if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
+    // else if (block2code[0] === "B"){theme = "Brexit"};
     // if (block2code[1]==="D") {condition2 = "desc"} 
     // else if (block2code[1]==="N") {condition2 = "nondesc"};
     // if (block2code[2] ==="T") {rule2 = "true"} 
