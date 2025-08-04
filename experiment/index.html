@@ -334,8 +334,8 @@ var block2code = ""
 var theme = ""
 var condition1 = "nondesc"
 var condition2 = "desc"
-var rule1 = "false"
-var rule2 = "false"
+var rule1 = "true"
+var rule2 = "true"
 var code = ""
 var valid = 0
 var block2only = 0
@@ -2549,10 +2549,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -3206,6 +3204,7 @@ var exitfullscreen = {
       bar.id = 'bottom-bar';
       document.body.appendChild(bar)},
       on_finish: function(){
+        console.log('welcome trial finishing')
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar'),
