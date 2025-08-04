@@ -775,6 +775,11 @@ var ImmigrationExplicitMeasures3_ItemsX = [
             slider_start: 0.5  }];
 
 
+            // && validcodes.includes(block2code)
+        //     function(){
+        // let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
+        // if (block2only===1 && !validcodes.includes(block2code)) {return []}
+        // else {return '[Continue]'}},
 
 var welcomeA = {
     type: jsPsychHtmlButtonResponse,
@@ -782,18 +787,13 @@ var welcomeA = {
         let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
         if (block2only===0) {return `Welcome to the study! Please make a note or take a picture of the below:
             <br><br>Your participant ID: <strong>${jspsych_id}</strong>
-            <br>Your condition code: <strong>${block2code}</strong>
+            <br>Your theme: <strong>${theme}</strong>
             <br><br>These will allow you to resume the study if it is interrupted for any reason, without compromising anonymity.<br>
             <br>Next, we will check the experiment display.`}
-        else if (block2only===1 && validcodes.includes(block2code))
-        {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and condition code <strong>${block2code}</strong>.
-                <br>Next, we will check the experiment display.`}
-        else if (block2only===1 && !validcodes.includes(block2code)) {return `<p style="color:red">This code is invalid. Please refresh and try again</p>`}
-        },
-    choices: function(){
-        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
-        if (block2only===1 && !validcodes.includes(block2code)) {return []}
-        else {return '[Continue]'}},
+        else if (block2only===1)
+        {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and theme <strong>${theme}</strong>.
+                <br>Next, we will check the experiment display.`}},
+    choices: 'Continue',
     button_html: function(){
         let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
         if (block2only===1 && !validcodes.includes(block2code)) {return []}
