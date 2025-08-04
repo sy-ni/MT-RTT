@@ -511,7 +511,7 @@ var lasttheme = ""
 var getthemefun = function(){
   console.log("getthemefun ran");
   lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-  console.log(lasttheme)}
+  console.log('function says last theme is',lasttheme)}
   // if (lasttheme ==="BrexitTheme") {theme="Immigration"}
   // else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
   // console.log(theme)
@@ -552,8 +552,8 @@ var halfbeenherebefore = {
     data.jspsych_id = jspsych_id;
     // const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
     if (block2only===1){
-    if(lasttheme="BrexitTheme") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
-  else if (lasttheme="ImmigrationTheme") {theme="Immigration";block2code="IDT";console.log('going to IDT')}}
+    if(lasttheme==="BrexitTheme") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
+  else if (lasttheme==="ImmigrationTheme") {theme="Immigration";block2code="IDT";console.log('going to IDT')}}
     else if (block2only===3){
       console.log('block2only=3 so theme is opposite');
     if (lasttheme==="BrexitTheme") {theme="Immigration"}
@@ -565,6 +565,7 @@ var halfbeenherebefore = {
   };
     console.log('last theme is', lasttheme);
     console.log('theme is', theme);
+    console.log(block2code)
     data.theme=theme;
     // if (condition1 === "desc") {condition2 = "nondesc"}
     // else if (condition1 ==="nondesc") {condition2 = "desc"};
@@ -1528,7 +1529,7 @@ var immigration_desc_false_instructions = {
     type: jsPsychHtmlButtonResponse,
     stimulus: `<p>In this block, please respond as if immigrant numbers are <strong>going down</strong>.</p>
     <p>For example, if the sentence says '<em>Immigration numbers are decreasing</em>', respond as if the sentence is <strong>true</strong>.</p>
-    <p> If the sentence says '<em>The immigrant population is increasing</em>',respond as if the sentence is <strong>false</strong>.</p>
+    <p> If the sentence says '<em>The immigrant population is increasing</em>', respond as if the sentence is <strong>false</strong>.</p>
             <p style="color:red"><strong>It is important that you keep the mouse still until the sentence appears</strong></p>
     <p><br>Press to continue.</p>`,
     choices: ['Continue'],
