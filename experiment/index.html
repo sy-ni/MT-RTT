@@ -3379,7 +3379,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(experimentover);
     jsPsych.timeline.insert(exclusionform);
   }
-  else if (theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+  else if (block2only===0 && theme === "Brexit" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+    console.log('Brexit full (NT, DT)');
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
@@ -3707,7 +3708,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(experimentover);
     jsPsych.timeline.insert(exclusionform);
   }
-  else if (theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+  else if (block2only===0 && theme === "Immigration" && condition1 === "nondesc" && rule1 === "true" && rule2 === "true"){
+    console.log('immigration full (NT, DT)');
     jsPsych.timeline.insert(instructions1);
             jsPsych.timeline.insert(participant_info2);
 jsPsych.timeline.insert(participant_info3);
