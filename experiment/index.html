@@ -545,10 +545,12 @@ var halfbeenherebefore = {
       document.body.appendChild(bar);
         },
         on_load: function(){
+          console.log('halfbeenherebefore running');
           document.addEventListener('click',getthemefun);
           document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
+          console.log("halfbeenherebeforefinishing");
           document.removeEventListener('click',getthemefun);
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
