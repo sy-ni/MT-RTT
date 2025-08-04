@@ -552,26 +552,27 @@ var halfbeenherebefore = {
     data.jspsych_id = jspsych_id;
     // const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
     if (block2only===1){
-      console.log('block2only=1 so theme is last theme');
-    if(lasttheme="BrexitTheme") {theme="Brexit"}
-  else if (lasttheme="ImmigrationTheme") {theme="Immigration"}}
-    else if (block2only===3){console.log('block2only=3 so theme is opposite');
+    if(lasttheme="BrexitTheme") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
+  else if (lasttheme="ImmigrationTheme") {theme="Immigration";block2code="IDT";console.log('going to IDT')}}
+    else if (block2only===3){
+      console.log('block2only=3 so theme is opposite');
     if (lasttheme==="BrexitTheme") {theme="Immigration"}
-    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}};
+    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
+    block2only=0
+    data.condition2=condition2;
+    data.rule1=rule1;
+    data.rule2=rule2;
+  };
     console.log('last theme is', lasttheme);
     console.log('theme is', theme);
     data.theme=theme;
     // if (condition1 === "desc") {condition2 = "nondesc"}
     // else if (condition1 ==="nondesc") {condition2 = "desc"};
-    data.condition2=condition2;
     // rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-    data.rule1=rule1;
             // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-    data.rule2=rule2;
             // code=theme[0]+condition2[0]+rule2[0];
-            block2code=code.toUpperCase();
-            data.block2code=block2code
-            block2only=0;
+            // block2code=code.toUpperCase();
+            // data.block2code=block2code
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
         let bar = document.getElementById('bottom-bar');
