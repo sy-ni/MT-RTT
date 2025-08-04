@@ -551,7 +551,10 @@ var halfbeenherebefore = {
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     // const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    if (block2only===1){theme=lasttheme;console.log('block2only=1 so theme is last theme')}
+    if (block2only===1){
+      console.log('block2only=1 so theme is last theme');
+    if(lasttheme="BrexitTheme") {theme="Brexit"}
+  else if (lasttheme="ImmigrationTheme") {theme="Immigration"}}
     else if (block2only===3){console.log('block2only=3 so theme is opposite');
     if (lasttheme==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}};
