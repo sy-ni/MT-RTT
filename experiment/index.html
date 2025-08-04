@@ -598,11 +598,13 @@ var beenherebefore = {
         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
+            console.log('beenherebefore running')
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
+          console.log('beenherebefore finishing')
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
