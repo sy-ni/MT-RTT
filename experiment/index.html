@@ -511,6 +511,7 @@ timeline.push(beforequestion);
 var getthemefun = function(){
   console.log("getthemefun ran");
   const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+  console.log(lasttheme)
   if (lasttheme ==="BrexitTheme") {theme="Immigration"}
   else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
   console.log(theme)
