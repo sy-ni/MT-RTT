@@ -794,10 +794,7 @@ var welcomeA = {
         {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and theme <strong>${theme}</strong>.
                 <br>Next, we will check the experiment display.`}},
     choices: 'Continue',
-    button_html: function(){
-        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
-        if (block2only===1 && !validcodes.includes(block2code)) {return []}
-        else {return '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>'}},
+    button_html: '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>',
     data: { screen: "welcomeA" },
     on_start: function(){
             let bar = document.createElement('div');
