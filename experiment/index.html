@@ -234,14 +234,13 @@
         some parts of the experiment cannot register inputs from a touchscreen, and this will result in unusable data.</p>
       <p><em>What is it for?</em></p>
       <p>The purpose of this research study is to further our understanding of our automatic comprehension and response to different types
-        of sentence. If you have any questions, the researchers may be contacted at (ss2651@sussex.ac.uk)</p>
+        of sentences. If you have any questions, the researchers may be contacted at (ss2651@sussex.ac.uk)</p>
 
          <p><br><em>What does participation involve?</em></p>
       <p>This study uses an online experiment lasting approximately 25-35 minutes; Please make sure you are in a place where you can focus and
-        not be interrupted. Firstly, you will be asked a few questions about yourself. Then, instructions will be given to complete tasks 
+        not be interrupted. Firstly, you will be asked a few questions about yourself and complete a survey. Then, instructions will be given to complete tasks 
         involving responding to particular statements by pressing different buttons. These statements will either be to do with immigration
-        in the UK, or Brexit. After the main task, you will be asked a few more questions before finishing. At that point, you will be given
-        a link to a separate form to submit your email for the prize draw.
+        in the UK, or Brexit. After completing the tasks, a link to a separate form to submit your email for the prize draw.
        
         <br>None of the statements presented will be of an abusive or extreme nature. However, given the topic matter, 
         they may nonetheless be distressing for some people. Please consult <a href="https://www.nhs.uk/mental-health/feelings-symptoms-behaviours/feelings-and-symptoms/stress/" target="_blank">this NHS webpage for resources to deal with distress</a> . This will also be presented at the end.
@@ -251,8 +250,9 @@
         Information from the prize draw form is entered and kept on a system entirely separate from the experimental data and is thus
         not connected to it. During the experiment, you will be given a random unique ID which you may make a note of. If after the experiment 
         you change your mind about participating, at any point until 10/08/2025 you may request that the data associated with this ID be 
-        deleted.  You may also leave the experiment at any point if you wish to reverse your decision to participate, in which case your data 
-        will not be included in the final analysis and will be deleted.</p>
+        deleted. You may also leave the experiment before the save point if you wish to reverse your decision to participate, in which case your data 
+        will not be included in the final analysis and will be deleted. After the save point, information will be provided with details of how to
+        withdraw your data if you wish to do so.</p>
         <p><br><em>Who can take part?</em></p>
         <p> To take part, you must be at least 18 years of age, speak English fluently, and currently reside in the UK. You must be using
             a mouse or trackpad, and not a touchscreen, to input your answers. If you are currently using a touchscreen, please connect a
@@ -333,9 +333,9 @@ var jspsych_id = ""
 var block2code = ""
 var theme = ""
 var condition1 = "nondesc"
-var condition2 = ""
-var rule1 = ""
-var rule2 = ""
+var condition2 = "desc"
+var rule1 = "false"
+var rule2 = "false"
 var code = ""
 var valid = 0
 var block2only = 0
@@ -477,11 +477,11 @@ var beforequestion = {
             data.condition1=condition1
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
-            if (condition1 === "desc") {condition2 = "nondesc"}
-            else if (condition1 ==="nondesc") {condition2 = "desc"};
-            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            // if (condition1 === "desc") {condition2 = "nondesc"}
+            // else if (condition1 ==="nondesc") {condition2 = "desc"};
+            // rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
             data.rule1=rule1;
-            rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
             data.rule2=rule2;
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
@@ -553,12 +553,12 @@ var halfbeenherebefore = {
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
     data.theme=theme
     data.condition1=condition1
-    if (condition1 === "desc") {condition2 = "nondesc"}
-    else if (condition1 ==="nondesc") {condition2 = "desc"};
+    // if (condition1 === "desc") {condition2 = "nondesc"}
+    // else if (condition1 ==="nondesc") {condition2 = "desc"};
     data.condition2=condition2;
-    rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+    // rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule1=rule1;
-            rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule2=rule2;
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
@@ -578,7 +578,7 @@ var beenherebefore = {
         preamble:`
             <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
             <p>Thank you for returning!</p>
-            <p>Please enter your participant ID and condition code (e.g. BNF) from before below.</p>`,
+            <p>Please enter your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
         button_label: "Continue",
         html: `<div style="width: 400px; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
@@ -586,7 +586,7 @@ var beenherebefore = {
   <div style="width:400px; align-items: center"><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
   <p>Condition code:</p>
-  <div style="width:400px; align-items: center"><input type="text" name="code" maxlength="3" minlength="3" required style="width: 50%"></div>
+  <div style="width:400px; align-items: center"><input type="text" name="code" maxlength="12" minlength="1" required style="width: 50%"></div>
 </div>`,
             data: { screen: "beenherebefore" },
         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -601,12 +601,12 @@ var beenherebefore = {
     data.jspsych_id = jspsych_id;
     block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
     data.block2code = block2code
-    if (block2code[0] === "I") {theme = "Immigration"}
+    if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
     else if (block2code[0] === "B"){theme = "Brexit"};
-    if (block2code[1]==="D") {condition2 = "desc"} 
-    else if (block2code[1]==="N") {condition2 = "nondesc"};
-    if (block2code[2] ==="T") {rule2 = "true"} 
-    else if (block2code[2] ==="F") {rule2 = "false"};
+    // if (block2code[1]==="D") {condition2 = "desc"} 
+    // else if (block2code[1]==="N") {condition2 = "nondesc"};
+    // if (block2code[2] ==="T") {rule2 = "true"} 
+    // else if (block2code[2] ==="F") {rule2 = "false"};
             console.log(theme,condition2,rule2,block2code);
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
         let bar = document.getElementById('bottom-bar');
@@ -2080,9 +2080,9 @@ var rulechange = {
 var conditionchange = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){return `<p>Great.<br> In the next block, the rule <strong>and</strong> the statements are going to change.</p><br>
-    <p> If you need a break, take one now.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
+    <p> If you need a break, <strong>take one now</strong>.<br> Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
         as you may need these to resume the experiment.<br>
-        If you exit fullscreen mode, please restart the experiment and enter the above codes to continue from this point.`},
+        As a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2100,12 +2100,14 @@ var conditionchange = {
 
 var B_NtDconditionchange = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: function(){return `<p>Great.<br> In the next block, the statements and rule are going to change.</p>
+    stimulus: function(){return `<p>Great.
+      <br> In the next block, the statements and rule are going to change.</p>
     <p>Instead of being about whether the UK <strong>should have left</strong> the EU,</p>
     <p>the statements are going to be about whether the UK <em>has left</em> the EU.</p>
     <p>That is, they will state either that the UK has left the EU, or that it is still in the EU</p>
     <br><br>
-    <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
+
+      <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
     as you may need these to resume the experiment</p>
     `},
@@ -2133,7 +2135,9 @@ var B_DtNconditionchange = {
         <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
-    as you may need these to resume the experiment</p>`},
+    as you may need these to resume the experiment</p>
+        <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
+`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2158,7 +2162,9 @@ var I_DtNconditionchange = {
         <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
-    as you may need these to resume the experiment</p>`},
+    as you may need these to resume the experiment</p>
+        <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
+`},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
         let bar = document.createElement('div');
@@ -2183,7 +2189,9 @@ var I_NtDconditionchange = {
     <br><br>
     <p> If you need a short break, take one now. You may leave fullscreen mode if you need to.</p><br>
     <p>Please ensure you have recorded your ID (<strong>${jspsych_id}</strong>) and condition code (<strong>${block2code}</strong>)
-    as you may need these to resume the experiment</p>
+    as you may need these to resume the experiment
+        <p>Your data so far has been saved; as a reminder, if you would like to withdraw your data at any point, this may be requested via an email: ss2651@sussex.ac.uk.</p>
+</p>
     `},
     on_start: function(){
         block2code = (`${theme[0]}${condition2[0]}${rule2[0]}`).toUpperCase();
@@ -2381,7 +2389,6 @@ var BrexitExplicitMeasures1 = {
       document.body.appendChild(bar);
   },
   on_load: function(){
-    console.log('new bem1 running')
     let form = document.getElementById('jspsych-multiple-slider-form');
     form.style.position = 'fixed';
     document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar-and-button');
@@ -2401,10 +2408,8 @@ TheSliders.forEach(s => {
 });
 sliderIDs.forEach(id => {
   sliderStatuses[id] = false; 
-  console.log(sliderStatuses);
   document.getElementById(id).addEventListener('click', () => {
     sliderStatuses[id] = true;
-    console.log(sliderStatuses);
     const allMoved = Object.values(sliderStatuses).every(moved => moved);
     if (allMoved) {button.disabled=false}
   });
@@ -3238,6 +3243,8 @@ jsPsych.timeline.insert(BrexitExplicitMeasures5);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(B_DtNconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions)
@@ -3278,6 +3285,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf)
     jsPsych.timeline.insert(B_DtNconditionchange)
     jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions)
@@ -3314,6 +3323,8 @@ jsPsych.timeline.insert(participant_info3);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(B_DtNconditionchange);
     jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_instructions);
     jsPsych.timeline.insert(brexit_nondesc_false_procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40instructions);
@@ -3354,6 +3365,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(B_DtNconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_instructions);
     jsPsych.timeline.insert(brexit_nondesc_true_procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40instructions);
@@ -3394,6 +3407,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(B_NtDconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -3434,6 +3449,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(B_NtDconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -3472,8 +3489,10 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_true_block40procedure);
     jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(B_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_desc_true_instructions);
     jsPsych.timeline.insert(brexit_desc_true_procedure);
     jsPsych.timeline.insert(brexit_desc_true_block40instructions);
@@ -3512,8 +3531,10 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(brexit_nondesc_false_block40procedure);
     jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(B_NtDconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(B_NtDconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(brexit_desc_false_instructions);
     jsPsych.timeline.insert(brexit_desc_false_procedure);
     jsPsych.timeline.insert(brexit_desc_false_block40instructions);
@@ -3552,8 +3573,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40procedure);
     jsPsych.timeline.insert(pipefirsthalf);
-    jsPsych.timeline.insert(I_DtNconditionchange)
-    jsPsych.timeline.insert(fullscreentrial)
+    jsPsych.timeline.insert(I_DtNconditionchange);
+    jsPsych.timeline.insert(fullscreentrial);
     jsPsych.timeline.insert(immigration_nondesc_false_instructions);
     jsPsych.timeline.insert(immigration_nondesc_false_procedure);
     jsPsych.timeline.insert(immigration_nondesc_false_block40instructions);
@@ -3714,6 +3735,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(I_DtNconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -3754,6 +3777,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(I_NtDconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
@@ -3794,6 +3819,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(I_NtDconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(immigration_desc_true_instructions);
     jsPsych.timeline.insert(immigration_desc_true_procedure);
     jsPsych.timeline.insert(immigration_desc_true_block40instructions);
@@ -3834,6 +3861,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(pipefirsthalf);
     jsPsych.timeline.insert(I_NtDconditionchange);
     jsPsych.timeline.insert(fullscreentrial);
+    jsPsych.timeline.insert(instructions);
+    jsPsych.timeline.insert(inducer_procedure);
     jsPsych.timeline.insert(immigration_desc_false_instructions);
     jsPsych.timeline.insert(immigration_desc_false_procedure);
     jsPsych.timeline.insert(immigration_desc_false_block40instructions);
