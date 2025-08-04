@@ -506,11 +506,11 @@ timeline.push(beforequestion);
 
 //DO
 
-lastheme =""
+var lasttheme = ""
 
 var getthemefun = function(){
   console.log("getthemefun ran");
-  const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+  lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
   console.log(lasttheme)}
   // if (lasttheme ==="BrexitTheme") {theme="Immigration"}
   // else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
