@@ -467,10 +467,6 @@ var beforequestion = {
         console.log('block2only is', block2only)
         if (block2only === 1) {
             jsPsych.timeline.insert(halfbeenherebefore);
-            jsPsych.timeline.insert(welcomeA);
-            jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
-            jsPsych.timeline.insert(welcome);
             }
         else if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
@@ -499,10 +495,6 @@ var beforequestion = {
           rule1="true";
           rule2="true";
             jsPsych.timeline.insert(halfbeenherebefore);
-            jsPsych.timeline.insert(welcomeA);
-            jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
-            jsPsych.timeline.insert(welcome);
         };
 }};
 timeline.push(beforequestion);
@@ -574,6 +566,10 @@ var halfbeenherebefore = {
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
+        jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
     }
 };
 
