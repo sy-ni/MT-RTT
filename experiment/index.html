@@ -583,7 +583,6 @@ var halfbeenherebefore = {
           document.removeEventListener('click',getlastconfun)
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
-    // const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
     if (block2only===1){
     if(lasttheme==="BrexitTheme" && lastcon==="A") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
     else if(lasttheme==="BrexitTheme" && lastcon==="B") {theme="Brexit";block2code="BDF";console.log('going to BDF')}
@@ -625,61 +624,60 @@ var halfbeenherebefore = {
 
 
 
-var beenherebefore = {
-        type: jsPsychSurveyHtmlForm,
-        preamble:`
-            <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
-            <p>Thank you for returning!</p>
-            <p>Please enter your participant ID and your previous theme and condition below.</p>`,
-        button_label: "Continue",
-        html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
+// var beenherebefore = {
+//         type: jsPsychSurveyHtmlForm,
+//         preamble:`
+//             <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
+//             <p>Thank you for returning!</p>
+//             <p>Please enter your participant ID and your previous theme and condition below.</p>`,
+//         button_label: "Continue",
+//         html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
-  <p>Participant ID:</p>
-  <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
+//   <p>Participant ID:</p>
+//   <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
-  <p><br>Theme last session:</p>
-        <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
-        <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
+//   <p><br>Theme last session:</p>
+//         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
+//         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
 
-    <p><br>Condition last session:</p>
-        <label><input type="radio" name="lastcon" value="A" required> A</label><br>
-        <label><input type="radio" name="lastcon" value="B"> B</label><br>
-        </div>
-            <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
-`,
-            data: { screen: "beenherebefore" },
-        button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-        on_start: function(){
-            let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      document.body.appendChild(bar);
-      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-        },
-        on_finish: function(data){
-    jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
-    data.jspsych_id = jspsych_id;
-    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
-    if (lasttheme ==="BrexitTheme" && lastcon==="A") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
-    else if (lasttheme ==="BrexitTheme" && lastcon==="B") {theme="Immigration"; block2code="IDF";console.log('code is IDF')}
-
-    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"; block2code="BDT";console.log('code is BDT')}
-    data.theme=theme
-    data.block2code=block2code
-    // block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
-    // data.block2code = block2code
-    // if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
-    // else if (block2code[0] === "B"){theme = "Brexit"};
-    // if (block2code[1]==="D") {condition2 = "desc"} 
-    // else if (block2code[1]==="N") {condition2 = "nondesc"};
-    // if (block2code[2] ==="T") {rule2 = "true"} 
-    // else if (block2code[2] ==="F") {rule2 = "false"};
-            console.log(theme,condition2,rule2,block2code);
-        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-        let bar = document.getElementById('bottom-bar');
-        document.body.removeChild(bar);
-    }
-};
+//     <p><br>Condition last session:</p>
+//         <label><input type="radio" name="lastcon" value="A" required> A</label><br>
+//         <label><input type="radio" name="lastcon" value="B"> B</label><br>
+//         </div>
+//             <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
+// `,
+//             data: { screen: "beenherebefore" },
+//         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+//         on_start: function(){
+//             let bar = document.createElement('div');
+//       bar.id = 'bottom-bar';
+//       document.body.appendChild(bar);
+//       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+//         },
+//         on_finish: function(data){
+//     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
+//     data.jspsych_id = jspsych_id;
+//     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+//     lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
+//     if (lasttheme ==="BrexitTheme" && lastcon==="A") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
+//     else if (lasttheme ==="BrexitTheme" && lastcon==="B") {theme="Immigration"; block2code="IDF";console.log('code is IDF')}
+//     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"; block2code="BDT";console.log('code is BDT')}
+//     data.theme=theme
+//     data.block2code=block2code
+//     // block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
+//     // data.block2code = block2code
+//     // if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
+//     // else if (block2code[0] === "B"){theme = "Brexit"};
+//     // if (block2code[1]==="D") {condition2 = "desc"} 
+//     // else if (block2code[1]==="N") {condition2 = "nondesc"};
+//     // if (block2code[2] ==="T") {rule2 = "true"} 
+//     // else if (block2code[2] ==="F") {rule2 = "false"};
+//             console.log(theme,condition2,rule2,block2code);
+//         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+//         let bar = document.getElementById('bottom-bar');
+//         document.body.removeChild(bar);
+//     }
+// };
     
 
 var SelectBrexitNondescStimuli = [];
