@@ -283,11 +283,10 @@ This project has been reviewed and approved by the University of Sussex. Questio
       <p><li>I understand that my participation is entirely voluntary, that I can choose not to participate in part or all of the study, and that I can withdraw at any stage without having to give a reason and without being penalised in any way (e.g., if I am a student, my decision whether or not to take part will not affect my grades)
 </li></p>
 <p><li>I understand that my personal data will be used for the purposes of this research study and will be handled in accordance with Data Protection legislation. I understand that the University’s  <a href="https://www.sussex.ac.uk/about/website/privacy-and-cookies/privacy" target="_blank">Privacy Notice</a> provides further information on how the University uses personal data in its research.</li></p>
-      <p><li>I understand I can request without penalty that my data be withdrawn and deleted even after the data collection is complete, any time up until the results are analysed (25/08/25).</li></p></ul>
-      <p>This project has been reviewed and approved by the University of Sussex.<br>Questions concerning your rights as a participant in this research may 
-        be directed to ss2651@sussex.ac.uk.</p></ul></em>
+      <p><li>I understand I can request without penalty that my data be withdrawn and deleted even after the data collection is complete, any time up until the results are analysed (25/08/25).</em></li></p></ul>
 
-        <p>For further information about this research please contact Syni Stamouli via ss2651@sussex.ac.uk. This research has been approved (ER/SS2651/1) by the School of Psychology. If you have any ethical concerns, please contact the project supervisor Dr. Dominique Makowski (D.makowski@sussex.ac.uk. The University of Sussex has insurance in place to cover its legal liabilities in respect of this study.</p>
+
+        <p>For further information about this research and your rights as a participant please contact Syni Stamouli via ss2651@sussex.ac.uk. This research has been approved (ER/SS2651/1) by the School of Psychology. If you have any ethical concerns, please contact the project supervisor Dr. Dominique Makowski (D.makowski@sussex.ac.uk. The University of Sussex has insurance in place to cover its legal liabilities in respect of this study.</p>
     </div> <div style="display: flex; justify-content: space-around;flex-wrap:wrap">
      <div style="width:400px; text-align: left; margin-top: 10px; font-size: 12px;">
       <label><input type="checkbox" id="18-checkbox">I am over the age of 18</label><br>
@@ -1125,8 +1124,9 @@ on_finish: function(data){
 document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
 let bar = document.getElementById('bottom-bar');
 document.body.removeChild(bar);
-data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu}}
-};
+data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu};
+jsPsych.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu})
+}};
 
 
 
@@ -3055,7 +3055,7 @@ sliderIDs.forEach(id => {
 var pipe = {
   type: jsPsychPipe,
     action: "save",
-    experiment_id: "v1bwf8JP6O6l",
+    experiment_id: "0JyZ279W9U6y",
     filename: filenamewhole,
     data_string: () => jsPsych.data.get().csv(),
     on_finish: function () {
@@ -3115,7 +3115,7 @@ const filenameblock2only = function(){
 var pipeblock2only = {
   type: jsPsychPipe,
     action: "save",
-    experiment_id: "v1bwf8JP6O6l",
+    experiment_id: "0JyZ279W9U6y",
     filename: filenameblock2only,
     data_string: () => jsPsych.data.get().csv(),
     on_finish: function () {
@@ -3232,7 +3232,7 @@ const filenamefirsthalf = function(){
 var pipefirsthalf = {
   type: jsPsychPipe,
     action: "save",
-    experiment_id: "v1bwf8JP6O6l",
+    experiment_id: "0JyZ279W9U6y",
     wait_message: `<p>Saving progress. Please do not close this page.</p>`,
     filename: filenamefirsthalf,
     data_string: () => jsPsych.data.get().csv(),
@@ -3262,7 +3262,6 @@ var exitfullscreen = {
         console.log('welcome trial starting');
       },
       on_finish: function(data){
-        jsPsych.data.addProperties({jspsych_id: jspsych_id})
         console.log('welcome trial finishing');
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
