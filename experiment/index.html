@@ -450,7 +450,8 @@ var fullscreentrial = {
     if (document.querySelector('input[name="participated"]:checked')) {contbutton.disabled = false}
 }
 
-block2code="";
+var block2code="";
+var AorB="";
 
 var beforequestion = {
     type: jsPsychHtmlButtonResponse,
@@ -488,8 +489,9 @@ var beforequestion = {
           jsPsych.data.addProperties({sessiontype: '1O'})
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
             data.theme=theme;
-            rule1="true";
-            rule2="true";
+            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            if (rule1==="true") {rule2="true",AorB="A", console.log(rule1,rule2,AorB)}
+            else if (rule1==="false") {rule2="false",AorB="B",console.log(rule1,rule2,AorB)};
             data.condition1=condition1;
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
@@ -511,8 +513,9 @@ var beforequestion = {
         else if (block2only === 3){
           jsPsych.data.addProperties({sessiontype: '2O'})
           console.log('block2only is three inserting halfbeenherebefore');
-          rule1="true";
-          rule2="true";
+          rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            if (rule1==="true") {rule2="true",AorB="A", console.log(rule1,rule2,AorB)}
+            else if (rule1==="false") {rule2="false",AorB="B",console.log(rule1,rule2,AorB)};
             jsPsych.timeline.insert(halfbeenherebefore);
         };
 }};
@@ -524,6 +527,7 @@ timeline.push(beforequestion);
 //DO
 
 var lasttheme = ""
+var lastcon = ""
 
 var getthemefun = function(){
   console.log("getthemefun ran");
@@ -532,6 +536,12 @@ var getthemefun = function(){
   // if (lasttheme ==="BrexitTheme") {theme="Immigration"}
   // else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
   // console.log(theme)
+
+
+  var getlastconfun = function(){
+  console.log("getaorb ran");
+  lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
+  console.log('function says last con is',lastcon)}
 
 var halfbeenherebefore = {
         type: jsPsychSurveyHtmlForm,
@@ -547,8 +557,12 @@ var halfbeenherebefore = {
   <p><br>Theme last session:</p>
         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
+  
+            <p><br>Condition last session:</p>
+        <label><input type="radio" name="lastcon" value="A" required> A</label><br>
+        <label><input type="radio" name="lastcon" value="B"> B</label><br>
         </div>
-            <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
+            <div style="height: 65%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
 `,
             data: { screen: "beenherebefore" },
         button_html: '<button id="beenherebtn" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
@@ -560,21 +574,28 @@ var halfbeenherebefore = {
         on_load: function(){
           console.log('halfbeenherebefore running');
           document.addEventListener('click',getthemefun);
+          document.addEventListener('click',getlastconfun);
           document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
           console.log("halfbeenherebeforefinishing");
           document.removeEventListener('click',getthemefun)
+          document.removeEventListener('click',getlastconfun)
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     // const lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
     if (block2only===1){
-    if(lasttheme==="BrexitTheme") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
-  else if (lasttheme==="ImmigrationTheme") {theme="Immigration";block2code="IDT";console.log('going to IDT')}}
+    if(lasttheme==="BrexitTheme" && lastcon==="A") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
+    else if(lasttheme==="BrexitTheme" && lastcon==="B") {theme="Brexit";block2code="BDF";console.log('going to BDF')}
+  else if (lasttheme==="ImmigrationTheme" && lastcon==="A") {theme="Immigration";block2code="IDT";console.log('going to IDT')}
+  else if (lasttheme==="ImmigrationTheme" && lastcon==="B") {theme="Immigration";block2code="IDF";console.log('going to IDF')}
+}
     else if (block2only===3){
       console.log('block2only=3 so theme is opposite');
     if (lasttheme==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
+    if (lastcon==="A"){rule1="true", rule2="true", AorB="A"}
+    else if (lastcon==="B") {rule1="false", rule2="false", AorB="B"}
     block2only=0
     data.condition2=condition2;
     data.rule1=rule1;
@@ -609,7 +630,7 @@ var beenherebefore = {
         preamble:`
             <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
             <p>Thank you for returning!</p>
-            <p>Please enter your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
+            <p>Please enter your participant ID and your previous theme and condition below.</p>`,
         button_label: "Continue",
         html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
@@ -619,6 +640,10 @@ var beenherebefore = {
   <p><br>Theme last session:</p>
         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
+
+    <p><br>Condition last session:</p>
+        <label><input type="radio" name="lastcon" value="A" required> A</label><br>
+        <label><input type="radio" name="lastcon" value="B"> B</label><br>
         </div>
             <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
 `,
@@ -626,17 +651,18 @@ var beenherebefore = {
         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
-            console.log('beenherebefore running')
       bar.id = 'bottom-bar';
       document.body.appendChild(bar);
       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
-          console.log('beenherebefore finishing')
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    if (lasttheme ==="BrexitTheme") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
+    lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
+    if (lasttheme ==="BrexitTheme" && lastcon==="A") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
+    else if (lasttheme ==="BrexitTheme" && lastcon==="B") {theme="Immigration"; block2code="IDF";console.log('code is IDF')}
+
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"; block2code="BDT";console.log('code is BDT')}
     data.theme=theme
     data.block2code=block2code
@@ -818,12 +844,13 @@ var welcomeA = {
         if (block2only===0) {return `Welcome to the study! Please make a note or take a picture of the below:
             <br><br>Your randomised participant ID: <strong>${jspsych_id}</strong>
             <br>Your theme: <strong>${theme}</strong>
-            <br><br>Your ID will allow you to resume the study if it is interrupted for any reason, without compromising anonymity.<br>
+            <br>Your condition: <strong>${AorB}</strong>
+            <br><br>Your ID and condition will allow you to resume the study if it is interrupted for any reason, without compromising anonymity.<br>
             <br>Next, we will check the experiment display.`}
         else if (block2only===1)
         {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and theme <strong>${theme}</strong>.
                 <br>Next, we will check the experiment display.`}
-              else if (block2only===3)         {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong>.<br> This time, the theme will be <strong>${theme}</strong>.
+              else if (block2only===3)         {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and condition <strong>${AorB}</strong>.<br> This time, the condition will be the same and the theme will be <strong>${theme}</strong>.
                 <br>Next, we will check the experiment display.`}
             },
     choices: ['Continue'],
