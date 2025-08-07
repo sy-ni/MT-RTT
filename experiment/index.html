@@ -346,8 +346,8 @@ timeline.push(consent);
 var jspsych_id = ""
 var block2code = ""
 var theme = ""
-var condition1 = "nondesc"
-var condition2 = "desc"
+var condition1 = ""
+var condition2 = ""
 var rule1 = ""
 var rule2 = ""
 var code = ""
@@ -438,9 +438,8 @@ var fullscreentrial = {
         let bar = document.getElementById('bottom-bar');
              document.body.removeChild(bar);
 }
-}
+};
 
-// timeline.push(fullscreentrial)
 
         beforeqfun = function(){
     const participated = document.querySelector('input[name="participated"]:checked')?.value;
@@ -481,29 +480,27 @@ var beforequestion = {
         data.block2only=block2only;
         console.log('block2only is', block2only)
         if (block2only === 1) {
-          console.log('block2only is one, inserting halfbeenherebefore');
-            jsPsych.timeline.insert(halfbeenherebefore);
-            jsPsych.data.addProperties({sessiontype: '2B'})
+            jsPsych.timeline.insert(beenherebefore);
+            jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
             }
         else if (block2only===0) {
-          jsPsych.data.addProperties({sessiontype: '1O'})
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
-            data.theme=theme;
-            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-            if (rule1==="true") {rule2="true",AorB="A", console.log(rule1,rule2,AorB)}
-            else if (rule1==="false") {rule2="false",AorB="B",console.log(rule1,rule2,AorB)};
-            data.condition1=condition1;
+            data.theme=theme
+            condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
-            // if (condition1 === "desc") {condition2 = "nondesc"}
-            // else if (condition1 ==="nondesc") {condition2 = "desc"};
-            // rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            if (condition1 === "desc") {condition2 = "nondesc"}
+            else if (condition1 ==="nondesc") {condition2 = "desc"};
+            rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+            rule2=rule1
             data.rule1=rule1;
-            // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
             data.rule2=rule2;
             code=theme[0]+condition2[0]+rule2[0];
-            // block2code=code.toUpperCase();
-            // data.block2code=block2code;
+            block2code=code.toUpperCase();
+            data.block2code=block2code;
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
@@ -511,12 +508,11 @@ var beforequestion = {
             jsPsych.timeline.insert(welcome);
           }
         else if (block2only === 3){
-          jsPsych.data.addProperties({sessiontype: '2O'})
-          console.log('block2only is three inserting halfbeenherebefore');
-          rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-            if (rule1==="true") {rule2="true",AorB="A", console.log(rule1,rule2,AorB)}
-            else if (rule1==="false") {rule2="false",AorB="B",console.log(rule1,rule2,AorB)};
             jsPsych.timeline.insert(halfbeenherebefore);
+            jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
         };
 }};
 timeline.push(beforequestion);
@@ -524,24 +520,21 @@ timeline.push(beforequestion);
 
   
 
-//DO
-
 var lasttheme = ""
 var lastcon = ""
 
 var getthemefun = function(){
   console.log("getthemefun ran");
   lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-  console.log('function says last theme is',lasttheme)}
-  // if (lasttheme ==="BrexitTheme") {theme="Immigration"}
-  // else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
-  // console.log(theme)
+  console.log('function says last theme is',lasttheme)
+  if (lasttheme ==="BrexitTheme") {theme="Immigration"}
+  else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}};
 
 
-  var getlastconfun = function(){
-  console.log("getaorb ran");
-  lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
-  console.log('function says last con is',lastcon)}
+  // var getlastconfun = function(){
+  // console.log("getaorb ran");
+  // lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
+  // console.log('function says last con is',lastcon)}
 
 var halfbeenherebefore = {
         type: jsPsychSurveyHtmlForm,
@@ -558,13 +551,9 @@ var halfbeenherebefore = {
         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
   
-            <p><br>Condition last session:</p>
-        <label><input type="radio" name="lastcon" value="A" required> A</label><br>
-        <label><input type="radio" name="lastcon" value="B"> B</label><br>
-        </div>
             <div style="height: 65%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
 `,
-            data: { screen: "beenherebefore" },
+            data: { screen: "halfbeenherebefore" },
         button_html: '<button id="beenherebtn" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
         on_start: function(){
             let bar = document.createElement('div');
@@ -572,113 +561,79 @@ var halfbeenherebefore = {
       document.body.appendChild(bar);
         },
         on_load: function(){
-          console.log('halfbeenherebefore running');
           document.addEventListener('click',getthemefun);
-          document.addEventListener('click',getlastconfun);
           document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
         },
         on_finish: function(data){
-          console.log("halfbeenherebeforefinishing");
-          document.removeEventListener('click',getthemefun)
-          document.removeEventListener('click',getlastconfun)
+          document.removeEventListener('click',getthemefun);
     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
     data.jspsych_id = jspsych_id;
-    if (block2only===1){
-    if(lasttheme==="BrexitTheme" && lastcon==="A") {theme="Brexit";block2code="BDT";console.log('going to BDT')}
-    else if(lasttheme==="BrexitTheme" && lastcon==="B") {theme="Brexit";block2code="BDF";console.log('going to BDF')}
-  else if (lasttheme==="ImmigrationTheme" && lastcon==="A") {theme="Immigration";block2code="IDT";console.log('going to IDT')}
-  else if (lasttheme==="ImmigrationTheme" && lastcon==="B") {theme="Immigration";block2code="IDF";console.log('going to IDF')}
-}
-    else if (block2only===3){
-      console.log('block2only=3 so theme is opposite');
-    if (lasttheme==="BrexitTheme") {theme="Immigration"}
+    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+    if (lasttheme ==="BrexitTheme") {theme="Immigration"}
     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
-    if (lastcon==="A"){rule1="true", rule2="true", AorB="A"}
-    else if (lastcon==="B") {rule1="false", rule2="false", AorB="B"}
-    block2only=0
+    data.theme=theme
+    condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
+    data.condition1=condition1
+    if (condition1 === "desc") {condition2 = "nondesc"}
+    else if (condition1 ==="nondesc") {condition2 = "desc"};
     data.condition2=condition2;
+    rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
     data.rule1=rule1;
+    rule2=rule1
     data.rule2=rule2;
-  };
-    console.log('last theme is', lasttheme);
-    console.log('theme is', theme);
-    console.log(block2code)
-    data.theme=theme;
-    // if (condition1 === "desc") {condition2 = "nondesc"}
-    // else if (condition1 ==="nondesc") {condition2 = "desc"};
-    // rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-            // rule2 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-            // code=theme[0]+condition2[0]+rule2[0];
-            // block2code=code.toUpperCase();
-            // data.block2code=block2code
+            code=theme[0]+condition2[0]+rule2[0];
+            block2code=code.toUpperCase();
+            data.block2code=block2code
+            block2only=0;
             console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
-        jsPsych.timeline.insert(welcomeA);
-            jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
-            jsPsych.timeline.insert(welcome);
     }
 };
 
 
 
-// var beenherebefore = {
-//         type: jsPsychSurveyHtmlForm,
-//         preamble:`
-//             <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
-//             <p>Thank you for returning!</p>
-//             <p>Please enter your participant ID and your previous theme and condition below.</p>`,
-//         button_label: "Continue",
-//         html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
+var beenherebefore = {
+        type: jsPsychSurveyHtmlForm,
+        preamble:`
+            <div style="position:fixed; top:20%;left: 50%; transform: translateX(-50%); margin: auto">
+            <p>Thank you for returning!</p>
+            <p>Please enter your participant ID and condition code (e.g. BNF) from before below.</p>`,
+        button_label: "Continue",
+        html: `<div style="width: 400px; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
   
-//   <p>Participant ID:</p>
-//   <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
+  <p>Participant ID:</p>
+  <div style="width:400px; align-items: center"><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
-//   <p><br>Theme last session:</p>
-//         <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
-//         <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
-
-//     <p><br>Condition last session:</p>
-//         <label><input type="radio" name="lastcon" value="A" required> A</label><br>
-//         <label><input type="radio" name="lastcon" value="B"> B</label><br>
-//         </div>
-//             <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
-// `,
-//             data: { screen: "beenherebefore" },
-//         button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-//         on_start: function(){
-//             let bar = document.createElement('div');
-//       bar.id = 'bottom-bar';
-//       document.body.appendChild(bar);
-//       document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-//         },
-//         on_finish: function(data){
-//     jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
-//     data.jspsych_id = jspsych_id;
-//     lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-//     lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
-//     if (lasttheme ==="BrexitTheme" && lastcon==="A") {theme="Immigration"; block2code="IDT";console.log('code is IDT')}
-//     else if (lasttheme ==="BrexitTheme" && lastcon==="B") {theme="Immigration"; block2code="IDF";console.log('code is IDF')}
-//     else if (lasttheme==="ImmigrationTheme"){theme="Brexit"; block2code="BDT";console.log('code is BDT')}
-//     data.theme=theme
-//     data.block2code=block2code
-//     // block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
-//     // data.block2code = block2code
-//     // if (block2code[0] === "I") {theme = "Immigration"; condition2 = "desc";rule2="true"}
-//     // else if (block2code[0] === "B"){theme = "Brexit"};
-//     // if (block2code[1]==="D") {condition2 = "desc"} 
-//     // else if (block2code[1]==="N") {condition2 = "nondesc"};
-//     // if (block2code[2] ==="T") {rule2 = "true"} 
-//     // else if (block2code[2] ==="F") {rule2 = "false"};
-//             console.log(theme,condition2,rule2,block2code);
-//         document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-//         let bar = document.getElementById('bottom-bar');
-//         document.body.removeChild(bar);
-//     }
-// };
-    
+  <p>Condition code:</p>
+  <div style="width:400px; align-items: center"><input type="text" name="code" maxlength="3" minlength="3" required style="width: 50%"></div>
+</div>`,
+            data: { screen: "beenherebefore" },
+        button_html: '<button id="beenhere-btn" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+        on_start: function(){
+            let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+      document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+        },
+        on_finish: function(data){
+    jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
+    data.jspsych_id = jspsych_id;
+    block2code = jsPsych.data.get().last(1).values()[0].response.code.toUpperCase();
+    data.block2code = block2code
+    if (block2code[0] === "I") {theme = "Immigration"}
+    else if (block2code[0] === "B"){theme = "Brexit"};
+    if (block2code[1]==="D") {condition2 = "desc"} 
+    else if (block2code[1]==="N") {condition2 = "nondesc"};
+    if (block2code[2] ==="T") {rule2 = "true"} 
+    else if (block2code[2] ==="F") {rule2 = "false"};
+            console.log(theme,condition2,rule2,block2code);
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar);
+    }
+};
 
 var SelectBrexitNondescStimuli = [];
 var SelectBrexitDescStimuli = [];
@@ -835,37 +790,42 @@ var ImmigrationExplicitMeasures3_ItemsX = [
         // if (block2only===1 && !validcodes.includes(block2code)) {return []}
         // else {return '[Continue]'}},
 
-var welcomeA = {
+
+        var welcomeA = {
     type: jsPsychHtmlButtonResponse,
     stimulus: function(){
         let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
         if (block2only===0) {return `Welcome to the study! Please make a note or take a picture of the below:
-            <br><br>Your randomised participant ID: <strong>${jspsych_id}</strong>
-            <br>Your theme: <strong>${theme}</strong>
-            <br>Your condition: <strong>${AorB}</strong>
-            <br><br>Your ID and condition will allow you to resume the study if it is interrupted for any reason, without compromising anonymity.<br>
+            <br><br>Your participant ID: <strong>${jspsych_id}</strong>
+            <br>Your condition code: <strong>${block2code}</strong>
+            <br><br>These will allow you to resume the study if it is interrupted for any reason, without compromising anonymity.<br>
             <br>Next, we will check the experiment display.`}
-        else if (block2only===1)
-        {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and theme <strong>${theme}</strong>.
+        else if (block2only===1 && validcodes.includes(block2code))
+        {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and condition code <strong>${block2code}</strong>.
                 <br>Next, we will check the experiment display.`}
-              else if (block2only===3)         {return `Welcome back! You are returning with user ID <strong>${jspsych_id}</strong> and condition <strong>${AorB}</strong>.<br> This time, the condition will be the same and the theme will be <strong>${theme}</strong>.
-                <br>Next, we will check the experiment display.`}
-            },
-    choices: ['Continue'],
-    button_html: '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>',
+        else if (block2only===1 && !validcodes.includes(block2code)) {return `<p style="color:red">This code is invalid. Please refresh and try again</p>`}
+        },
+    choices: function(){
+        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
+        if (block2only===1 && !validcodes.includes(block2code)) {return []}
+        else {return '[Continue]'}},
+    button_html: function(){
+        let validcodes = ['BNT', 'BNF', 'BDT', 'BDF', 'INT', 'INF', 'IDT', 'IDF']
+        if (block2only===1 && !validcodes.includes(block2code)) {return []}
+        else {return '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>'}},
     data: { screen: "welcomeA" },
     on_start: function(){
             let bar = document.createElement('div');
             bar.id = 'bottom-bar';
            document.body.appendChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+            console.log(theme,condition2,rule2,block2code);
         },
     on_finish: function(){
-      console.log('welcomeA runnning');
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
-                    }
+        }
 };
 
 
@@ -1252,16 +1212,16 @@ var part1cont= {
 
 
     var inducer_stimuli = [
-    { stimulus: "Right",  correct_response: 0, colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
-    { stimulus: "Wrong",  correct_response: 1, colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
-    { stimulus: "Correct",  correct_response: 0, colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
-    { stimulus: "Incorrect",  correct_response: 1,colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
-    { stimulus: "True",  correct_response: 0, colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
-    { stimulus: "False",  correct_response: 1, colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
-    { stimulus: "Agree",  correct_response: 0, colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
-    { stimulus: "Disagree",  correct_response: 1, colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
-    { stimulus: "Agree",  correct_response: 0, colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
-    { stimulus: "Disagree",  correct_response: 1, colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
+    { stimulus: "Right",  correct_response: 0, stimulus2: 'I1',colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+    { stimulus: "Wrong",  correct_response: 1, stimulus2: 'I2',colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
+    { stimulus: "Correct",  correct_response: 0,stimulus2: 'I3', colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%">TRUE</button>'},
+    { stimulus: "Incorrect",  correct_response: 1,stimulus2: 'I4',colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
+    { stimulus: "True",  correct_response: 0, stimulus2: 'I5',colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
+    { stimulus: "False",  correct_response: 1, stimulus2: 'I6',colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
+    { stimulus: "Agree",  correct_response: 0,stimulus2: 'I7',colour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
+    { stimulus: "Disagree",  correct_response: 1,stimulus2: 'I8', colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
+    { stimulus: "Agree",  correct_response: 0, stimulus2: 'I7',olour: 'orange', button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%">TRUE</button>'},
+    { stimulus: "Disagree",  correct_response: 1, stimulus2: 'I8',colour: 'orange', button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%">FALSE</button>'},
     ];
 
 var rightwrong2stimuli = inducer_stimuli.concat(inducer_stimuli)
