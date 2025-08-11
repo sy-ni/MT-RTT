@@ -1113,7 +1113,7 @@ document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-botto
 let bar = document.getElementById('bottom-bar');
 document.body.removeChild(bar);
 data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu};
-jsPsych.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu})
+jsPsych.data.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu})
 }};
 
 
