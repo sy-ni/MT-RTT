@@ -1116,7 +1116,24 @@ data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu};
 jsPsych.data.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu})
 }};
 
+var british=0
+var uktime=0
 
+var uktimefun = function(){
+const uktime = document.querySelector('input[name="uktime"]:checked')?.value;
+    if (uktimecheck === "1to2") {uktime = 0} 
+    else if (uktimecheck ==="2to5") {uktime=1}
+    else if (uktimecheck ==="over5years") {uktime=2}
+    else if (uktimecheck ==="over10years") {uktime=3}
+    else if (uktimecheck ==="allmylife") {uktime=14}
+}
+
+var britishfun = function(){
+const britishcheck = document.querySelector('input[name="british"]:checked')?.value;
+    if (britishcheck === "British") {british = 0} 
+    else if (britishcheck ==="NotBritish") {british=1}
+    else if (britishcheck ==="Prefernottosay") {british=2}
+}
 
 var participant_info3 = {
         type: jsPsychSurveyHtmlForm,
@@ -1147,11 +1164,16 @@ button_label: "Continue",
   let bar = document.createElement('div');
              bar.id = 'bottom-bar';
              document.body.appendChild(bar);
+             document.addEventListener('click',uktimefun)
+document.addEventListener('click',britishfun)
   },
-  on_finish: function() {
+  on_finish: function(data) {
     document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
     let bar = document.getElementById('bottom-bar');
     document.body.removeChild(bar);
+    data.response={British:british,uktime:uktime};
+    jsPsych.data.addProperties({British:british,uktime:uktime})
+
             }
 };
 
@@ -1209,6 +1231,8 @@ var part1cont= {
         on_finish: function(){
             let bar = document.getElementById('bottom-bar');
             document.body.removeChild(bar);
+            document.removeEventListener('click',uktimefun)
+            document.removeEventListener('click',britishfun)
         }
     };
 
