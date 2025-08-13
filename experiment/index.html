@@ -1161,6 +1161,7 @@ document.removeEventListener('click',britishfun)
 document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
 let bar = document.getElementById('bottom-bar');
 document.body.removeChild(bar);
+	console.log(ethnicity,age,gender,edu,british,uktime);
 data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu, british:british, uktime:uktime};
 jsPsych.data.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu,british:british, uktime:uktime})
 }};
