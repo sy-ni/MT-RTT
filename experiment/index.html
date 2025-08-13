@@ -418,6 +418,11 @@ var buttoncalibration = {
         document.addEventListener('click', recordmouse)
         document.addEventListener('click', calstim)
     },
+    on_finish: function(data){
+      document.removeEventListener('click', recordmouse)
+      document.removeEventListener('click', calstim)
+      data.calibration1=calibrationarray
+    },
     data: {
       screen: "calibration",
       calibration: calibrationarray
