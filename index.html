@@ -1838,16 +1838,16 @@ var part1cont= {
 
 
     var inducer_stimuli = [
-    { stimulus: "Right",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-    { stimulus: "Wrong",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
-    { stimulus: "Correct",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
-    { stimulus: "Incorrect",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
-    { stimulus: "True",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
-    { stimulus: "False",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
-    { stimulus: "Agree",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
-    { stimulus: "Disagree",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
-    { stimulus: "True",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
-    { stimulus: "False",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
+    { stimulus: "Right", stimulus2:"I1", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    { stimulus: "Wrong",  stimulus2:"I2",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
+    { stimulus: "Correct", stimulus2:"I3", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 25%; top: 15%"></button>'},
+    { stimulus: "Incorrect", stimulus2:"I4", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
+    { stimulus: "True", stimulus2:"I5", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
+    { stimulus: "False",stimulus2:"I6",  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
+    { stimulus: "Agree",stimulus2:"I7",  correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
+    { stimulus: "Disagree", stimulus2:"I8", correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
+    { stimulus: "True", stimulus2:"I5", correct_response: 0, button: ['TRUE'], html: '<button id="btn-true" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:25%; top: 15%"></button>'},
+    { stimulus: "False", stimulus2:"I5",correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left:75%; top: 15%"></button>'},
     ];
 
 var rightwrong2stimuli = inducer_stimuli.concat(inducer_stimuli)
@@ -1981,10 +1981,10 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
         var goodtrials = trials.filter({earlymove: 0});
         var goodness = Math.round(goodtrials.count() / trials.count() * 100)
         if (goodness < 90) {console.log('goodness okay;',goodness)}
-        else {console.log('goodnessbad;',goodness)}
-        data.mousebad=mousebad;
+        else {console.log('goodnessbad;',goodness)};
         data.goodness=goodness
-
+        if (mousebad) {data.earlymove=mousebad}
+        else;
       },
 };
 
