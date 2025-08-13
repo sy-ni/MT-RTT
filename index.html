@@ -1982,6 +1982,8 @@ extensions: [{type: jsPsychExtensionMouseTracking, params: {targets: ['*']}}],
         var goodness = Math.round(goodtrials.count() / trials.count() * 100)
         if (goodness < 90) {console.log('goodness okay;',goodness)}
         else {console.log('goodnessbad;',goodness)}
+        data.mousebad=mousebad;
+        data.goodness=goodness
 
       },
 };
