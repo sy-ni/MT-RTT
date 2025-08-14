@@ -1688,8 +1688,7 @@ var brexit_desc_false_stimuli = [
     var brexit_desc_false_procedure  = {
       timeline: [start_button, fixation, test1],
       timeline_variables: brexit_desc_false_stimuli,
-      // 2
-      repetitions: 1,
+      repetitions: 2,
       randomize_order: true,
       data: {block:'BDFintro'} 
     };
@@ -1702,7 +1701,6 @@ var brexit_desc_false_stimuli = [
       data: {block:'BDF'} 
     };
 
-    // 2
 
     var immigration_desc_false_stimuli = [
     { stimulus: "Immigrant numbers are rising",colour:"blue",  stimulus2: 'ID1',  correct_response: 1, button: ['FALSE'], html: '<button id="btn-false" class="jspsych-btn top-buttons" style = "font-size: 30px; position:fixed; left: 75%; top: 15%">FALSE</button>' },
