@@ -3342,6 +3342,7 @@ var exitfullscreen = {
         console.log('welcome trial finishing');
         let bar = document.getElementById('bottom-bar');
         document.body.removeChild(bar);
+        jsPsych.data.addProperties({condition1:condition1, condition2:condition2, rule1:rule1, rule2:rule2,block2only:block2only})
             document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar'),
             console.log(jspsych_id,theme,condition1,rule1,rule2,block2code,block2only)
         if (theme === "Brexit" && condition1 === "desc" && rule1 === "true" && rule2 === "false") {
