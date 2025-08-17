@@ -455,6 +455,7 @@ var fullscreentrial = {
     // if (participated === "Yes") {block2only = 1} 
     if (participated ==="No") {block2only=0}
     else if (participated ==="Half") {block2only=3}
+    console.log('block2',block2only)
     if (document.querySelector('input[name="participated"]:checked')) {contbutton.disabled = false}
 }
 
@@ -467,8 +468,7 @@ var beforequestion = {
         return `<div style="position:fixed; top:20%; left:50%; transform:translateX(-50%);"><p><strong>Select which applies to you:</strong></p></div>
             <div style="display: flex; flex-direction:column;height: 20%; width:46%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 16px; position:absolute; z-index:-1;top:26.5%;left:50%;transform: translateX(-50%);">
                 <label style="margin-bottom:4%"><input type="radio" name="participated" value="No"> I have not completed any of the experiment before</label><br><label><input type="radio" name="participated" value="Half"> I am participating again</label><br>
-                </div>
-        `
+                </div>`
         },
     choices: ['<strong>Continue</strong>'],
     button_html: '<button id="continue-btn" class="jspsych-btn" style="font-weight:bold"<strong>Continue</strong></button>',
@@ -510,7 +510,7 @@ var beforequestion = {
             code=theme[0]+condition2[0]+rule2[0];
             block2code=code.toUpperCase();
             data.block2code=block2code;
-            console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
+            console.log('jspsych',jspsych_id,'theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
             jsPsych.timeline.insert(buttoncalibration);
@@ -808,10 +808,10 @@ var ImmigrationExplicitMeasures3_ItemsX = [
 
         var welcomeA = {
     type: jsPsychHtmlButtonResponse,
-    stimulus: `Welcome to the study! Please make a note or take a picture of the below:
+    stimulus: function(){return `Welcome to the study! Please make a note or take a picture of the below:
             <br><br>Your participant ID: <strong>${jspsych_id}</strong>
             <br><br>This will allow you to connect your results across sessions or ask to withdraw your data without compromising anonymity.<br>
-            <br>Next, we will check the experiment display.`,
+            <br>Next, we will check the experiment display.`},
     choices: ['Continue'],
     button_html: '<button id="continue-btn" class="jspsych-btn"><strong>Continue</strong></button>',
     data: { screen: "welcomeA" },
