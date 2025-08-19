@@ -238,7 +238,7 @@
         some parts of the experiment cannot register inputs from a touchscreen, and this will result in unusable data.</p>
       <p><br><em>What is it for?</em></p>
       <p>The purpose of this research study is to further our understanding of our automatic comprehension and response to different types of sentences. 
-        This study is being conducted by student researcher Syni Stamouli with project supervisor Dr. Dominique Makowski at the University of Sussex. 
+        This study is being conducted by a student researcher with project supervisor Dr. Dominique Makowski at the University of Sussex. 
         If you have any questions, the researchers may be contacted at (ss2651@sussex.ac.uk)</p>
 
          <p><br><em>What does participation involve?</em></p>
@@ -498,7 +498,7 @@ var beforequestion = {
         if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
             data.theme=theme
-            condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
+            condition1 = jsPsych.randomization.sampleWithoutReplacement(["nondesc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
             if (condition1 === "desc") {condition2 = "nondesc"}
