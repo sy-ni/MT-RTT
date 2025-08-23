@@ -498,7 +498,7 @@ var beforequestion = {
         if (block2only===0) {
             theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
             data.theme=theme
-            condition1 = jsPsych.randomization.sampleWithoutReplacement(["nondesc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
+            condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];jsPsych.data.addProperties({condition: condition1});
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
             data.jspsych_id=jspsych_id;
             if (condition1 === "desc") {condition2 = "nondesc"}
