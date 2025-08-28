@@ -496,7 +496,7 @@ var beforequestion = {
         //     jsPsych.timeline.insert(welcome);
         //     }
         if (block2only===0) {
-            theme = jsPsych.randomization.sampleWithoutReplacement(["Brexit", "Immigration"],1)[0];
+            theme = jsPsych.randomization.sampleWithoutReplacement(["Immigration","Immigration"],1)[0];
             data.theme=theme
             condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "desc"],1)[0];jsPsych.data.addProperties({condition: condition1});
             jspsych_id = jsPsych.randomization.randomID(5).toUpperCase();
