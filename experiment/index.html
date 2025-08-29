@@ -517,6 +517,16 @@ var beforequestion = {
             jsPsych.timeline.insert(welcome);
           }
         else if (block2only === 3){
+          jsPsych.timeline.insert(halfbeenherebefore);
+          jsPsych.timeline.insert(participant_info2);
+          jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(BIDR);
+    jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(halfbeenherebefore);
             jsPsych.timeline.insert(welcomeA);
             jsPsych.timeline.insert(fullscreentrial);
@@ -526,6 +536,20 @@ var beforequestion = {
 }};
 timeline.push(beforequestion);
 
+const filenameC = function(){
+  return `${jspsych_id}-${formatted_date}-C.csv`
+}
+
+var pipeC = {
+  type: jsPsychPipe,
+    action: "save",
+    experiment_id: "0JyZ279W9U6y",
+    filename: filenameC,
+    data_string: () => jsPsych.data.get().csv(),
+    on_finish: function () {
+        finished_experiment = true
+     }
+}
 
   
 
