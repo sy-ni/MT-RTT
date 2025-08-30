@@ -520,7 +520,7 @@ var beforequestion = {
           jsPsych.timeline.insert(halfbeenherebefore);
         };
 }};
-timeline.push(beforequestion);
+// timeline.push(beforequestion);
 
 const filenameC = function(){
   return `${jspsych_id}-${formatted_date}-C.csv`
@@ -536,6 +536,22 @@ var pipeC = {
         finished_experiment = true
      }
 }
+
+const filenameD = function(){
+  return `${jspsych_id}-${formatted_date}-D.csv`
+}
+
+var pipeD = {
+  type: jsPsychPipe,
+    action: "save",
+    experiment_id: "0JyZ279W9U6y",
+    filename: filenameC,
+    data_string: () => jsPsych.data.get().csv(),
+    on_finish: function () {
+        finished_experiment = true
+     }
+}
+
 
   
 
@@ -1027,6 +1043,14 @@ const uktimecheck = document.querySelector('input[name="uktime"]:checked')?.valu
     else if (uktimecheck ==="allmylife") {uktime=4}
 }
 
+id=""
+var idfun = function(){
+const idcheck = document.querySelector('input[name="ID"]')?.value;
+id=idcheck
+    console.log(id)
+};
+
+
 
             var participant_info2 = {
     type: jsPsychSurveyHtmlForm,
@@ -1036,6 +1060,8 @@ const uktimecheck = document.querySelector('input[name="uktime"]:checked')?.valu
 <div style="height: 55%; width: 50%; margin: auto; text-align: center; align-items: center; position:fixed;top:21%;left: 52%;transform: translateX(-50%);font-size:16px; overflow-y: auto; overflow-x: hidden">
   
   <div style="text-align:left; display:flex; gap:20px; align-items:center"><p>Age (in years, e.g., "31"):</p><input type="number" name="age" style="width: 15%; height:20px" required></div>
+
+    <div style="text-align:left; display:flex; gap:20px; align-items:center"><p>ID:</p><input type="number" name="ID" style="width: 15%; height:20px"></div>
 
 
   <div style="text-align:left; display:flex; gap:20px"><p>Gender:</p><label style="margin-left:110px;display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Female" required> Female</label><label style="display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Male"> Male</label><label style="display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Non-binary"> Non-binary</label></div>
@@ -3355,6 +3381,7 @@ jsPsych.timeline.insert(BIDR);
 jsPsych.timeline.insert(BrexitExplicitMeasures1);
 jsPsych.timeline.insert(BrexitExplicitMeasures3);
 jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3396,6 +3423,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3433,6 +3461,11 @@ jsPsych.timeline.insert(BIDR);
   else if (theme === "Brexit" && condition1 === "desc" && rule1 === "false" && rule2 === "false"){
     jsPsych.timeline.insert(instructions1);
 jsPsych.timeline.insert(participant_info2);
+jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3474,6 +3507,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3516,6 +3550,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3557,6 +3592,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3598,6 +3634,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3639,6 +3676,7 @@ jsPsych.timeline.insert(BrexitExplicitMeasures1);
     jsPsych.timeline.insert(BrexitExplicitMeasures3);
     jsPsych.timeline.insert(BrexitExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeC);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3680,6 +3718,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3719,6 +3758,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3758,6 +3798,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3797,6 +3838,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3837,6 +3879,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3878,6 +3921,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3919,6 +3963,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3960,6 +4005,7 @@ jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
     jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
 jsPsych.timeline.insert(BIDR);
+jsPsych.timeline.insert(pipeD);
             jsPsych.timeline.insert(part1cont);
             jsPsych.timeline.insert(instructions);
             jsPsych.timeline.insert(inducer_procedure);
@@ -3994,6 +4040,8 @@ jsPsych.timeline.insert(BIDR);
     jsPsych.timeline.insert(experimentover);
     jsPsych.timeline.insert(exclusionform);
   }
+
+
   // else if (block2code ==="BNT" && block2only===1) {
   //   jsPsych.timeline.insert(instructions);
   //   jsPsych.timeline.insert(inducer_procedure);
