@@ -518,20 +518,6 @@ var beforequestion = {
           }
         else if (block2only === 3){
           jsPsych.timeline.insert(halfbeenherebefore);
-          jsPsych.timeline.insert(participant_info2);
-          jsPsych.timeline.insert(BrexitExplicitMeasures1);
-    jsPsych.timeline.insert(BrexitExplicitMeasures3);
-    jsPsych.timeline.insert(BrexitExplicitMeasures5);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
-    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
-    jsPsych.timeline.insert(BIDR);
-    jsPsych.timeline.insert(pipeC);
-            jsPsych.timeline.insert(halfbeenherebefore);
-            jsPsych.timeline.insert(welcomeA);
-            jsPsych.timeline.insert(fullscreentrial);
-            jsPsych.timeline.insert(buttoncalibration);
-            jsPsych.timeline.insert(welcome);
         };
 }};
 timeline.push(beforequestion);
@@ -569,61 +555,7 @@ var getthemefun = function(){
   // lastcon = document.querySelector('input[name="lastcon"]:checked')?.value;
   // console.log('function says last con is',lastcon)}
 
-var halfbeenherebefore = {
-        type: jsPsychSurveyHtmlForm,
-        preamble:`
-            <div style="position:fixed; top:15%;left: 50%; transform: translateX(-50%); width:30%; margin: auto">
-            <p>Thank you for returning!</p>
-            <p>Please your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
-        html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
-  
-  <p>Participant ID:</p>
-  <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
 
-  <p><br>Theme last session:</p>
-        <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
-        <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
-  </div>
-            <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
-`,
-            data: { screen: "halfbeenherebefore" },
-        button_html: '<button id="beenherebtn" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
-        on_start: function(){
-            let bar = document.createElement('div');
-      bar.id = 'bottom-bar';
-      document.body.appendChild(bar);
-        },
-        on_load: function(){
-          document.addEventListener('click',getthemefun);
-          document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-        },
-        on_finish: function(data){
-          document.removeEventListener('click',getthemefun);
-    jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
-    data.jspsych_id = jspsych_id;
-    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
-    if (lasttheme ==="BrexitTheme") {theme="Immigration"}
-    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
-    data.theme=theme
-    condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
-    data.condition1=condition1
-    if (condition1 === "desc") {condition2 = "nondesc"}
-    else if (condition1 ==="nondesc") {condition2 = "desc"};
-    data.condition2=condition2;
-    rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
-    data.rule1=rule1;
-    rule2=rule1
-    data.rule2=rule2;
-            code=theme[0]+condition2[0]+rule2[0];
-            block2code=code.toUpperCase();
-            data.block2code=block2code
-            block2only=0;
-            console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
-        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
-        let bar = document.getElementById('bottom-bar');
-        document.body.removeChild(bar);
-    }
-};
 
 
 
@@ -1246,6 +1178,75 @@ var part1cont= {
         button_html: '<button id="btn-instructions1" button class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
     };
 
+    var halfbeenherebefore = {
+        type: jsPsychSurveyHtmlForm,
+        preamble:`
+            <div style="position:fixed; top:15%;left: 50%; transform: translateX(-50%); width:30%; margin: auto">
+            <p>Thank you for returning!</p>
+            <p>Please your participant ID and your previous theme (Immigration or Brexit) below.</p>`,
+        html: `<div style="width: 30%; margin: auto; text-align: center; align-items: center; position:fixed; top:35%; left:50%;transform: translateX(-50%)">
+  
+  <p>Participant ID:</p>
+  <div><input type="text" name="ID" maxlength="5" minlength="5" required style="width: 50%"></div>
+
+  <p><br>Theme last session:</p>
+        <label><input type="radio" name="lasttheme" value="BrexitTheme" required> Brexit</label><br>
+        <label><input type="radio" name="lasttheme" value="ImmigrationTheme"> Immigration</label><br>
+  </div>
+            <div style="height: 55%; width:30%; text-align: left; border: 1px solid #ccc; padding: 15px; font-size: 14px; position:absolute; z-index:-1;top:21%;left:50%;transform: translateX(-50%);"></div>
+`,
+            data: { screen: "halfbeenherebefore" },
+        button_html: '<button id="beenherebtn" class="jspsych-btn" style = "width: 120px; height: 30px; position: fixed; bottom: 0px; justify-content: center; align-items: center;"><strong>Continue</strong></button>',
+        on_start: function(){
+            let bar = document.createElement('div');
+      bar.id = 'bottom-bar';
+      document.body.appendChild(bar);
+        },
+        on_load: function(){
+          document.addEventListener('click',getthemefun);
+          document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
+        },
+        on_finish: function(data){
+          document.removeEventListener('click',getthemefun);
+    jspsych_id = jsPsych.data.get().last(1).values()[0].response.ID.toUpperCase();
+    data.jspsych_id = jspsych_id;
+    lasttheme = document.querySelector('input[name="lasttheme"]:checked')?.value;
+    if (lasttheme ==="BrexitTheme") {theme="Immigration"}
+    else if (lasttheme==="ImmigrationTheme"){theme="Brexit"}
+    data.theme=theme
+    condition1 = jsPsych.randomization.sampleWithoutReplacement(["desc", "nondesc"],1)[0];
+    data.condition1=condition1
+    if (condition1 === "desc") {condition2 = "nondesc"}
+    else if (condition1 ==="nondesc") {condition2 = "desc"};
+    data.condition2=condition2;
+    rule1 = jsPsych.randomization.sampleWithoutReplacement(["true", "false"],1)[0];
+    data.rule1=rule1;
+    rule2=rule1
+    data.rule2=rule2;
+            code=theme[0]+condition2[0]+rule2[0];
+            block2code=code.toUpperCase();
+            data.block2code=block2code
+            block2only=0;
+            console.log('theme:',theme,'<br>condition:',condition1,'<br>rule1:',rule1,'<br>condition2:',condition2,'<br>rule2:',rule2,'<br>code:',code,'<br>block2code:',block2code);
+        document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
+        let bar = document.getElementById('bottom-bar');
+        document.body.removeChild(bar);
+        jsPsych.timeline.insert(participant_info2);
+          jsPsych.timeline.insert(BrexitExplicitMeasures1);
+    jsPsych.timeline.insert(BrexitExplicitMeasures3);
+    jsPsych.timeline.insert(BrexitExplicitMeasures5);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures1);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures3);
+    jsPsych.timeline.insert(ImmigrationExplicitMeasures5);
+    jsPsych.timeline.insert(BIDR);
+    jsPsych.timeline.insert(pipeC);
+            jsPsych.timeline.insert(halfbeenherebefore);
+            jsPsych.timeline.insert(welcomeA);
+            jsPsych.timeline.insert(fullscreentrial);
+            jsPsych.timeline.insert(buttoncalibration);
+            jsPsych.timeline.insert(welcome);
+    }
+};
 
 
     var instructions = {
