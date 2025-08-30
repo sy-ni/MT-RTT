@@ -1061,7 +1061,7 @@ id=idcheck
   
   <div style="text-align:left; display:flex; gap:20px; align-items:center"><p>Age (in years, e.g., "31"):</p><input type="number" name="age" style="width: 15%; height:20px" required></div>
 
-    <div style="text-align:left; display:flex; gap:20px; align-items:center"><p>ID:</p><input type="number" name="ID" style="width: 15%; height:20px"></div>
+    <div style="text-align:left; display:flex; gap:20px; align-items:center"><p>ID:</p><input type="text" name="ID" style="width: 15%; height:20px"></div>
 
 
   <div style="text-align:left; display:flex; gap:20px"><p>Gender:</p><label style="margin-left:110px;display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Female" required> Female</label><label style="display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Male"> Male</label><label style="display: flex; align-items: center; gap: 5px;"><input type="radio" name="gender" value="Non-binary"> Non-binary</label></div>
@@ -1115,6 +1115,7 @@ document.addEventListener('click',educationfun)
 document.addEventListener('click',genderfun)
 document.addEventListener('click',uktimefun)
 document.addEventListener('click',britishfun)
+document.addEventListener('click',idfun)
 let bar = document.createElement('div');
          bar.id = 'bottom-bar';
          document.body.appendChild(bar);
@@ -1125,6 +1126,7 @@ on_finish: function(data){
     document.removeEventListener('click',educationfun)
     document.removeEventListener('click',genderfun)
     document.removeEventListener('click',uktimefun)
+    document.removeEventListener('click',idfun)
 document.removeEventListener('click',britishfun)
 document.querySelector('.jspsych-content-wrapper')?.classList.remove('with-bottom-bar');
 let bar = document.getElementById('bottom-bar');
@@ -1132,7 +1134,7 @@ document.body.removeChild(bar);
 	console.log("it should be saving")
 	console.log(ethnicity,age,gender,edu,british,uktime);
 data.response={ethnicity:ethnicity, age:age, gender:gender,education:edu, british:british, uktime:uktime};
-jsPsych.data.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu,british:british, uktime:uktime})
+jsPsych.data.addProperties({id:jspsych_id,age:age, ethnicity:ethnicity,gender:gender,education:edu,british:british, uktime:uktime,id:id,jspsych_id:id})
 }};
 
 
