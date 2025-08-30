@@ -895,7 +895,7 @@ var ontorealblocks = {
              bar.id = 'bottom-bar';
              document.body.appendChild(bar);
             document.querySelector('.jspsych-content-wrapper')?.classList.add('with-bottom-bar');
-            if (theme==="Brexit"){
+            if (theme==="Brexit" || theme==="Immigration"){
             console.log('if brexit runnning')
     SelectBrexitDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllBrexitDescStimuli,10);
     BrexitExplicitMeasures1_StimuliX.push(...SelectBrexitDescStimuli);
@@ -929,7 +929,7 @@ var ontorealblocks = {
         })
     };
     }
-    else if (theme==="Immigration"){
+    else if (theme==="Immigration" || theme==="Brexit"){
       console.log('if immigration runnning')
       SelectImmigrationDescStimuli = jsPsych.randomization.sampleWithoutReplacement(AllImmigrationDescStimuli,10);
     ImmigrationExplicitMeasures1_StimuliX.push(...SelectImmigrationDescStimuli);
